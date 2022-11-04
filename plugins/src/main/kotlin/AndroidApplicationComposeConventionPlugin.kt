@@ -16,6 +16,8 @@
 
 import com.android.build.api.dsl.ApplicationExtension
 import no.nordicsemi.android.buildlogic.configureAndroidCompose
+import no.nordicsemi.android.buildlogic.getVersionCodeFromTags
+import no.nordicsemi.android.buildlogic.getVersionNameFromTags
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.getByType
@@ -26,7 +28,11 @@ class AndroidApplicationComposeConventionPlugin : Plugin<Project> {
             pluginManager.apply("com.android.application")
             val extension = extensions.getByType<ApplicationExtension>()
             configureAndroidCompose(extension)
+
+            extension.defaultConfig {
+                versionName = target.getVersionNameFromTags()
+                versionCode = target.getVersionCodeFromTags()
+            }
         }
     }
-
 }

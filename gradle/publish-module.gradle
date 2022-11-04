@@ -1,3 +1,4 @@
+apply plugin: 'version-catalog'
 apply plugin: 'maven-publish'
 apply plugin: 'signing'
 apply from: rootProject.file("gradle/git-tag-version.gradle")
@@ -9,6 +10,7 @@ afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
+                from(components["versionCatalog"])
 
                 groupId = GROUP
                 artifactId = POM_ARTIFACT_ID
