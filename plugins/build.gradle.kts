@@ -21,9 +21,12 @@ plugins {
     `maven-publish`
     id("com.gradle.plugin-publish") version "1.0.0"
 }
+apply(from = "../gradle/git-tag-version.gradle")
+
+val getVersionNameFromTags: groovy.lang.Closure<String> by ext
 
 group = "no.nordicsemi.android"
-version = "1.0.0"
+version = getVersionNameFromTags()
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
@@ -93,11 +96,10 @@ publishing {
 
             groupId = "no.nordicsemi.android"
             artifactId = "version-catalog"
-            version = "1.0.0"
+            version = getVersionNameFromTags()
         }
     }
-//    repositories {
-//        mavenCentral()
-////        gradlePluginPortal()
-//    }
+    repositories {
+        mavenCentral()
+    }
 }
