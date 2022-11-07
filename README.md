@@ -13,6 +13,7 @@ List of plugins currently available in the repository:
 4. [no.nordicsemi.android.library.compose](plugins/src/main/kotlin/AndroidLibraryComposeConventionPlugin.kt)
 5. [no.nordicsemi.android.feature](plugins/src/main/kotlin/AndroidFeatureConventionPlugin.kt)
 6. [no.nordicsemi.android.hilt](plugins/src/main/kotlin/AndroidHiltConventionPlugin.kt)
+6. [no.nordicsemi.android.gradle.nexus](plugins/src/main/kotlin/AndroidNexusRepositoryPlugin.kt)
 
 Plugins are released to Nexus repository and are available by their ids and version number.
 
