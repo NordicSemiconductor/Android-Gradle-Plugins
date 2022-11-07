@@ -21,6 +21,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "build-logic"
+rootProject.name = "Android-Gradle-Plugins"
 
 include(":plugins")

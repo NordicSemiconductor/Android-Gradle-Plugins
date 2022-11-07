@@ -25,7 +25,7 @@ apply(from = "../gradle/git-tag-version.gradle")
 
 val getVersionNameFromTags: groovy.lang.Closure<String> by ext
 
-group = "no.nordicsemi.android"
+group = "no.nordicsemi.android.gradle"
 version = getVersionNameFromTags()
 
 java {
@@ -41,40 +41,46 @@ dependencies {
 gradlePlugin {
     plugins {
         register("application.compose") {
-            id = "no.nordicsemi.android.application.compose"
+            id = "no.nordicsemi.android.gradle.application.compose"
             displayName = "Application with Compose"
             description = "Application plugin extension with Compose feature enabled"
             implementationClass = "AndroidApplicationComposeConventionPlugin"
         }
         register("application") {
-            id = "no.nordicsemi.android.application"
+            id = "no.nordicsemi.android.gradle.application"
             displayName = "Standalone Application configuration"
             description = "Application plugin extension for internal releases"
             implementationClass = "AndroidApplicationConventionPlugin"
         }
         register("library.compose") {
-            id = "no.nordicsemi.android.library.compose"
+            id = "no.nordicsemi.android.gradle.library.compose"
             displayName = "Library with Compose"
             description = "Library plugin extension with Compose feature enabled"
             implementationClass = "AndroidLibraryComposeConventionPlugin"
         }
         register("library") {
-            id = "no.nordicsemi.android.library"
+            id = "no.nordicsemi.android.gradle.library"
             displayName = "Standalone library configuration"
             description = "Library plugin extension for internal releases"
             implementationClass = "AndroidLibraryConventionPlugin"
         }
         register("feature") {
-            id = "no.nordicsemi.android.feature"
+            id = "no.nordicsemi.android.gradle.feature"
             displayName = "Feature plugin"
             description = "UI feature plugin with Hilt & Compose"
             implementationClass = "AndroidFeatureConventionPlugin"
         }
         register("hilt") {
-            id = "no.nordicsemi.android.hilt"
+            id = "no.nordicsemi.android.gradle.hilt"
             displayName = "Hilt plugin"
             description = "Plugin enabling Hilt"
             implementationClass = "AndroidHiltConventionPlugin"
+        }
+        register("nexus") {
+            id = "no.nordicsemi.android.gradle.nexus"
+            displayName = "Nexus plugin"
+            description = "Plugin creating a task for publishing to Nexus repository."
+            implementationClass = "AndroidNexusRepositoryPlugin"
         }
     }
 }
@@ -83,8 +89,8 @@ gradlePlugin {
 // The following file exists only when Android BLE Library project is opened, but not
 // when the module is loaded to a different project.
 //if (rootProject.file("gradle/publish-module.gradle").exists()) {
-//    extra.set("POM_ARTIFACT_ID", "plugins")
-//    extra.set("POM_NAME", "Nordic common plugins")
+//    extra.set("POM_ARTIFACT_ID", "gradle")
+//    extra.set("POM_NAME", "Nordic common gradle")
 //    extra.set("POM_PACKAGING", "aar")
 //    apply(from = rootProject.file("gradle/publish-module.gradle"))
 //}
@@ -94,7 +100,7 @@ publishing {
         create<MavenPublication>("maven") {
             from(components["versionCatalog"])
 
-            groupId = "no.nordicsemi.android"
+            groupId = "no.nordicsemi.android.gradle"
             artifactId = "version-catalog"
             version = getVersionNameFromTags()
         }
