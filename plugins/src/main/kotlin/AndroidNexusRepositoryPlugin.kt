@@ -12,63 +12,71 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
                 apply("maven-publish")
             }
 
+            val nexusPluginExt: NexusRepositoryPluginExt = extensions.create("myPlugin", NexusRepositoryPluginExt::class.java)
+
             val publishing = extensions.getByType<PublishingExtension>()
             publishing.publications {
                 this.withType(MavenPublication::class.java) {
                     if (!project.state.executed) {
                         project.afterEvaluate {
-                            configureDescription(this@withType, this)
+                            configureDescription(this@withType, nexusPluginExt)
                         }
                     } else {
-                        configureDescription(this@withType, project)
+                        configureDescription(this@withType, nexusPluginExt)
                     }
                 }
             }
         }
     }
 
-    private fun configureDescription(publication: MavenPublication, p: Project) {
+    private fun configureDescription(publication: MavenPublication, nexusPluginExt: NexusRepositoryPluginExt) {
+        println("AAATESTAAA: $nexusPluginExt")
+
         publication.pom {
-            packaging = SonatypeObject.GROUP
-            description.set(SonatypeObject.POM_DESCRIPTION)
-            url.set(SonatypeObject.POM_URL)
+            packaging = nexusPluginExt.GROUP
+            description.set(nexusPluginExt.POM_DESCRIPTION)
+            url.set(nexusPluginExt.POM_URL)
 
             licenses {
                 license {
-                    distribution.set(SonatypeObject.POM_LICENCE)
-                    name.set(SonatypeObject.POM_LICENCE_NAME)
-                    url.set(SonatypeObject.POM_LICENCE_URL)
+                    distribution.set(nexusPluginExt.POM_LICENCE)
+                    name.set(nexusPluginExt.POM_LICENCE_NAME)
+                    url.set(nexusPluginExt.POM_LICENCE_URL)
                 }
-                name.set(SonatypeObject.POM_LICENCE)
+                name.set(nexusPluginExt.POM_LICENCE)
 
             }
             scm {
-                url.set(SonatypeObject.POM_SCM_URL)
-                connection.set(SonatypeObject.POM_SCM_CONNECTION)
-                developerConnection.set(SonatypeObject.POM_SCM_DEV_CONNECTION)
+                url.set(nexusPluginExt.POM_SCM_URL)
+                connection.set(nexusPluginExt.POM_SCM_CONNECTION)
+                developerConnection.set(nexusPluginExt.POM_SCM_DEV_CONNECTION)
             }
             developers {
                 developer {
-                    id.set(SonatypeObject.POM_DEVELOPER_ID)
-                    name.set(SonatypeObject.POM_DEVELOPER_NAME)
-                    email.set(SonatypeObject.POM_DEVELOPER_EMAIL)
+                    id.set(nexusPluginExt.POM_DEVELOPER_ID)
+                    name.set(nexusPluginExt.POM_DEVELOPER_NAME)
+                    email.set(nexusPluginExt.POM_DEVELOPER_EMAIL)
                 }
             }
         }
     }
 }
 
-object SonatypeObject {
-    val GROUP = "no.nordicsemi.android"
-    val POM_DESCRIPTION = "Nordic Android Common Libraries"
-    val POM_URL = "https://github.com/NordicSemiconductor/Android-Gradle-Plugins"
-    val POM_SCM_URL = "https://github.com/NordicSemiconductor/Android-Gradle-Plugins"
-    val POM_SCM_CONNECTION = "scm:git@github.com:NordicSemiconductor/Android-Gradle-Plugins.git"
-    val POM_SCM_DEV_CONNECTION = "scm:git@github.com:NordicSemiconductor/Android-Gradle-Plugins.git"
-    val POM_LICENCE = "BSD-3-Clause"
-    val POM_LICENCE_NAME = "The BSD 3-Clause License"
-    val POM_LICENCE_URL = "http://opensource.org/licenses/BSD-3-Clause"
-    val POM_DEVELOPER_ID = "syzi"
-    val POM_DEVELOPER_NAME = "Sylwester Zielinski"
-    val POM_DEVELOPER_EMAIL = "sylwester.zielinski@nordicsemi.no"
-}
+data class NexusRepositoryPluginExt(
+    val POM_ARTIFACT_ID: String,
+    val POM_NAME: String,
+    val POM_PACKAGING: String = "aar",
+
+    val GROUP: String = "no.nordicsemi.android",
+    val POM_DESCRIPTION: String = "Nordic Android Common Libraries",
+    val POM_URL: String = "https://github.com/NordicSemiconductor/Android-Gradle-Plugins",
+    val POM_SCM_URL: String = "https://github.com/NordicSemiconductor/Android-Gradle-Plugins",
+    val POM_SCM_CONNECTION: String = "scm:git@github.com:NordicSemiconductor/Android-Gradle-Plugins.git",
+    val POM_SCM_DEV_CONNECTION: String = "scm:git@github.com:NordicSemiconductor/Android-Gradle-Plugins.git",
+    val POM_LICENCE: String = "BSD-3-Clause",
+    val POM_LICENCE_NAME: String = "The BSD 3-Clause License",
+    val POM_LICENCE_URL: String = "http://opensource.org/licenses/BSD-3-Clause",
+    val POM_DEVELOPER_ID: String = "syzi",
+    val POM_DEVELOPER_NAME: String = "Sylwester Zielinski",
+    val POM_DEVELOPER_EMAIL: String = "sylwester.zielinski@nordicsemi.no"
+)
