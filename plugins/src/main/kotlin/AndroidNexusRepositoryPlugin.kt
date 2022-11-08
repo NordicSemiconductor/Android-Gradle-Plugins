@@ -1,8 +1,10 @@
+import com.android.build.gradle.LibraryExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
+import org.gradle.jvm.tasks.Jar
 import org.gradle.kotlin.dsl.extra
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.getByType
@@ -13,6 +15,7 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             pluginManager.apply {
+                apply("com.android.library")
                 apply("maven-publish")
                 apply("signing")
             }
@@ -20,6 +23,12 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
             val nexusPluginExt: NexusRepositoryPluginExt = extensions.create("nordicNexusPublishing", NexusRepositoryPluginExt::class.java)
             val publishing = extensions.getByType<PublishingExtension>()
             val signing = extensions.getByType<SigningExtension>()
+            val library = extensions.getByType<LibraryExtension>()
+
+            val androidSourcesJar: Task = project.tasks.create("androidSourcesJar", Jar::class.java) {
+                archiveClassifier.set("sources")
+                from(library.sourceSets.getByName("main").java.srcDirs)
+            }
 
             tasks.register("publishToSonatype") {
                 finalizedBy("publishToMavenLocal")
@@ -38,10 +47,10 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
                             from(components["release"])
                             if (!project.state.executed) {
                                 project.afterEvaluate {
-                                    configureDescription(this@withType, nexusPluginExt, tasks.getByName("androidSourcesJar"))
+                                    configureDescription(this@withType, nexusPluginExt, androidSourcesJar)
                                 }
                             } else {
-                                configureDescription(this@withType, nexusPluginExt, tasks.getByName("androidSourcesJar"))
+                                configureDescription(this@withType, nexusPluginExt, androidSourcesJar)
                             }
                         }
                     }
