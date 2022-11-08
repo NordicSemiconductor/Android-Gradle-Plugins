@@ -1,12 +1,8 @@
-import com.android.build.api.dsl.AndroidSourceFile
-import com.android.build.api.dsl.AndroidSourceSet
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
-import org.gradle.api.tasks.SourceSetContainer
-import org.gradle.api.tasks.bundling.Jar
 import org.gradle.kotlin.dsl.extra
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.getByType
@@ -22,34 +18,40 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
             }
 
             val nexusPluginExt: NexusRepositoryPluginExt = extensions.create("nordicNexusPublishing", NexusRepositoryPluginExt::class.java)
-
             val publishing = extensions.getByType<PublishingExtension>()
-            publishing.repositories {
-                maven {
-                    credentials {
-                        username = System.getenv("OSSR_USERNAME")
-                        password = System.getenv("OSSR_PASSWORD")
-                    }
-                }
-            }
-            publishing.publications {
-                this.withType(MavenPublication::class.java) {
-                    from(components["release"])
-                    if (!project.state.executed) {
-                        project.afterEvaluate {
-                            configureDescription(this@withType, nexusPluginExt, tasks.getByName("androidSourcesJar"))
-                        }
-                    } else {
-                        configureDescription(this@withType, nexusPluginExt, tasks.getByName("androidSourcesJar"))
-                    }
-                }
-            }
-
             val signing = extensions.getByType<SigningExtension>()
-            project.extra.set("signing.keyId", System.getenv("GPG_SIGNING_KEY"))
-            project.extra.set("signing.password", System.getenv("GPG_PASSWORD"))
-            project.extra.set("signing.secretKeyRingFile", System.getenv("../sec.gpg"))
-            signing.sign(publishing.publications)
+
+            tasks.register("publishToSonatype") {
+                finalizedBy("publishToMavenLocal")
+
+                doLast {
+                    publishing.repositories {
+                        maven {
+                            credentials {
+                                username = System.getenv("OSSR_USERNAME")
+                                password = System.getenv("OSSR_PASSWORD")
+                            }
+                        }
+                    }
+                    publishing.publications {
+                        this.withType(MavenPublication::class.java) {
+                            from(components["release"])
+                            if (!project.state.executed) {
+                                project.afterEvaluate {
+                                    configureDescription(this@withType, nexusPluginExt, tasks.getByName("androidSourcesJar"))
+                                }
+                            } else {
+                                configureDescription(this@withType, nexusPluginExt, tasks.getByName("androidSourcesJar"))
+                            }
+                        }
+                    }
+
+                    project.extra.set("signing.keyId", System.getenv("GPG_SIGNING_KEY"))
+                    project.extra.set("signing.password", System.getenv("GPG_PASSWORD"))
+                    project.extra.set("signing.secretKeyRingFile", System.getenv("../sec.gpg"))
+                    signing.sign(publishing.publications)
+                }
+            }
         }
     }
 
