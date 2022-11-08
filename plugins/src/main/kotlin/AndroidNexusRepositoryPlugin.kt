@@ -1,8 +1,14 @@
+import com.android.build.api.dsl.AndroidSourceFile
+import com.android.build.api.dsl.AndroidSourceSet
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.Task
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
+import org.gradle.api.tasks.SourceSetContainer
+import org.gradle.api.tasks.bundling.Jar
 import org.gradle.kotlin.dsl.extra
+import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.plugins.signing.SigningExtension
 
@@ -28,12 +34,13 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
             }
             publishing.publications {
                 this.withType(MavenPublication::class.java) {
+                    from(components["release"])
                     if (!project.state.executed) {
                         project.afterEvaluate {
-                            configureDescription(this@withType, nexusPluginExt)
+                            configureDescription(this@withType, nexusPluginExt, tasks.getByName("androidSourcesJar"))
                         }
                     } else {
-                        configureDescription(this@withType, nexusPluginExt)
+                        configureDescription(this@withType, nexusPluginExt, tasks.getByName("androidSourcesJar"))
                     }
                 }
             }
@@ -48,10 +55,13 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
 
     private fun configureDescription(
         publication: MavenPublication,
-        nexusPluginExt: NexusRepositoryPluginExt
+        nexusPluginExt: NexusRepositoryPluginExt,
+        androidSourcesJar: Task
     ) {
         publication.artifactId = nexusPluginExt.POM_ARTIFACT_ID
         publication.groupId = nexusPluginExt.GROUP
+
+        publication.artifact(androidSourcesJar)
 
         publication.pom {
             this.name.set(nexusPluginExt.POM_NAME)
