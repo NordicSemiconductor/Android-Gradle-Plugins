@@ -2,15 +2,17 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
+import org.gradle.kotlin.dsl.extra
 import org.gradle.kotlin.dsl.getByType
+import org.gradle.plugins.signing.SigningExtension
 
 class AndroidNexusRepositoryPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         with(target) {
             pluginManager.apply {
-                apply("io.github.gradle-nexus.publish-plugin")
                 apply("maven-publish")
+                apply("signing")
             }
 
             val nexusPluginExt: NexusRepositoryPluginExt = extensions.create("nordicNexusPublishing", NexusRepositoryPluginExt::class.java)
@@ -35,14 +37,26 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
                     }
                 }
             }
+
+            val signing = extensions.getByType<SigningExtension>()
+            project.extra.set("signing.keyId", System.getenv("GPG_SIGNING_KEY"))
+            project.extra.set("signing.password", System.getenv("GPG_PASSWORD"))
+            project.extra.set("signing.secretKeyRingFile", System.getenv("../sec.gpg"))
+            signing.sign(publishing.publications)
         }
     }
 
-    private fun configureDescription(publication: MavenPublication, nexusPluginExt: NexusRepositoryPluginExt) {
-        println("AAATESTAAA: $nexusPluginExt")
+    private fun configureDescription(
+        publication: MavenPublication,
+        nexusPluginExt: NexusRepositoryPluginExt
+    ) {
+        publication.artifactId = nexusPluginExt.POM_ARTIFACT_ID
+        publication.groupId = nexusPluginExt.GROUP
 
         publication.pom {
-            packaging = nexusPluginExt.GROUP
+            this.name.set(nexusPluginExt.POM_NAME)
+
+            packaging = nexusPluginExt.POM_PACKAGING
             description.set(nexusPluginExt.POM_DESCRIPTION)
             url.set(nexusPluginExt.POM_URL)
 
@@ -51,9 +65,8 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
                     distribution.set(nexusPluginExt.POM_LICENCE)
                     name.set(nexusPluginExt.POM_LICENCE_NAME)
                     url.set(nexusPluginExt.POM_LICENCE_URL)
+                    name.set(nexusPluginExt.POM_LICENCE)
                 }
-                name.set(nexusPluginExt.POM_LICENCE)
-
             }
             scm {
                 url.set(nexusPluginExt.POM_SCM_URL)
