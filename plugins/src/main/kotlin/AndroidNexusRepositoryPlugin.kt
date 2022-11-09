@@ -55,7 +55,7 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
         }
 
         publishing.repositories {
-            maven {
+            mavenCentral {
                 credentials {
                     username = System.getenv("OSSR_USERNAME")
                     password = System.getenv("OSSR_PASSWORD")
