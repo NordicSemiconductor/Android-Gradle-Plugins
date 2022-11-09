@@ -1,9 +1,10 @@
 import com.android.build.gradle.LibraryExtension
+import no.nordicsemi.android.buildlogic.getVersionNameFromTags
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.Task
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
+import org.gradle.api.tasks.bundling.AbstractArchiveTask
 import org.gradle.jvm.tasks.Jar
 import org.gradle.kotlin.dsl.extra
 import org.gradle.kotlin.dsl.get
@@ -25,15 +26,19 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
             val signing = extensions.getByType<SigningExtension>()
             val library = extensions.getByType<LibraryExtension>()
 
-            val androidSourcesJar: Task = project.tasks.create("androidSourcesJar", Jar::class.java) {
+            val androidSourcesJar: AbstractArchiveTask = project.tasks.create("androidSourcesJar", Jar::class.java) {
                 archiveClassifier.set("sources")
                 from(library.sourceSets.getByName("main").java.srcDirs)
             }
 
-            tasks.register("publishToSonatype") {
-                finalizedBy("publishToMavenLocal")
+            artifacts {
+                add("archives", androidSourcesJar)
+            }
 
-                doLast {
+            tasks.register("publishToSonatype") {
+                finalizedBy(tasks.getByName("publishToMavenLocal"))
+
+                doFirst {
                     publishing.repositories {
                         maven {
                             credentials {
@@ -43,14 +48,14 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
                         }
                     }
                     publishing.publications {
-                        this.withType(MavenPublication::class.java) {
+                        this.register("mavenPublication", MavenPublication::class.java) {
                             from(components["release"])
                             if (!project.state.executed) {
                                 project.afterEvaluate {
-                                    configureDescription(this@withType, nexusPluginExt, androidSourcesJar)
+                                    configureDescription(this@register, nexusPluginExt, androidSourcesJar)
                                 }
                             } else {
-                                configureDescription(this@withType, nexusPluginExt, androidSourcesJar)
+                                configureDescription(this@register, nexusPluginExt, androidSourcesJar)
                             }
                         }
                     }
@@ -64,13 +69,15 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
         }
     }
 
-    private fun configureDescription(
+    private fun Project.configureDescription(
         publication: MavenPublication,
         nexusPluginExt: NexusRepositoryPluginExt,
-        androidSourcesJar: Task
+        androidSourcesJar: AbstractArchiveTask
     ) {
+        println("AAAA configured")
         publication.artifactId = nexusPluginExt.POM_ARTIFACT_ID
         publication.groupId = nexusPluginExt.GROUP
+        publication.version = getVersionNameFromTags()
 
         publication.artifact(androidSourcesJar)
 
