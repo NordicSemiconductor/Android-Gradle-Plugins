@@ -2,7 +2,6 @@ import com.android.build.gradle.LibraryExtension
 import no.nordicsemi.android.buildlogic.getVersionNameFromTags
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.bundling.AbstractArchiveTask
@@ -11,8 +10,6 @@ import org.gradle.kotlin.dsl.extra
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.plugins.signing.SigningExtension
-import org.gradle.plugins.signing.type.SignatureType
-import kotlin.math.sign
 
 class AndroidNexusRepositoryPlugin : Plugin<Project> {
 
@@ -23,10 +20,6 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
                 apply("maven-publish")
                 apply("signing")
             }
-
-            project.extra.set("signing.keyId", System.getenv("GPG_SIGNING_KEY"))
-            project.extra.set("signing.password", System.getenv("GPG_PASSWORD"))
-            project.extra.set("signing.secretKeyRingFile", System.getenv(rootProject.file("sec.gpg").path))
 
             val nexusPluginExt: NexusRepositoryPluginExt = extensions.create("nordicNexusPublishing", NexusRepositoryPluginExt::class.java)
             val library = extensions.getByType<LibraryExtension>()
@@ -40,7 +33,7 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
                 }
             }
 
-            val androidSourcesJar: AbstractArchiveTask = project.tasks.create("androidSourcesJar", Jar::class.java) {
+            project.tasks.create("androidSourcesJar", Jar::class.java) {
                 archiveClassifier.set("sources")
                 from(library.sourceSets.getByName("main").java.srcDirs)
             }
@@ -49,11 +42,6 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
                 project.configurePublishingExtension(nexusPluginExt)
             }
         }
-    }
-
-    private fun Project.configureJavaExtension() {
-        val extension = extensions.getByType(JavaPluginExtension::class.java)
-        extension.withSourcesJar()
     }
 
     private fun Project.configurePublishingExtension(nexusPluginExt: NexusRepositoryPluginExt) {
@@ -75,7 +63,7 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
             }
         }
         publishing.publications {
-            this.register("maven", MavenPublication::class.java) {
+            this.register("mavenPublication", MavenPublication::class.java) {
                 from(components["release"])
                 if (!project.state.executed) {
                     project.afterEvaluate {
@@ -87,14 +75,11 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
             }
         }
 
-
-        println("AAAA ${rootProject.file("sec.gpg").path}")
+        project.extra.set("signing.keyId", System.getenv("GPG_SIGNING_KEY"))
+        project.extra.set("signing.password", System.getenv("GPG_PASSWORD"))
+        project.extra.set("signing.secretKeyRingFile", System.getenv(rootProject.file("sec.gpg").path))
         signing.useGpgCmd()
-//        signing.useInMemoryPgpKeys(System.getenv("GPG_SIGNING_KEY"), System.getenv("GPG_PASSWORD"))
-        signing.sign(publishing.publications.getByName("maven"))
-        val publication = publishing.publications.getByName("maven")
-
-        println("AAAA conf: ${signing.configuration.all}")
+        signing.sign(publishing.publications.getByName("mavenPublication"))
     }
 
     private fun Project.configureDescription(
