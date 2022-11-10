@@ -94,14 +94,21 @@ gradlePlugin {
 //    apply(from = rootProject.file("gradle/publish-module.gradle"))
 //}
 
+catalog {
+    // declare the aliases, bundles and versions in this block
+    versionCatalog {
+        from(files("../gradle/libs.versions.toml"))
+    }
+}
+
 publishing {
     publications {
-        create<MavenPublication>("maven") {
-            from(components["versionCatalog"])
-
+        create<MavenPublication>("libs") {
             groupId = "no.nordicsemi.android.gradle"
             artifactId = "version-catalog"
             version = getVersionNameFromTags()
+
+            from(components["versionCatalog"])
         }
     }
     repositories {
