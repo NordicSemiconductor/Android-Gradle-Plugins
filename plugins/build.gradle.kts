@@ -27,11 +27,6 @@ val getVersionNameFromTags: groovy.lang.Closure<String> by ext
 group = "no.nordicsemi.android.gradle"
 version = getVersionNameFromTags()
 
-tasks.create<Jar>("sourcesJar") {
-    archiveClassifier.set("sources")
-    from(sourceSets.main)
-}
-
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
@@ -89,18 +84,7 @@ gradlePlugin {
     }
 }
 
-// === Maven Central configuration ===
-// The following file exists only when Android BLE Library project is opened, but not
-// when the module is loaded to a different project.
-//if (rootProject.file("gradle/publish-module.gradle").exists()) {
-//    extra.set("POM_ARTIFACT_ID", "gradle")
-//    extra.set("POM_NAME", "Nordic common gradle")
-//    extra.set("POM_PACKAGING", "aar")
-//    apply(from = rootProject.file("gradle/publish-module.gradle"))
-//}
-
 catalog {
-    // declare the aliases, bundles and versions in this block
     versionCatalog {
         from(files("../gradle/libs.versions.toml"))
     }
@@ -123,7 +107,6 @@ publishing {
             groupId = "no.nordicsemi.android.gradle"
             artifactId = "gradle"
             version = getVersionNameFromTags()
-            artifact(tasks.getByName("sourcesJar"))
 
             pom {
                 name.set("Nordic Gradle plugins for Android")
@@ -161,9 +144,5 @@ ext["signing.password"] = System.getenv("GPG_PASSWORD")
 ext["signing.secretKeyRingFile"] = "../sec.gpg"
 
 signing {
-    sign(publishing.publications["libs"])
-}
-
-signing {
-    sign(publishing.publications["plugins"])
+    sign(publishing.publications)
 }
