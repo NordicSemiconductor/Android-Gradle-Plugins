@@ -27,6 +27,11 @@ val getVersionNameFromTags: groovy.lang.Closure<String> by ext
 group = "no.nordicsemi.android.gradle"
 version = getVersionNameFromTags()
 
+tasks.create<Jar>("sourcesJar") {
+    archiveClassifier.set("sources")
+    from(sourceSets.main)
+}
+
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
@@ -111,7 +116,54 @@ publishing {
             from(components["versionCatalog"])
         }
     }
-    repositories {
-        mavenCentral()
+    publications {
+        create<MavenPublication>("plugins") {
+            from(components["java"])
+
+            groupId = "no.nordicsemi.android.gradle"
+            artifactId = "gradle"
+            version = getVersionNameFromTags()
+            artifact(tasks.getByName("sourcesJar"))
+
+            pom {
+                name.set("Nordic Gradle plugins for Android")
+                packaging = "jar"
+                description.set("Nordic Android Common Libraries")
+                url.set("https://github.com/NordicSemiconductor/Android-Gradle-Plugins")
+
+                scm {
+                    url.set("https://github.com/NordicSemiconductor/Android-Gradle-Plugins")
+                    connection.set("scm:git@github.com:NordicSemiconductor/Android-Gradle-Plugins.git")
+                    developerConnection.set("scm:git@github.com:NordicSemiconductor/Android-Gradle-Plugins.git")
+                }
+
+                licenses {
+                    license {
+                        name.set("The BSD 3-Clause License")
+                        url.set("http://opensource.org/licenses/BSD-3-Clause")
+                    }
+                }
+
+                developers {
+                    developer {
+                        id.set("syzi")
+                        name.set("Sylwester Zielinski")
+                        email.set("sylwester.zielinski@nordicsemi.no")
+                    }
+                }
+            }
+        }
     }
+}
+
+ext["signing.keyId"] = System.getenv("GPG_SIGNING_KEY")
+ext["signing.password"] = System.getenv("GPG_PASSWORD")
+ext["signing.secretKeyRingFile"] = "../sec.gpg"
+
+signing {
+    sign(publishing.publications["libs"])
+}
+
+signing {
+    sign(publishing.publications["plugins"])
 }
