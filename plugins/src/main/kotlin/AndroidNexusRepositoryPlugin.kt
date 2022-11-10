@@ -55,7 +55,8 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
         }
 
         publishing.repositories {
-            mavenCentral {
+            maven {
+                setUrl("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
                 credentials {
                     username = System.getenv("OSSR_USERNAME")
                     password = System.getenv("OSSR_PASSWORD")
