@@ -15,13 +15,13 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ## Android
 
-### android deployNexus
+### android deploy
 
 ```sh
-[bundle exec] fastlane android deployNexus
+[bundle exec] fastlane android deploy
 ```
 
-Deploy libraries to Nexus.
+Deploy version catalog to Nexus and plugins to Gradle Portal.
 
 ### android deployLocal
 
