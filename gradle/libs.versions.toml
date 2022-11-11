@@ -52,6 +52,7 @@ markdown = "0.3.0"
 
 nordic-log = "2.3.0"
 nordic-scanner = "1.6.0"
+nordicPlugins = "1.0.0"
 
 [libraries]
 accompanist-flowlayout = { group = "com.google.accompanist", name = "accompanist-flowlayout", version.ref = "accompanist" }
@@ -139,6 +140,12 @@ android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", ver
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 
 [plugins]
+nordic-application = { id = "no.nordicsemi.android.gradle.application", version.ref = "nordicPlugins" }
+nordic-application-compose = { id = "no.nordicsemi.android.gradle.application.compose", version.ref = "nordicPlugins" }
+nordic-library = { id = "no.nordicsemi.android.gradle.library", version.ref = "nordicPlugins" }
+nordic-library-compose = { id = "no.nordicsemi.android.gradle.library.compose", version.ref = "nordicPlugins" }
+nordic-feature = { id = "no.nordicsemi.android.gradle.feature", version.ref = "nordicPlugins" }
+nordic-hilt = { id = "no.nordicsemi.android.gradle.hilt", version.ref = "nordicPlugins" }
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 android-test = { id = "com.android.test", version.ref = "androidGradlePlugin" }
