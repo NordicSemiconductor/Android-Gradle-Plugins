@@ -90,6 +90,11 @@ catalog {
     }
 }
 
+val sourcesJar by tasks.registering(Jar::class) {
+    archiveClassifier.set("sources")
+    from(sourceSets.main.get().allSource)
+}
+
 publishing {
     publications {
         create<MavenPublication>("libs") {
@@ -100,9 +105,9 @@ publishing {
             version = getVersionNameFromTags()
 
             pom {
-                name.set("Nordic Gradle plugins for Android")
+                name.set("Nordic version catalog for Android")
                 packaging = "toml"
-                description.set("Nordic Android Common Libraries")
+                description.set("Nordic version catalog for Android")
                 url.set("https://github.com/NordicSemiconductor/Android-Gradle-Plugins")
 
                 scm {
@@ -128,43 +133,45 @@ publishing {
             }
         }
     }
-//    publications {
-//        create<MavenPublication>("plugins") {
-//            from(components["java"])
-//
-//            groupId = "no.nordicsemi.android.gradle"
-//            artifactId = "gradle"
-//            version = getVersionNameFromTags()
-//
-//            pom {
-//                name.set("Nordic Gradle plugins for Android")
-//                packaging = "jar"
-//                description.set("Nordic Android Common Libraries")
-//                url.set("https://github.com/NordicSemiconductor/Android-Gradle-Plugins")
-//
-//                scm {
-//                    url.set("https://github.com/NordicSemiconductor/Android-Gradle-Plugins")
-//                    connection.set("scm:git@github.com:NordicSemiconductor/Android-Gradle-Plugins.git")
-//                    developerConnection.set("scm:git@github.com:NordicSemiconductor/Android-Gradle-Plugins.git")
-//                }
-//
-//                licenses {
-//                    license {
-//                        name.set("The BSD 3-Clause License")
-//                        url.set("http://opensource.org/licenses/BSD-3-Clause")
-//                    }
-//                }
-//
-//                developers {
-//                    developer {
-//                        id.set("syzi")
-//                        name.set("Sylwester Zielinski")
-//                        email.set("sylwester.zielinski@nordicsemi.no")
-//                    }
-//                }
-//            }
-//        }
-//    }
+    publications {
+        create<MavenPublication>("plugins") {
+            from(components["java"])
+
+            groupId = "no.nordicsemi.android.gradle"
+            artifactId = "plugins"
+            version = getVersionNameFromTags()
+
+            artifact(sourcesJar.get())
+
+            pom {
+                name.set("Nordic Gradle plugins for Android")
+                packaging = "jar"
+                description.set("Nordic Gradle plugins for Android")
+                url.set("https://github.com/NordicSemiconductor/Android-Gradle-Plugins")
+
+                scm {
+                    url.set("https://github.com/NordicSemiconductor/Android-Gradle-Plugins")
+                    connection.set("scm:git@github.com:NordicSemiconductor/Android-Gradle-Plugins.git")
+                    developerConnection.set("scm:git@github.com:NordicSemiconductor/Android-Gradle-Plugins.git")
+                }
+
+                licenses {
+                    license {
+                        name.set("The BSD 3-Clause License")
+                        url.set("http://opensource.org/licenses/BSD-3-Clause")
+                    }
+                }
+
+                developers {
+                    developer {
+                        id.set("syzi")
+                        name.set("Sylwester Zielinski")
+                        email.set("sylwester.zielinski@nordicsemi.no")
+                    }
+                }
+            }
+        }
+    }
 }
 
 ext["signing.keyId"] = System.getenv("GPG_SIGNING_KEY")
