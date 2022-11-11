@@ -19,6 +19,7 @@ plugins {
     `kotlin-dsl`
     `maven-publish`
     signing
+    id("com.gradle.plugin-publish") version "1.0.0"
 }
 apply(from = "../gradle/git-tag-version.gradle")
 
@@ -35,6 +36,12 @@ java {
 dependencies {
     compileOnly(libs.android.gradlePlugin)
     compileOnly(libs.kotlin.gradlePlugin)
+}
+
+pluginBundle {
+    website = "https://www.nordicsemi.com/"
+    vcsUrl = "https://github.com/NordicSemiconductor/Android-Gradle-Plugins"
+    tags = listOf("nordicsemi", "Android")
 }
 
 gradlePlugin {
@@ -80,96 +87,6 @@ gradlePlugin {
             displayName = "Nexus plugin"
             description = "Plugin creating a task for publishing to Nexus repository."
             implementationClass = "AndroidNexusRepositoryPlugin"
-        }
-    }
-}
-
-catalog {
-    versionCatalog {
-        from(files("../gradle/libs.versions.toml"))
-    }
-}
-
-val sourcesJar by tasks.registering(Jar::class) {
-    archiveClassifier.set("sources")
-    from(sourceSets.main.get().allSource)
-}
-
-publishing {
-    publications {
-        create<MavenPublication>("libs") {
-            from(components["versionCatalog"])
-
-            groupId = "no.nordicsemi.android.gradle"
-            artifactId = "version-catalog"
-            version = getVersionNameFromTags()
-
-            pom {
-                name.set("Nordic version catalog for Android")
-                packaging = "toml"
-                description.set("Nordic version catalog for Android")
-                url.set("https://github.com/NordicSemiconductor/Android-Gradle-Plugins")
-
-                scm {
-                    url.set("https://github.com/NordicSemiconductor/Android-Gradle-Plugins")
-                    connection.set("scm:git@github.com:NordicSemiconductor/Android-Gradle-Plugins.git")
-                    developerConnection.set("scm:git@github.com:NordicSemiconductor/Android-Gradle-Plugins.git")
-                }
-
-                licenses {
-                    license {
-                        name.set("The BSD 3-Clause License")
-                        url.set("http://opensource.org/licenses/BSD-3-Clause")
-                    }
-                }
-
-                developers {
-                    developer {
-                        id.set("syzi")
-                        name.set("Sylwester Zielinski")
-                        email.set("sylwester.zielinski@nordicsemi.no")
-                    }
-                }
-            }
-        }
-    }
-    publications {
-        create<MavenPublication>("plugins") {
-            from(components["java"])
-
-            groupId = "no.nordicsemi.android.gradle"
-            artifactId = "plugins"
-            version = getVersionNameFromTags()
-
-            artifact(sourcesJar.get())
-
-            pom {
-                name.set("Nordic Gradle plugins for Android")
-                packaging = "jar"
-                description.set("Nordic Gradle plugins for Android")
-                url.set("https://github.com/NordicSemiconductor/Android-Gradle-Plugins")
-
-                scm {
-                    url.set("https://github.com/NordicSemiconductor/Android-Gradle-Plugins")
-                    connection.set("scm:git@github.com:NordicSemiconductor/Android-Gradle-Plugins.git")
-                    developerConnection.set("scm:git@github.com:NordicSemiconductor/Android-Gradle-Plugins.git")
-                }
-
-                licenses {
-                    license {
-                        name.set("The BSD 3-Clause License")
-                        url.set("http://opensource.org/licenses/BSD-3-Clause")
-                    }
-                }
-
-                developers {
-                    developer {
-                        id.set("syzi")
-                        name.set("Sylwester Zielinski")
-                        email.set("sylwester.zielinski@nordicsemi.no")
-                    }
-                }
-            }
         }
     }
 }
