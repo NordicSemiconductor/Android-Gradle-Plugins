@@ -93,11 +93,39 @@ catalog {
 publishing {
     publications {
         create<MavenPublication>("libs") {
+            from(components["versionCatalog"])
+
             groupId = "no.nordicsemi.android.gradle"
             artifactId = "version-catalog"
             version = getVersionNameFromTags()
 
-            from(components["versionCatalog"])
+            pom {
+                name.set("Nordic Gradle plugins for Android")
+                packaging = "jar"
+                description.set("Nordic Android Common Libraries")
+                url.set("https://github.com/NordicSemiconductor/Android-Gradle-Plugins")
+
+                scm {
+                    url.set("https://github.com/NordicSemiconductor/Android-Gradle-Plugins")
+                    connection.set("scm:git@github.com:NordicSemiconductor/Android-Gradle-Plugins.git")
+                    developerConnection.set("scm:git@github.com:NordicSemiconductor/Android-Gradle-Plugins.git")
+                }
+
+                licenses {
+                    license {
+                        name.set("The BSD 3-Clause License")
+                        url.set("http://opensource.org/licenses/BSD-3-Clause")
+                    }
+                }
+
+                developers {
+                    developer {
+                        id.set("syzi")
+                        name.set("Sylwester Zielinski")
+                        email.set("sylwester.zielinski@nordicsemi.no")
+                    }
+                }
+            }
         }
     }
     publications {
