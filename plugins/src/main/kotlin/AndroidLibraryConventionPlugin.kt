@@ -34,8 +34,29 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
 
             extensions.configure<LibraryExtension> {
                 configureKotlinAndroid(this)
+                compileSdk = 33
+                defaultConfig.minSdk = 24
                 defaultConfig.targetSdk = 33
+
+                signingConfigs {
+                    create("release") {
+                        storeFile = file("../keystore")
+                        storePassword = System.getenv("KEYSTORE_PSWD")
+                        keyAlias = System.getenv("KEYSTORE_ALIAS")
+                        keyPassword = System.getenv("KEYSTORE_KEY_PSWD")
+                    }
+                }
+
+                buildTypes {
+                    create("release") {
+                        isMinifyEnabled = true
+                        isShrinkResources = true
+                        signingConfig = signingConfigs.getByName("release")
+                        setProguardFiles(listOf(getDefaultProguardFile("proguard-android-optimize.txt"), file("proguard-rules.pro")))
+                    }
+                }
             }
+
             extensions.configure<LibraryAndroidComponentsExtension> {
                 configurePrintApksTask(this)
             }

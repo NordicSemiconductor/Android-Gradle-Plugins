@@ -24,15 +24,6 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
             val nexusPluginExt: NexusRepositoryPluginExt = extensions.create("nordicNexusPublishing", NexusRepositoryPluginExt::class.java)
             val library = extensions.getByType<LibraryExtension>()
 
-            library.signingConfigs {
-                this.create("release") {
-                    this.storeFile = file("../keystore")
-                    this.storePassword = System.getenv("KEYSTORE_PSWD")
-                    this.keyAlias = System.getenv("KEYSTORE_ALIAS")
-                    this.keyPassword = System.getenv("KEYSTORE_KEY_PSWD")
-                }
-            }
-
             project.tasks.create("androidSourcesJar", Jar::class.java) {
                 archiveClassifier.set("sources")
                 from(library.sourceSets.getByName("main").java.srcDirs)
