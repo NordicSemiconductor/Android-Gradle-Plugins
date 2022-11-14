@@ -1,4 +1,4 @@
-name: Deploy to Nexus
+name: Deploy artifacts
 on:
   push:
     tags:
