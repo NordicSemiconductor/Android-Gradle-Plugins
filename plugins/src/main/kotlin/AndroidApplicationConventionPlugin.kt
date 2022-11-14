@@ -46,7 +46,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                 }
 
                 buildTypes {
-                    create("release") {
+                    getByName("release") {
                         isMinifyEnabled = true
                         isShrinkResources = true
                         signingConfig = signingConfigs.getByName("release")

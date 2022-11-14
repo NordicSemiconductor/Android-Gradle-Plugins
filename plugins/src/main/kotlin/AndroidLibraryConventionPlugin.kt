@@ -48,9 +48,8 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                 }
 
                 buildTypes {
-                    create("release") {
+                    getByName("release") {
                         isMinifyEnabled = true
-                        isShrinkResources = true
                         signingConfig = signingConfigs.getByName("release")
                         setProguardFiles(listOf(getDefaultProguardFile("proguard-android-optimize.txt"), file("proguard-rules.pro")))
                     }
