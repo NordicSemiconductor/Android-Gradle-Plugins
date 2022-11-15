@@ -18,10 +18,13 @@ import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import no.nordicsemi.android.buildlogic.configureKotlinAndroid
 import no.nordicsemi.android.buildlogic.configurePrintApksTask
+import no.nordicsemi.android.buildlogic.getVersionCodeFromTags
+import no.nordicsemi.android.buildlogic.getVersionNameFromTags
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 
+@Suppress("UnstableApiUsage")
 class AndroidApplicationConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
@@ -33,8 +36,13 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
             extensions.configure<ApplicationExtension> {
                 configureKotlinAndroid(this)
                 compileSdk = 33
-                defaultConfig.minSdk = 24
-                defaultConfig.targetSdk = 33
+
+                defaultConfig {
+                    minSdk = 24
+                    targetSdk = 33
+                    versionName = target.getVersionNameFromTags()
+                    versionCode = target.getVersionCodeFromTags()
+                }
 
                 signingConfigs {
                     create("release") {
@@ -59,5 +67,4 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
             }
         }
     }
-
 }
