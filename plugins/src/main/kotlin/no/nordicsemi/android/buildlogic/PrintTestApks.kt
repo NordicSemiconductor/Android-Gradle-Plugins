@@ -14,6 +14,8 @@
  *   limitations under the License.
  */
 
+@file:Suppress("UnstableApiUsage")
+
 package no.nordicsemi.android.buildlogic
 
 import com.android.build.api.artifact.SingleArtifact
