@@ -40,7 +40,6 @@ kotlinxSerializationJson = "1.4.0"
 ksp = "1.7.20-1.0.7"
 lint = "30.2.2"
 memfault-cloud = "2.0.3"
-material = "1.7.0"
 okhttp = "4.10.0"
 protobuf = "3.21.9"
 protobufPlugin = "0.8.19"
@@ -117,7 +116,6 @@ coil-kt-svg = { group = "io.coil-kt", name = "coil-svg", version.ref = "coil"}
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom"}
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics-ktx" }
-google-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-ext-work = { group = "androidx.hilt", name = "hilt-work", version.ref = "hiltExt" }
 hilt-ext-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "hiltExt" }
