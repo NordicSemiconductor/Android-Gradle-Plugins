@@ -17,14 +17,18 @@ default_platform(:android)
 
 platform :android do
 
-  desc "Deploy version catalog to Nexus and plugins to Gradle Portal."
-  lane :deploy do
+  desc "Deploy plugins to Gradle Portal."
+  lane :deployPlugins do
     gradle(task: ":plugins:publishPlugins")
+  end
+
+  desc "Deploy version catalog to Nexus."
+  lane :deployVersionCatalog do
     gradle(task: ":version-catalog:publishToSonatype closeAndReleaseSonatypeStagingRepository")
   end
 
   desc "Deploy libraries to Maven locally on the PC."
-    lane :deployLocal do
-      gradle(task: "publishToMavenLocal")
-    end
+  lane :deployLocal do
+    gradle(task: "publishToMavenLocal")
+  end
 end
