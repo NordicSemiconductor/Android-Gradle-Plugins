@@ -51,6 +51,7 @@ secrets = "2.0.1"
 turbine = "0.8.0"
 markdown = "0.3.0"
 
+nordic-ble = "2.6.0-alpha03"
 nordic-log = "2.3.0"
 nordic-scanner = "1.6.0"
 nordic-common = "1.3.0"
@@ -91,8 +92,8 @@ androidx-lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecy
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "androidxLifecycle" }
 androidx-lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime", version.ref = "androidxLifecycle" }
 androidx-lifecycle-runtimeCompose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
-androidx-lifecycle-runtimeCompose = { group = "androidx.lifecycle", name = "lifecycle-runtime-livedata", version.ref = "androidxLifecycle" }
-androidx-lifecycle-runtimeCompose = { group = "androidx.lifecycle", name = "lifecycle-runtime-rxjava2", version.ref = "androidxLifecycle" }
+androidx-lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-runtime-livedata", version.ref = "androidxLifecycle" }
+androidx-lifecycle-rxjava2 = { group = "androidx.lifecycle", name = "lifecycle-runtime-rxjava2", version.ref = "androidxLifecycle" }
 androidx-lifecycle-viewModelCompose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
 androidx-metrics = { group = "androidx.metrics", name = "metrics-performance", version.ref = "androidxMetrics" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidxNavigation" }
@@ -140,8 +141,8 @@ markdown = { group = "com.github.jeziellago", name = "compose-markdown", version
 memfault-cloud = { group = "com.memfault.cloud", name = "cloud-android", version.ref = "memfault-cloud" }
 
 #Nordic
-nordic-ble = { group = "no.nordicsemi.android", name = "ble-ktx", version.ref = "2.6.0-alpha03" }
-nordic-common = { group = "no.nordicsemi.android", name = "ble-common", version.ref = "2.6.0-alpha03" }
+nordic-ble = { group = "no.nordicsemi.android", name = "ble-ktx", version.ref = "nordic-ble" }
+nordic-common = { group = "no.nordicsemi.android", name = "ble-common", version.ref = "nordic-ble" }
 nordic-log = { group = "no.nordicsemi.android", name = "log", version.ref = "nordic-log" }
 nordic-scanner = { group = "no.nordicsemi.android.support.v18", name = "scanner", version.ref = "nordic-scanner" }
 nordic-theme = { group = "no.nordicsemi.android.common", name = "theme", version.ref = "nordic-common" }
