@@ -36,8 +36,11 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
             extensions.configure<LibraryExtension> {
                 configureKotlinAndroid(this)
                 compileSdk = 33
-                defaultConfig.minSdk = 24
-                defaultConfig.targetSdk = 33
+
+                defaultConfig {
+                    minSdk = 21
+                    targetSdk = 33
+                }
 
                 signingConfigs {
                     create("release") {
