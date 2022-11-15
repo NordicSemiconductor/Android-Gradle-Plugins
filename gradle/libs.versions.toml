@@ -50,12 +50,13 @@ room = "2.5.0-beta02"
 secrets = "2.0.1"
 turbine = "0.12.1"
 markdown = "0.3.0"
+wirePlugin = "4.4.0"
 
 nordic-ble = "2.6.0-alpha03"
 nordic-log = "2.3.0"
 nordic-scanner = "1.6.0"
 nordic-common = "1.3.1"
-nordicPlugins = "1.0.5"
+nordicPlugins = "1.0.7"
 
 [libraries]
 accompanist-flowlayout = { group = "com.google.accompanist", name = "accompanist-flowlayout", version.ref = "accompanist" }
@@ -165,6 +166,7 @@ nordic-library = { id = "no.nordicsemi.android.gradle.library", version.ref = "n
 nordic-library-compose = { id = "no.nordicsemi.android.gradle.library.compose", version.ref = "nordicPlugins" }
 nordic-feature = { id = "no.nordicsemi.android.gradle.feature", version.ref = "nordicPlugins" }
 nordic-hilt = { id = "no.nordicsemi.android.gradle.hilt", version.ref = "nordicPlugins" }
+nordic-nexus = { id = "no.nordicsemi.android.gradle.nexus", version.ref = "nordicPlugins" }
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 android-test = { id = "com.android.test", version.ref = "androidGradlePlugin" }
@@ -175,3 +177,4 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 protobuf = { id = "com.google.protobuf", version.ref = "protobufPlugin" }
 secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secrets" }
 publish = { id = "com.gradle.plugin-publish", version.ref = "publishPlugin" }
+wire = { id = "com.squareup.wire", version.ref = "wirePlugin" }
