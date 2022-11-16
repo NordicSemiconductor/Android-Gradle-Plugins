@@ -24,16 +24,24 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
             val nexusPluginExt: NexusRepositoryPluginExt = extensions.create("nordicNexusPublishing", NexusRepositoryPluginExt::class.java)
             val library = extensions.getByType<LibraryExtension>()
 
-            project.tasks.create("androidSourcesJar", Jar::class.java) {
-                archiveClassifier.set("sources")
-                from(library.sourceSets.getByName("main").java.srcDirs)
-            }
-
             extra.set("signing.keyId", System.getenv("GPG_SIGNING_KEY"))
             extra.set("signing.password", System.getenv("GPG_PASSWORD"))
             extra.set("signing.secretKeyRingFile", "../sec.gpg")
 
+            library.publishing {
+                singleVariant("sources") {
+                    withSourcesJar()
+                }
+            }
+
             project.afterEvaluate {
+                project.tasks.create("androidSourcesJar", Jar::class.java) {
+                    afterEvaluate {
+                        archiveClassifier.set("sources")
+                        from(library.sourceSets.getByName("main").java.srcDirs)
+                    }
+                }
+
                 project.configurePublishingExtension(nexusPluginExt)
             }
         }
