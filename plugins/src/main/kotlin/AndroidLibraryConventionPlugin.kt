@@ -42,20 +42,10 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                     targetSdk = 33
                 }
 
-                signingConfigs {
-                    create("release") {
-                        storeFile = file("../keystore")
-                        storePassword = System.getenv("KEYSTORE_PSWD")
-                        keyAlias = System.getenv("KEYSTORE_ALIAS")
-                        keyPassword = System.getenv("KEYSTORE_KEY_PSWD")
-                    }
-                }
-
                 buildTypes {
                     getByName("release") {
                         isMinifyEnabled = true
-                        signingConfig = signingConfigs.getByName("release")
-                        setProguardFiles(listOf(getDefaultProguardFile("proguard-android-optimize.txt"), file("proguard-rules.pro")))
+                        consumerProguardFile("module-rules.pro")
                     }
                 }
             }
