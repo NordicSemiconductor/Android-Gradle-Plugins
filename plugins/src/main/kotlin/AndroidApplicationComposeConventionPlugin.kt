@@ -18,6 +18,8 @@ import com.android.build.api.dsl.ApplicationExtension
 import no.nordicsemi.android.buildlogic.configureAndroidCompose
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.artifacts.VersionCatalogsExtension
+import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
 
 class AndroidApplicationComposeConventionPlugin : Plugin<Project> {
@@ -29,6 +31,15 @@ class AndroidApplicationComposeConventionPlugin : Plugin<Project> {
 
             val extension = extensions.getByType<ApplicationExtension>()
             configureAndroidCompose(extension)
+
+            val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
+            dependencies {
+                // Add Material 3 Compose
+                add("implementation", libs.findLibrary("androidx.compose.material3").get())
+                // Add UI Tooling and Previews
+                add("debugImplementation", libs.findLibrary("androidx.compose.ui.tooling").get())
+                add("implementation", libs.findLibrary("androidx.compose.ui.tooling.preview").get())
+            }
         }
     }
 }
