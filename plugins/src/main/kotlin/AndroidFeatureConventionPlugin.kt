@@ -24,21 +24,17 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             pluginManager.apply {
-                apply("no.nordicsemi.android.gradle.library")
+                apply("no.nordicsemi.android.gradle.library.compose")
                 apply("no.nordicsemi.android.gradle.hilt")
             }
 
             val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
-
             dependencies {
-                // add("implementation", libs.findLibrary("coil.kt").get())
-                // add("implementation", libs.findLibrary("coil.kt.compose").get())
-
                 add("implementation", libs.findLibrary("androidx.hilt.navigation.compose").get())
+                // The above library depends on the following libraries, but to keep them in the
+                // newest version, we add them here as well.
                 add("implementation", libs.findLibrary("androidx.lifecycle.runtime.compose").get())
                 add("implementation", libs.findLibrary("androidx.lifecycle.viewModel.compose").get())
-
-                add("implementation", libs.findLibrary("kotlinx.coroutines.android").get())
             }
         }
     }
