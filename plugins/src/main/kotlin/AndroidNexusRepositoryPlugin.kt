@@ -29,6 +29,10 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
                 from(library.sourceSets.getByName("main").java.srcDirs)
             }
 
+            extra.set("signing.keyId", System.getenv("GPG_SIGNING_KEY"))
+            extra.set("signing.password", System.getenv("GPG_PASSWORD"))
+            extra.set("signing.secretKeyRingFile", "../sec.gpg")
+
             project.afterEvaluate {
                 project.configurePublishingExtension(nexusPluginExt)
             }
@@ -67,10 +71,6 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
             }
         }
 
-        project.extra.set("signing.keyId", System.getenv("GPG_SIGNING_KEY"))
-        project.extra.set("signing.password", System.getenv("GPG_PASSWORD"))
-        project.extra.set("signing.secretKeyRingFile", System.getenv(rootProject.file("sec.gpg").path))
-        signing.useGpgCmd()
         signing.sign(publishing.publications.getByName("mavenPublication"))
     }
 
