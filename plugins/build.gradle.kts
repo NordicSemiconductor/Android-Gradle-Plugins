@@ -49,31 +49,31 @@ gradlePlugin {
         register("application.compose") {
             id = "no.nordicsemi.android.gradle.application.compose"
             displayName = "Application with Compose"
-            description = "Application plugin extension with Compose feature enabled"
+            description = "Application plugin extension with Compose and Material3 dependencies. This plugin includes 'application' plugin."
             implementationClass = "AndroidApplicationComposeConventionPlugin"
         }
         register("application") {
             id = "no.nordicsemi.android.gradle.application"
             displayName = "Standalone Application configuration"
-            description = "Application plugin extension for internal releases"
+            description = "Application plugin extension"
             implementationClass = "AndroidApplicationConventionPlugin"
         }
         register("library.compose") {
             id = "no.nordicsemi.android.gradle.library.compose"
             displayName = "Library with Compose"
-            description = "Library plugin extension with Compose feature enabled"
+            description = "Library plugin extension with Compose and Material3 dependencies. This plugin extends 'library' plugin."
             implementationClass = "AndroidLibraryComposeConventionPlugin"
         }
         register("library") {
             id = "no.nordicsemi.android.gradle.library"
             displayName = "Standalone library configuration"
-            description = "Library plugin extension for internal releases"
+            description = "Library plugin extension"
             implementationClass = "AndroidLibraryConventionPlugin"
         }
         register("feature") {
             id = "no.nordicsemi.android.gradle.feature"
             displayName = "Feature plugin"
-            description = "UI feature plugin with Hilt & Compose"
+            description = "UI feature plugin with Hilt & Compose. This plugin extends 'library.compose' and 'hilt' plugins and adds Compose navigation."
             implementationClass = "AndroidFeatureConventionPlugin"
         }
         register("hilt") {
