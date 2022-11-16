@@ -49,7 +49,7 @@ room = "2.5.0-beta02"
 secrets = "2.0.1"
 turbine = "0.12.1"
 markdown = "0.3.0"
-wirePlugin = "4.4.0"
+wirePlugin = "4.4.3"
 
 nordic-ble = "2.6.0-alpha03"
 nordic-log = "2.3.0"
