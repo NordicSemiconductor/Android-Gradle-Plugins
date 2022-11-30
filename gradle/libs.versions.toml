@@ -57,6 +57,7 @@ nordic-log = "2.3.0"
 nordic-mcumgr = "1.5.0"
 nordic-scanner = "1.6.0"
 nordic-common = "1.3.3"
+nordic-memfault = "1.0.2"
 nordicPlugins = "1.0.11"
 
 [libraries]
@@ -159,6 +160,7 @@ nordic-navigation = { group = "no.nordicsemi.android.common", name = "navigation
 nordic-uiscanner = { group = "no.nordicsemi.android.common", name = "uiscanner", version.ref = "nordic-common" }
 nordic-uilogger = { group = "no.nordicsemi.android.common", name = "uilogger", version.ref = "nordic-common" }
 nordic-permission = { group = "no.nordicsemi.android.common", name = "permission", version.ref = "nordic-common" }
+nordic-memfault = { group = "no.nordicsemi.android", name = "memfault", version.ref = "nordic-memfault" }
 
 # Dependencies of the included build-logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
