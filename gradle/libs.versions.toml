@@ -55,6 +55,7 @@ wirePlugin = "4.4.3"
 timber = "5.0.1"
 
 nordic-ble = "2.6.0-alpha04"
+nordic-dfu = "2.3.0"
 nordic-log = "2.3.0"
 nordic-mcumgr = "1.5.2"
 nordic-scanner = "1.6.0"
@@ -154,6 +155,7 @@ timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "tim
 # Nordic
 nordic-ble-ktx = { group = "no.nordicsemi.android", name = "ble-ktx", version.ref = "nordic-ble" }
 nordic-ble-common = { group = "no.nordicsemi.android", name = "ble-common", version.ref = "nordic-ble" }
+nordic-dfu = { group = "no.nordicsemi.android", name = "dfu", version.ref = "nordic-dfu" }
 nordic-mcumgr-core = { group = "no.nordicsemi.android", name = "mcumgr-core", version.ref = "nordic-mcumgr" }
 nordic-mcumgr-ble = { group = "no.nordicsemi.android", name = "mcumgr-ble", version.ref = "nordic-mcumgr" }
 nordic-log = { group = "no.nordicsemi.android", name = "log", version.ref = "nordic-log" }
