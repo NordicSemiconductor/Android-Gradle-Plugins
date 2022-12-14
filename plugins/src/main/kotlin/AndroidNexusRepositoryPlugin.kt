@@ -149,6 +149,8 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
                     id.set(nexusPluginExt.POM_DEVELOPER_ID)
                     name.set(nexusPluginExt.POM_DEVELOPER_NAME)
                     email.set(nexusPluginExt.POM_DEVELOPER_EMAIL)
+                    organization.set(nexusPluginExt.POM_DEVELOPER_ORG)
+                    organizationUrl.set(nexusPluginExt.POM_DEVELOPER_ORG_URL)
                 }
             }
         }
@@ -166,10 +168,14 @@ abstract class NexusRepositoryPluginExt(
     var POM_SCM_URL: String = "https://github.com/NordicSemiconductor/Android-Gradle-Plugins",
     var POM_SCM_CONNECTION: String = "scm:git@github.com:NordicSemiconductor/Android-Gradle-Plugins.git",
     var POM_SCM_DEV_CONNECTION: String = "scm:git@github.com:NordicSemiconductor/Android-Gradle-Plugins.git",
+    // License
     var POM_LICENCE: String = "BSD-3-Clause",
     var POM_LICENCE_NAME: String = "The BSD 3-Clause License",
     var POM_LICENCE_URL: String = "http://opensource.org/licenses/BSD-3-Clause",
-    var POM_DEVELOPER_ID: String = "syzi",
-    var POM_DEVELOPER_NAME: String = "Sylwester Zielinski",
-    var POM_DEVELOPER_EMAIL: String = "sylwester.zielinski@nordicsemi.no"
+    // Developer
+    var POM_DEVELOPER_ID: String = "mag",
+    var POM_DEVELOPER_NAME: String = "Mobile Applications Group",
+    var POM_DEVELOPER_EMAIL: String = "mag@nordicsemi.no",
+    var POM_DEVELOPER_ORG: String = "Nordic Semiconductor ASA",
+    var POM_DEVELOPER_ORG_URL: String = "https://www.nordicsemi.com"
 )
