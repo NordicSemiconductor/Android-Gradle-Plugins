@@ -29,6 +29,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.gradle.LibraryExtension
 import no.nordicsemi.android.buildlogic.configureAndroidCompose
 import no.nordicsemi.android.buildlogic.configureKotlinAndroid
@@ -36,6 +37,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.dependencies
+import org.gradle.kotlin.dsl.findByType
 import org.gradle.kotlin.dsl.getByType
 
 class AndroidKotlinConventionPlugin : Plugin<Project> {
@@ -45,8 +47,12 @@ class AndroidKotlinConventionPlugin : Plugin<Project> {
                 apply("org.jetbrains.kotlin.android")
             }
 
-            val extension = extensions.getByType<LibraryExtension>()
-            configureKotlinAndroid(extension)
+            extensions.findByType<LibraryExtension>()?.apply {
+                configureKotlinAndroid(this)
+            }
+            extensions.findByType<ApplicationExtension>()?.apply {
+                configureKotlinAndroid(this)
+            }
         }
     }
 }
