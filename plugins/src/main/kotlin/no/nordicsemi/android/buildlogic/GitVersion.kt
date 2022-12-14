@@ -47,7 +47,7 @@ fun Project.getVersionCodeFromTags(): Int {
     }
 }
 
-fun Project.getVersionNameFromTags(): String? {
+fun Project.getVersionNameFromTags(): String {
     return try {
         val code = ByteArrayOutputStream()
         exec {
@@ -56,6 +56,6 @@ fun Project.getVersionNameFromTags(): String? {
         }
         code.toString().trim().split("%")[0]
     } catch (e: Exception) {
-        null
+        ""
     }
 }

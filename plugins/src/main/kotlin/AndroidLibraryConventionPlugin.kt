@@ -33,6 +33,8 @@ import com.android.build.api.variant.LibraryAndroidComponentsExtension
 import com.android.build.gradle.LibraryExtension
 import no.nordicsemi.android.buildlogic.configureKotlinAndroid
 import no.nordicsemi.android.buildlogic.configurePrintApksTask
+import no.nordicsemi.android.buildlogic.getVersionCodeFromTags
+import no.nordicsemi.android.buildlogic.getVersionNameFromTags
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalogsExtension
@@ -61,6 +63,13 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                     getByName("release") {
                         isMinifyEnabled = true
                         consumerProguardFile("module-rules.pro")
+                        buildConfigField("String", "VERSION_NAME", getVersionNameFromTags())
+                        buildConfigField("String", "VERSION_CODE", getVersionCodeFromTags().toString())
+                    }
+
+                    getByName("debug") {
+                        buildConfigField("String", "VERSION_NAME", "debug")
+                        buildConfigField("String", "VERSION_CODE", getVersionCodeFromTags().toString())
                     }
                 }
             }
