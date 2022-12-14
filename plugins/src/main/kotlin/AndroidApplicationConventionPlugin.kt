@@ -74,13 +74,13 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                         isShrinkResources = true
                         signingConfig = signingConfigs.getByName("release")
                         setProguardFiles(listOf(getDefaultProguardFile("proguard-android-optimize.txt"), file("proguard-rules.pro")))
-                        buildConfigField("String", "VERSION_NAME", getVersionNameFromTags())
-                        buildConfigField("String", "VERSION_CODE", getVersionCodeFromTags().toString())
+                        buildConfigField("String", "VERSION_NAME", "\"${getVersionNameFromTags()}\"")
+                        buildConfigField("String", "VERSION_CODE", "\"${getVersionCodeFromTags()}\"")
                     }
 
                     getByName("debug") {
-                        buildConfigField("String", "VERSION_NAME", "debug")
-                        buildConfigField("String", "VERSION_CODE", getVersionCodeFromTags().toString())
+                        buildConfigField("String", "VERSION_NAME", "\"debug\"")
+                        buildConfigField("String", "VERSION_CODE", "\"${getVersionCodeFromTags()}\"")
                     }
                 }
             }

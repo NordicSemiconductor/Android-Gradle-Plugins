@@ -63,13 +63,13 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                     getByName("release") {
                         isMinifyEnabled = true
                         consumerProguardFile("module-rules.pro")
-                        buildConfigField("String", "VERSION_NAME", getVersionNameFromTags())
-                        buildConfigField("String", "VERSION_CODE", getVersionCodeFromTags().toString())
+                        buildConfigField("String", "VERSION_NAME", "\"${getVersionNameFromTags()}\"")
+                        buildConfigField("String", "VERSION_CODE", "\"${getVersionCodeFromTags()}\"")
                     }
 
                     getByName("debug") {
-                        buildConfigField("String", "VERSION_NAME", "debug")
-                        buildConfigField("String", "VERSION_CODE", getVersionCodeFromTags().toString())
+                        buildConfigField("String", "VERSION_NAME", "\"debug\"")
+                        buildConfigField("String", "VERSION_CODE", "\"${getVersionCodeFromTags()}\"")
                     }
                 }
             }
