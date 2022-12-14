@@ -70,16 +70,19 @@ publishing {
 
                 licenses {
                     license {
-                        name.set("The BSD 3-Clause License")
+                        name.set("BSD-3-Clause")
                         url.set("http://opensource.org/licenses/BSD-3-Clause")
+                        distribution.set("repo")
                     }
                 }
 
                 developers {
                     developer {
                         id.set("syzi")
-                        name.set("Sylwester Zielinski")
+                        name.set("Sylwester Zieliński")
                         email.set("sylwester.zielinski@nordicsemi.no")
+                        organization.set("Nordic Semiconductor ASA")
+                        organizationUrl.set("https://www.nordicsemi.com")
                     }
                 }
             }

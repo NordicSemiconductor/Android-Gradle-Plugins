@@ -125,18 +125,16 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
         publication.artifact(androidSourcesJar)
 
         publication.pom {
-            this.name.set(nexusPluginExt.POM_NAME)
-
+            name.set(nexusPluginExt.POM_NAME)
             packaging = nexusPluginExt.POM_PACKAGING
             description.set(nexusPluginExt.POM_DESCRIPTION)
             url.set(nexusPluginExt.POM_URL)
 
             licenses {
                 license {
-                    distribution.set(nexusPluginExt.POM_LICENCE)
-                    name.set(nexusPluginExt.POM_LICENCE_NAME)
-                    url.set(nexusPluginExt.POM_LICENCE_URL)
                     name.set(nexusPluginExt.POM_LICENCE)
+                    url.set(nexusPluginExt.POM_LICENCE_URL)
+                    distribution.set("repo")
                 }
             }
             scm {
@@ -170,7 +168,6 @@ abstract class NexusRepositoryPluginExt(
     var POM_SCM_DEV_CONNECTION: String = "scm:git@github.com:NordicSemiconductor/Android-Gradle-Plugins.git",
     // License
     var POM_LICENCE: String = "BSD-3-Clause",
-    var POM_LICENCE_NAME: String = "The BSD 3-Clause License",
     var POM_LICENCE_URL: String = "http://opensource.org/licenses/BSD-3-Clause",
     // Developer
     var POM_DEVELOPER_ID: String = "mag",
