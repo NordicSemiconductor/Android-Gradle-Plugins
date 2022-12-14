@@ -29,60 +29,24 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import com.android.build.api.variant.LibraryAndroidComponentsExtension
 import com.android.build.gradle.LibraryExtension
+import no.nordicsemi.android.buildlogic.configureAndroidCompose
 import no.nordicsemi.android.buildlogic.configureKotlinAndroid
-import no.nordicsemi.android.buildlogic.configurePrintApksTask
-import no.nordicsemi.android.buildlogic.getVersionCodeFromTags
-import no.nordicsemi.android.buildlogic.getVersionNameFromTags
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalogsExtension
-import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
 
-@Suppress("UnstableApiUsage")
-class AndroidLibraryConventionPlugin : Plugin<Project> {
+class AndroidKotlinConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
-                apply("com.android.library")
+                apply("org.jetbrains.kotlin.android")
             }
 
-            extensions.configure<LibraryExtension> {
-                compileSdk = 33
-
-                defaultConfig {
-                    minSdk = 21
-                    targetSdk = 33
-                }
-
-                buildTypes {
-                    getByName("release") {
-                        isMinifyEnabled = true
-                        consumerProguardFile("module-rules.pro")
-                        buildConfigField("String", "VERSION_NAME", "\"${getVersionNameFromTags()}\"")
-                        buildConfigField("String", "VERSION_CODE", "\"${getVersionCodeFromTags()}\"")
-                    }
-
-                    getByName("debug") {
-                        buildConfigField("String", "VERSION_NAME", "\"debug\"")
-                        buildConfigField("String", "VERSION_CODE", "\"${getVersionCodeFromTags()}\"")
-                    }
-                }
-            }
-
-            extensions.configure<LibraryAndroidComponentsExtension> {
-                configurePrintApksTask(this)
-            }
-            val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
-            configurations.configureEach {
-                resolutionStrategy {
-                    force(libs.findLibrary("junit4").get())
-                    // Temporary workaround for https://issuetracker.google.com/174733673
-                    force("org.objenesis:objenesis:2.6")
-                }
-            }
+            val extension = extensions.getByType<LibraryExtension>()
+            configureKotlinAndroid(extension)
         }
     }
 }

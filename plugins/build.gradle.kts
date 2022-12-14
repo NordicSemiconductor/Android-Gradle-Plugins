@@ -97,6 +97,12 @@ gradlePlugin {
             description = "Plugin enabling Hilt"
             implementationClass = "AndroidHiltConventionPlugin"
         }
+        register("kotlin") {
+            id = "no.nordicsemi.android.gradle.kotlin"
+            displayName = "Kotlin plugin"
+            description = "Plugin enabling Kotlin"
+            implementationClass = "AndroidKotlinConventionPlugin"
+        }
         register("nexus") {
             id = "no.nordicsemi.android.gradle.nexus"
             displayName = "Nexus plugin"
