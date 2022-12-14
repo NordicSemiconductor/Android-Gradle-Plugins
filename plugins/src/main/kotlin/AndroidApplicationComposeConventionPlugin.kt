@@ -42,6 +42,7 @@ class AndroidApplicationComposeConventionPlugin : Plugin<Project> {
         with(target) {
             with(pluginManager) {
                 apply("no.nordicsemi.android.gradle.application")
+                apply("no.nordicsemi.android.gradle.kotlin")
             }
 
             val extension = extensions.getByType<ApplicationExtension>()

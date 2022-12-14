@@ -42,6 +42,7 @@ class AndroidLibraryComposeConventionPlugin : Plugin<Project> {
         with(target) {
             with(pluginManager) {
                 apply("no.nordicsemi.android.gradle.library")
+                apply("no.nordicsemi.android.gradle.kotlin")
             }
 
             val extension = extensions.getByType<LibraryExtension>()

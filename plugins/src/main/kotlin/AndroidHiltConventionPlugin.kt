@@ -39,6 +39,7 @@ class AndroidHiltConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
+                apply("no.nordicsemi.android.gradle.kotlin")
                 apply("org.jetbrains.kotlin.kapt")
                 apply("dagger.hilt.android.plugin")
             }
