@@ -137,18 +137,25 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
                     distribution.set("repo")
                 }
             }
+            
             scm {
                 url.set(nexusPluginExt.POM_SCM_URL)
                 connection.set(nexusPluginExt.POM_SCM_CONNECTION)
                 developerConnection.set(nexusPluginExt.POM_SCM_DEV_CONNECTION)
             }
+
+            organization {
+                name.set(nexusPluginExt.POM_ORG)
+                url.set(nexusPluginExt.POM_ORG_URL)
+            }
+
             developers {
                 developer {
                     id.set(nexusPluginExt.POM_DEVELOPER_ID)
                     name.set(nexusPluginExt.POM_DEVELOPER_NAME)
                     email.set(nexusPluginExt.POM_DEVELOPER_EMAIL)
-                    organization.set(nexusPluginExt.POM_DEVELOPER_ORG)
-                    organizationUrl.set(nexusPluginExt.POM_DEVELOPER_ORG_URL)
+                    organization.set(nexusPluginExt.POM_ORG)
+                    organizationUrl.set(nexusPluginExt.POM_ORG_URL)
                 }
             }
         }
@@ -173,6 +180,6 @@ abstract class NexusRepositoryPluginExt(
     var POM_DEVELOPER_ID: String = "mag",
     var POM_DEVELOPER_NAME: String = "Mobile Applications Group",
     var POM_DEVELOPER_EMAIL: String = "mag@nordicsemi.no",
-    var POM_DEVELOPER_ORG: String = "Nordic Semiconductor ASA",
-    var POM_DEVELOPER_ORG_URL: String = "https://www.nordicsemi.com"
+    var POM_ORG: String = "Nordic Semiconductor ASA",
+    var POM_ORG_URL: String = "https://www.nordicsemi.com"
 )

@@ -76,6 +76,11 @@ publishing {
                     }
                 }
 
+                organization {
+                    name.set("Nordic Semiconductor ASA")
+                    url.set("https://www.nordicsemi.com")
+                }
+
                 developers {
                     developer {
                         id.set("syzi")
