@@ -87,7 +87,7 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
                             with (nexusPluginExt) {
                                 artifactId = POM_ARTIFACT_ID
                                 version = getVersionNameFromTags()
-                                groupId = GROUP ?: group.toString()
+                                groupId = POM_GROUP ?: group.toString()
                             }
                             // Set the component to be published.
                             from(components["release"])
@@ -165,7 +165,7 @@ abstract class NexusRepositoryPluginExt {
 
     // Default values:
     var POM_PACKAGING: String = "aar"
-    var GROUP: String? = null // If not set, the project's "group" will be used.
+    var POM_GROUP: String? = null // If not set, the project's "group" will be used.
 
     // License
     var POM_LICENCE: String = "BSD-3-Clause"
