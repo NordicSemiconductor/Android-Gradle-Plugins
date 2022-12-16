@@ -59,7 +59,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
 
                 buildTypes {
                     getByName("release") {
-                        isMinifyEnabled = true
+                        isMinifyEnabled = false
                         // The proguard files will be used to generate AARs for publishing.
                         proguardFiles(
                             getDefaultProguardFile("proguard-android-optimize.txt"),
