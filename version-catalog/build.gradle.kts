@@ -52,22 +52,17 @@ publishing {
         create<MavenPublication>("libs") {
             from(components["versionCatalog"])
 
-            groupId = "no.nordicsemi.android.gradle"
+            groupId = group.toString()
+            version = project.version.toString()
             artifactId = "version-catalog"
-            version = getVersionNameFromTags()
 
             pom {
                 name.set("Nordic version catalog for Android")
-                packaging = "toml"
                 description.set("Nordic version catalog for Android")
                 url.set("https://github.com/NordicSemiconductor/Android-Gradle-Plugins")
+                packaging = "toml"
 
-                scm {
-                    url.set("https://github.com/NordicSemiconductor/Android-Gradle-Plugins")
-                    connection.set("scm:git@github.com:NordicSemiconductor/Android-Gradle-Plugins.git")
-                    developerConnection.set("scm:git@github.com:NordicSemiconductor/Android-Gradle-Plugins.git")
-                }
-
+                // https://maven.apache.org/pom.html#licenses
                 licenses {
                     license {
                         name.set("BSD-3-Clause")
@@ -76,11 +71,20 @@ publishing {
                     }
                 }
 
+                // https://maven.apache.org/pom.html#scm
+                scm {
+                    url.set("https://github.com/NordicSemiconductor/Android-Gradle-Plugins")
+                    connection.set("scm:git@github.com:NordicSemiconductor/Android-Gradle-Plugins.git")
+                    developerConnection.set("scm:git@github.com:NordicSemiconductor/Android-Gradle-Plugins.git")
+                }
+
+                // https://maven.apache.org/pom.html#organization
                 organization {
                     name.set("Nordic Semiconductor ASA")
                     url.set("https://www.nordicsemi.com")
                 }
 
+                // https://maven.apache.org/pom.html#developers
                 developers {
                     developer {
                         id.set("syzi")
