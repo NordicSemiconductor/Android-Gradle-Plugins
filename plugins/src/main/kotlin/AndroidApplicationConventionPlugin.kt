@@ -31,7 +31,6 @@
 
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
-import no.nordicsemi.android.buildlogic.configureKotlinAndroid
 import no.nordicsemi.android.buildlogic.configurePrintApksTask
 import no.nordicsemi.android.buildlogic.getVersionCodeFromTags
 import no.nordicsemi.android.buildlogic.getVersionNameFromTags
@@ -71,12 +70,19 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                         isMinifyEnabled = true
                         isShrinkResources = true
                         signingConfig = signingConfigs.getByName("release")
-                        setProguardFiles(listOf(getDefaultProguardFile("proguard-android-optimize.txt"), file("proguard-rules.pro")))
+                        // The proguard files will be used to generate the release.
+                        proguardFiles(
+                            getDefaultProguardFile("proguard-android-optimize.txt"),
+                            file("proguard-rules.pro")
+                        )
+                        // Add version name and code to the manifest.
                         buildConfigField("String", "VERSION_NAME", "\"${getVersionNameFromTags()}\"")
                         buildConfigField("String", "VERSION_CODE", "\"${getVersionCodeFromTags()}\"")
                     }
 
                     getByName("debug") {
+                        isMinifyEnabled = false
+                        // Add version name and code to the manifest.
                         buildConfigField("String", "VERSION_NAME", "\"debug\"")
                         buildConfigField("String", "VERSION_CODE", "\"${getVersionCodeFromTags()}\"")
                     }
