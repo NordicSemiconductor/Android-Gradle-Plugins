@@ -60,12 +60,21 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                 buildTypes {
                     getByName("release") {
                         isMinifyEnabled = true
+                        // The proguard files will be used to generate AARs for publishing.
+                        proguardFiles(
+                            getDefaultProguardFile("proguard-android-optimize.txt"),
+                            file("module-rules.pro")
+                        )
+                        // The consumer proguard files will be added to dependent projects.
                         consumerProguardFile("module-rules.pro")
+                        // Add version name and code to the manifest.
                         buildConfigField("String", "VERSION_NAME", "\"${getVersionNameFromTags()}\"")
                         buildConfigField("String", "VERSION_CODE", "\"${getVersionCodeFromTags()}\"")
                     }
 
                     getByName("debug") {
+                        isMinifyEnabled = false
+                        // Add version name and code to the manifest.
                         buildConfigField("String", "VERSION_NAME", "\"debug\"")
                         buildConfigField("String", "VERSION_CODE", "\"${getVersionCodeFromTags()}\"")
                     }
