@@ -36,6 +36,10 @@ import java.io.ByteArrayOutputStream
 import java.time.ZoneId
 import java.time.ZonedDateTime
 
+/**
+ * This method returns the version code based on the current date (YYMM) and number of git revisions.
+ * The format is YYMMxxxxx where x is a number of git revisions.
+ */
 fun Project.getVersionCodeFromTags(): Int {
     val code = ByteArrayOutputStream()
     exec {
@@ -49,6 +53,9 @@ fun Project.getVersionCodeFromTags(): Int {
     return "$year$month$revisions".toInt()
 }
 
+/**
+ * This method returns the version name from the latest git tag.
+ */
 fun Project.getVersionNameFromTags(): String {
     val code = ByteArrayOutputStream()
     exec {
