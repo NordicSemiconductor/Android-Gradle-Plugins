@@ -33,29 +33,34 @@ package no.nordicsemi.android.buildlogic
 
 import org.gradle.api.Project
 import java.io.ByteArrayOutputStream
+import java.time.ZoneId
+import java.time.ZonedDateTime
 
+/**
+ * This method returns the version code based on the current date (YYMM) and number of git revisions.
+ * The format is YYMMxxxxx where x is a number of git revisions.
+ */
 fun Project.getVersionCodeFromTags(): Int {
-    return try {
-        val code = ByteArrayOutputStream()
-        exec {
-            commandLine("git", "tag", "--list")
-            standardOutput = code
-        }
-        2 + code.toString().split("\n").size
-    } catch (e: Exception) {
-        -1
+    val code = ByteArrayOutputStream()
+    exec {
+        commandLine("git", "rev-list", "--all", "--count")
+        standardOutput = code
     }
+    val now = ZonedDateTime.now(ZoneId.of("UTC"))
+    val year = now.year % 100
+    val month = now.monthValue
+    val revisions = code.toString().trim()
+    return "$year$month$revisions".toInt()
 }
 
+/**
+ * This method returns the version name from the latest git tag.
+ */
 fun Project.getVersionNameFromTags(): String {
-    return try {
-        val code = ByteArrayOutputStream()
-        exec {
-            commandLine("git", "describe", "--tags", "--abbrev=0")
-            standardOutput = code
-        }
-        code.toString().trim().split("%")[0]
-    } catch (e: Exception) {
-        ""
+    val code = ByteArrayOutputStream()
+    exec {
+        commandLine("git", "describe", "--tags", "--abbrev=0")
+        standardOutput = code
     }
+    return code.toString().trim().split("%")[0]
 }
