@@ -44,8 +44,8 @@ group = "no.nordicsemi.android.gradle"
 version = getVersionNameFromTags()
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }
 
 dependencies {
@@ -53,11 +53,11 @@ dependencies {
     compileOnly(libs.kotlin.gradlePlugin)
 }
 
-pluginBundle {
-    website = "https://www.nordicsemi.com/"
-    vcsUrl = "https://github.com/NordicSemiconductor/Android-Gradle-Plugins"
-    tags = listOf("nordicsemi", "Android")
-}
+//pluginBundle {
+//    website = "https://www.nordicsemi.com/"
+//    vcsUrl = "https://github.com/NordicSemiconductor/Android-Gradle-Plugins"
+//    tags = listOf("nordicsemi", "Android")
+//}
 
 gradlePlugin {
     plugins {
