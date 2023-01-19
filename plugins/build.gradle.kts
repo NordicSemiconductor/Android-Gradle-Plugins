@@ -53,11 +53,10 @@ dependencies {
     compileOnly(libs.kotlin.gradlePlugin)
 }
 
-//pluginBundle {
-//    website = "https://www.nordicsemi.com/"
-//    vcsUrl = "https://github.com/NordicSemiconductor/Android-Gradle-Plugins"
-//    tags = listOf("nordicsemi", "Android")
-//}
+gradlePlugin {
+    website.set("https://www.nordicsemi.com/")
+    vcsUrl.set("https://github.com/NordicSemiconductor/Android-Gradle-Plugins")
+}
 
 gradlePlugin {
     plugins {
@@ -66,48 +65,56 @@ gradlePlugin {
             displayName = "Application with Compose"
             description = "Application plugin extension with Compose and Material3 dependencies. This plugin includes 'application' plugin."
             implementationClass = "AndroidApplicationComposeConventionPlugin"
+            tags.set(listOf("nordicsemi", "Android", "application", "compose"))
         }
         register("application") {
             id = "no.nordicsemi.android.gradle.application"
             displayName = "Standalone Application configuration"
             description = "Application plugin extension"
             implementationClass = "AndroidApplicationConventionPlugin"
+            tags.set(listOf("nordicsemi", "Android", "application"))
         }
         register("library.compose") {
             id = "no.nordicsemi.android.gradle.library.compose"
             displayName = "Library with Compose"
             description = "Library plugin extension with Compose and Material3 dependencies. This plugin extends 'library' plugin."
             implementationClass = "AndroidLibraryComposeConventionPlugin"
+            tags.set(listOf("nordicsemi", "Android", "library", "compose"))
         }
         register("library") {
             id = "no.nordicsemi.android.gradle.library"
             displayName = "Standalone library configuration"
             description = "Library plugin extension"
             implementationClass = "AndroidLibraryConventionPlugin"
+            tags.set(listOf("nordicsemi", "Android", "library"))
         }
         register("feature") {
             id = "no.nordicsemi.android.gradle.feature"
             displayName = "Feature plugin"
             description = "UI feature plugin with Hilt & Compose. This plugin extends 'library.compose' and 'hilt' plugins and adds Compose navigation."
             implementationClass = "AndroidFeatureConventionPlugin"
+            tags.set(listOf("nordicsemi", "Android", "feature"))
         }
         register("hilt") {
             id = "no.nordicsemi.android.gradle.hilt"
             displayName = "Hilt plugin"
             description = "Plugin enabling Hilt"
             implementationClass = "AndroidHiltConventionPlugin"
+            tags.set(listOf("nordicsemi", "Android", "hilt"))
         }
         register("kotlin") {
             id = "no.nordicsemi.android.gradle.kotlin"
             displayName = "Kotlin plugin"
             description = "Plugin enabling Kotlin"
             implementationClass = "AndroidKotlinConventionPlugin"
+            tags.set(listOf("nordicsemi", "Android", "kotlin"))
         }
         register("nexus") {
             id = "no.nordicsemi.android.gradle.nexus"
             displayName = "Nexus plugin"
             description = "Plugin creating a task for publishing to Nexus repository."
             implementationClass = "AndroidNexusRepositoryPlugin"
+            tags.set(listOf("nordicsemi", "Android", "nexus", "publish"))
         }
     }
 }
