@@ -63,6 +63,8 @@ nordic-scanner = "1.6.0"
 nordic-common = "1.4.0"
 nordic-memfault = "1.0.2"
 nordicPlugins = "1.2.2"
+googleServicesPlugins = "4.3.15"
+firebaseCrashlyticsPlugins = "2.9.2"
 
 [libraries]
 accompanist-flowlayout = { group = "com.google.accompanist", name = "accompanist-flowlayout", version.ref = "accompanist" }
@@ -199,3 +201,5 @@ protobuf = { id = "com.google.protobuf", version.ref = "protobufPlugin" }
 secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secrets" }
 publish = { id = "com.gradle.plugin-publish", version.ref = "publishPlugin" }
 wire = { id = "com.squareup.wire", version.ref = "wirePlugin" }
+google-services = { id = "com.google.gms.google-services", version.ref = "googleServicesPlugins" }
+firebase-crashlytics = { id = "com.squareup.wire", version.ref = "firebaseCrashlyticsPlugins" }
