@@ -64,7 +64,7 @@ nordic-common = "1.4.0"
 nordic-memfault = "1.0.2"
 nordicPlugins = "1.2.2"
 googleServicesPlugins = "4.3.15"
-firebaseCrashlyticsPlugins = "2.9.2"
+firebaseCrashlyticsPlugins = "4.4.3"
 
 [libraries]
 accompanist-flowlayout = { group = "com.google.accompanist", name = "accompanist-flowlayout", version.ref = "accompanist" }
