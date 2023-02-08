@@ -54,13 +54,14 @@ markdown = "0.3.0"
 wirePlugin = "4.5.0"
 timber = "5.0.1"
 chart = "v3.1.0"
+leakcanary = "2.10"
 
 nordic-ble = "2.6.0"
 nordic-dfu = "2.3.0"
 nordic-log = "2.3.0"
 nordic-mcumgr = "1.5.2"
 nordic-scanner = "1.6.0"
-nordic-common = "1.4.1"
+nordic-common = "1.4.2"
 nordic-memfault = "1.0.2"
 nordicPlugins = "1.2.2"
 googleServicesPlugins = "4.3.15"
@@ -156,6 +157,7 @@ markdown = { group = "com.github.jeziellago", name = "compose-markdown", version
 memfault-cloud = { group = "com.memfault.cloud", name = "cloud-android", version.ref = "memfault-cloud" }
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
 chart = { group = "com.github.PhilJay", name = "MPAndroidChart", version.ref = "chart" }
+leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android", version.ref = "leakcanary" }
 
 # Nordic
 nordic-ble-ktx = { group = "no.nordicsemi.android", name = "ble-ktx", version.ref = "nordic-ble" }
