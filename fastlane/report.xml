@@ -5,12 +5,12 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000147578">
+      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000156046">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: publishToMavenLocal" time="21.996481003">
+      <testcase classname="fastlane.lanes" name="1: publishToMavenLocal" time="7.550080403">
         
       </testcase>
     
