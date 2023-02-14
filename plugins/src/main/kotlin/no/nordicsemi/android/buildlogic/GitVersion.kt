@@ -36,15 +36,22 @@ import java.io.ByteArrayOutputStream
 import java.time.ZoneId
 import java.time.ZonedDateTime
 
+private const val DEFAULT_CODE = 0
+private const val DEFAULT_NAME = "0.0.0"
+
 /**
  * This method returns the version code based on the current date (YYMM) and number of git revisions.
  * The format is YYMMxxxxx where x is a number of git revisions.
  */
 fun Project.getVersionCodeFromTags(): Int {
     val code = ByteArrayOutputStream()
-    exec {
-        commandLine("git", "rev-list", "--all", "--count")
-        standardOutput = code
+    try {
+        exec {
+            commandLine("git", "rev-list", "--all", "--count")
+            standardOutput = code
+        }
+    } catch (e: Exception) {
+        return DEFAULT_CODE
     }
     val now = ZonedDateTime.now(ZoneId.of("UTC"))
     val year = now.year % 100
@@ -58,9 +65,13 @@ fun Project.getVersionCodeFromTags(): Int {
  */
 fun Project.getVersionNameFromTags(): String {
     val code = ByteArrayOutputStream()
-    exec {
-        commandLine("git", "describe", "--tags", "--abbrev=0")
-        standardOutput = code
+    try {
+        exec {
+            commandLine("git", "describe", "--tags", "--abbrev=0")
+            standardOutput = code
+        }
+    } catch (e: Exception) {
+        return DEFAULT_NAME
     }
     return code.toString().trim().split("%")[0]
 }
