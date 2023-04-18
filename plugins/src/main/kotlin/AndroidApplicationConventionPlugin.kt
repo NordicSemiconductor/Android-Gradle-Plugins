@@ -56,6 +56,10 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                     versionCode = target.getVersionCodeFromTags()
                 }
 
+                buildFeatures {
+                    buildConfig = true
+                }
+
                 signingConfigs {
                     create("release") {
                         storeFile = file("../keystore")

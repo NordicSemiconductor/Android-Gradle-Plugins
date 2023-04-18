@@ -31,7 +31,6 @@
 
 import com.android.build.api.variant.LibraryAndroidComponentsExtension
 import com.android.build.gradle.LibraryExtension
-import no.nordicsemi.android.buildlogic.configureKotlinAndroid
 import no.nordicsemi.android.buildlogic.configurePrintApksTask
 import no.nordicsemi.android.buildlogic.getVersionCodeFromTags
 import no.nordicsemi.android.buildlogic.getVersionNameFromTags
@@ -55,6 +54,10 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                 defaultConfig {
                     minSdk = 21
                     targetSdk = 33
+                }
+
+                buildFeatures {
+                    buildConfig = true
                 }
 
                 buildTypes {
