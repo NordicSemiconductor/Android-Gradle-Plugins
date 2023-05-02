@@ -31,6 +31,7 @@
 
 plugins {
     `version-catalog`
+    `kotlin-dsl`
     `maven-publish`
     signing
     id("com.gradle.plugin-publish") version "1.2.0"
