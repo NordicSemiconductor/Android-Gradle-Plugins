@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.js.translate.context.Namer.kotlin
+
 /*
  * Copyright (c) 2022, Nordic Semiconductor
  * All rights reserved.
@@ -46,6 +48,10 @@ version = getVersionNameFromTags()
 java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
+}
+
+kotlin {
+    jvmToolchain(17)
 }
 
 dependencies {
