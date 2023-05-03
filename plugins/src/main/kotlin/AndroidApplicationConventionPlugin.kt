@@ -47,11 +47,11 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
             }
 
             extensions.configure<ApplicationExtension> {
-                compileSdk = 34
+                compileSdk = 33
 
                 defaultConfig {
                     minSdk = 21
-                    targetSdk = 34
+                    targetSdk = 33
                     versionName = target.getVersionNameFromTags()
                     versionCode = target.getVersionCodeFromTags()
                 }
