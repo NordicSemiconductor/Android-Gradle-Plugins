@@ -56,12 +56,13 @@ timber = "5.0.1"
 chart = "v3.1.0"
 leakcanary = "2.10"
 
+nordic-blek = "0.1.0"
 nordic-ble = "2.6.1"
 nordic-dfu = "2.3.0"
 nordic-log = "2.3.0"
 nordic-mcumgr = "1.6.0"
 nordic-scanner = "1.6.0"
-nordic-common = "1.5.4"
+nordic-common = "1.6.0"
 nordic-memfault = "1.0.2"
 nordicPlugins = "1.4.6"
 googleServicesPlugins = "4.3.15"
@@ -176,6 +177,14 @@ nordic-uiscanner = { group = "no.nordicsemi.android.common", name = "uiscanner",
 nordic-uilogger = { group = "no.nordicsemi.android.common", name = "uilogger", version.ref = "nordic-common" }
 nordic-permission = { group = "no.nordicsemi.android.common", name = "permission", version.ref = "nordic-common" }
 nordic-memfault = { group = "no.nordicsemi.android", name = "memfault", version.ref = "nordic-memfault" }
+
+# BleK
+nordic-blek-client = { group = "no.nordicsemi.android.kotlin.ble", name = "client", version.ref = "nordic-blek" }
+nordic-blek-server = { group = "no.nordicsemi.android.kotlin.ble", name = "server", version.ref = "nordic-blek" }
+nordic-blek-profile = { group = "no.nordicsemi.android.kotlin.ble", name = "profile", version.ref = "nordic-blek" }
+nordic-blek-core = { group = "no.nordicsemi.android.kotlin.ble", name = "core", version.ref = "nordic-blek" }
+nordic-blek-scanner = { group = "no.nordicsemi.android.kotlin.ble", name = "scanner", version.ref = "nordic-blek" }
+nordic-blek-advertiser = { group = "no.nordicsemi.android.kotlin.ble", name = "advertiser", version.ref = "nordic-blek" }
 
 # Dependencies of the included build-logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
