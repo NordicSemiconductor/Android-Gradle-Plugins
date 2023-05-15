@@ -56,7 +56,7 @@ timber = "5.0.1"
 chart = "v3.1.0"
 leakcanary = "2.10"
 
-nordic-blek = "0.1.0"
+nordic-blek = "0.1.1"
 nordic-ble = "2.6.1"
 nordic-dfu = "2.3.0"
 nordic-log = "2.3.0"
