@@ -164,7 +164,7 @@ chart = { group = "com.github.PhilJay", name = "MPAndroidChart", version.ref = "
 leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android", version.ref = "leakcanary" }
 test-slf4j-simple = { group = "io.mockk", name = "slf4j-simple", version.ref = "slf4j" }
 test-mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
-robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "mockk" }
+test-robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
 
 # Nordic
 nordic-ble-ktx = { group = "no.nordicsemi.android", name = "ble-ktx", version.ref = "nordic-ble" }
