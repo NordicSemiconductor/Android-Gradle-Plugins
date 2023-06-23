@@ -65,7 +65,7 @@ nordic-dfu = "2.3.0"
 nordic-log = "2.3.0"
 nordic-mcumgr = "1.6.0"
 nordic-scanner = "1.6.0"
-nordic-common = "1.6.4"
+nordic-common = "1.7.0"
 nordic-memfault = "1.0.2"
 nordicPlugins = "1.4.6"
 googleServicesPlugins = "4.3.15"
@@ -183,7 +183,9 @@ nordic-analytics = { group = "no.nordicsemi.android.common", name = "analytics",
 nordic-navigation = { group = "no.nordicsemi.android.common", name = "navigation", version.ref = "nordic-common" }
 nordic-uiscanner = { group = "no.nordicsemi.android.common", name = "uiscanner", version.ref = "nordic-common" }
 nordic-uilogger = { group = "no.nordicsemi.android.common", name = "uilogger", version.ref = "nordic-common" }
-nordic-permission = { group = "no.nordicsemi.android.common", name = "permission", version.ref = "nordic-common" }
+nordic-permissions-nfc = { group = "no.nordicsemi.android.common", name = "permissions-nfc", version.ref = "nordic-common" }
+nordic-permissions-ble = { group = "no.nordicsemi.android.common", name = "permissions-ble", version.ref = "nordic-common" }
+nordic-permissions-internet = { group = "no.nordicsemi.android.common", name = "permissions-internet", version.ref = "nordic-common" }
 nordic-memfault = { group = "no.nordicsemi.android", name = "memfault", version.ref = "nordic-memfault" }
 
 # BleK
