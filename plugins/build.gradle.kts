@@ -122,6 +122,13 @@ gradlePlugin {
             implementationClass = "AndroidNexusRepositoryPlugin"
             tags.set(listOf("nordicsemi", "Android", "nexus", "publish"))
         }
+        register("commonTheme") {
+            id = "no.nordicsemi.android.common.theme.AAA"
+            displayName = "Common theme plugin"
+            description = "Plugin enabling nordic theme."
+            implementationClass = "AndroidNordicCommonThemeConventionPlugin"
+            tags.set(listOf("nordicsemi", "Android", "Kotlin"))
+        }
     }
 }
 
