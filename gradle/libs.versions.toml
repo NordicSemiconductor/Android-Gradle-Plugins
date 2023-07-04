@@ -58,6 +58,9 @@ leakcanary = "2.11"
 mockk = "1.13.5"
 slf4j = "2.0.7"
 robolectric = "4.10.3"
+skydovesBallon = "1.5.4"
+moshiKotlin = "1.14.0"
+moshiAdapters = "1.14.0"
 
 nordic-blek = "0.1.3"
 nordic-ble = "2.6.1"
@@ -167,6 +170,9 @@ leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android", v
 test-slf4j-simple = { group = "org.slf4j", name = "slf4j-simple", version.ref = "slf4j" }
 test-mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 test-robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
+skydoves-ballon = {group = "com.github.skydoves", name = "balloon", version.ref = "skydovesBallon"}
+moshi-kotlin = {group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshiKotlin"}
+moshi-adapters = {group = "com.squareup.moshi", name = "moshi-adapters", version.ref = "moshiAdapters"}
 
 # Nordic
 nordic-ble-ktx = { group = "no.nordicsemi.android", name = "ble-ktx", version.ref = "nordic-ble" }
