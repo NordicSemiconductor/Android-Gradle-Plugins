@@ -171,7 +171,7 @@ leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android", v
 test-slf4j-simple = { group = "org.slf4j", name = "slf4j-simple", version.ref = "slf4j" }
 test-mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 test-robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
-skydoves-ballon = {group = "com.github.skydoves", name = "balloon", version.ref = "skydovesBallon"}
+skydoves-ballon = {group = "com.github.skydoves", name = "balloon-compose", version.ref = "skydovesBallon"}
 moshi-kotlin = {group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshiKotlin"}
 moshi-adapters = {group = "com.squareup.moshi", name = "moshi-adapters", version.ref = "moshiAdapters"}
 
