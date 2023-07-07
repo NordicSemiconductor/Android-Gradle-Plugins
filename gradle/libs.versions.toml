@@ -62,7 +62,7 @@ skydovesBallon = "1.5.4"
 moshiKotlin = "1.15.0"
 moshiAdapters = "1.15.0"
 
-nordic-blek = "0.1.4"
+nordic-blek = "0.1.5"
 nordic-ble = "2.6.1"
 nordic-dfu = "2.3.0"
 nordic-log = "2.3.0"
@@ -202,6 +202,7 @@ nordic-blek-profile = { group = "no.nordicsemi.android.kotlin.ble", name = "prof
 nordic-blek-core = { group = "no.nordicsemi.android.kotlin.ble", name = "core", version.ref = "nordic-blek" }
 nordic-blek-scanner = { group = "no.nordicsemi.android.kotlin.ble", name = "scanner", version.ref = "nordic-blek" }
 nordic-blek-advertiser = { group = "no.nordicsemi.android.kotlin.ble", name = "advertiser", version.ref = "nordic-blek" }
+nordic-blek-logger = { group = "no.nordicsemi.android.kotlin.ble", name = "logger", version.ref = "nordic-blek" }
 
 # Dependencies of the included build-logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
