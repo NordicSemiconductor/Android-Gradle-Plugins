@@ -132,3 +132,9 @@ ext["signing.secretKeyRingFile"] = "../sec.gpg"
 signing {
     sign(publishing.publications)
 }
+
+dependencies {
+    implementation("com.squareup.okhttp:okhttp:2.6.0")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-moshi:2.4.0")
+}
