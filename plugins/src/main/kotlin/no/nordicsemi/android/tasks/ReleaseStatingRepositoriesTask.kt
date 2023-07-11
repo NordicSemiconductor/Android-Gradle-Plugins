@@ -18,7 +18,8 @@ open class ReleaseStatingRepositoriesTask : DefaultTask() {
         val credentials = Credentials.basic(username, password)
 
         val client = OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor())
+                //only for testing
+//            .addInterceptor(HttpLoggingInterceptor())
             .addInterceptor { chain ->
                 chain.proceed(
                     chain.request().newBuilder()
@@ -58,7 +59,7 @@ open class ReleaseStatingRepositoriesTask : DefaultTask() {
             throw HttpException(closeResponse)
         }
 
-        Thread.sleep(60000) //Wait for the repository to close. Been too lazy to write retry mechanism.
+        Thread.sleep(120000) //Wait for the repository to close. Been too lazy to write retry mechanism.
 
         val releaseResponse = service.releaseStagingRepositories(requestBody).execute()
 
