@@ -8,7 +8,7 @@ import retrofit2.HttpException
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-open class ReleaseStatingRepositoriesTask : DefaultTask() {
+open class ReleaseStagingRepositoriesTask : DefaultTask() {
 
     @TaskAction
     fun releaseStagingRepositories() {
@@ -39,10 +39,10 @@ open class ReleaseStatingRepositoriesTask : DefaultTask() {
 
         val service = retrofit.create(SonatypeService::class.java)
 
-        getStagingRepositories(service)
+        releaseStagingRepositories(service)
     }
 
-    private fun getStagingRepositories(service: SonatypeService) {
+    private fun releaseStagingRepositories(service: SonatypeService) {
         val response = service.getStagingRepositories().execute()
 
         if (!response.isSuccessful) {
@@ -53,7 +53,7 @@ open class ReleaseStatingRepositoriesTask : DefaultTask() {
 
         val requestBody = StagingRepositoriesRequestBody(StagingRepositoriesRequest(stagedRepositoryIds = ids))
 
-        val closeResponse = service.closeStatingRepositories(requestBody).execute()
+        val closeResponse = service.closeStagingRepositories(requestBody).execute()
 
         if (!closeResponse.isSuccessful) {
             throw HttpException(closeResponse)

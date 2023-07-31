@@ -11,7 +11,7 @@ interface SonatypeService {
     fun getStagingRepositories(): Call<StagingRepositoryResponseBody>
 
     @POST("service/local/staging/bulk/close")
-    fun closeStatingRepositories(@Body body: StagingRepositoriesRequestBody): Call<Unit>
+    fun closeStagingRepositories(@Body body: StagingRepositoriesRequestBody): Call<Unit>
 
     @POST("service/local/staging/bulk/promote")
     fun releaseStagingRepositories(@Body body: StagingRepositoriesRequestBody): Call<Unit>

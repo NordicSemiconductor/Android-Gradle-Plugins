@@ -31,7 +31,7 @@
 
 import com.android.build.gradle.LibraryExtension
 import no.nordicsemi.android.buildlogic.getVersionNameFromTags
-import no.nordicsemi.android.tasks.ReleaseStatingRepositoriesTask
+import no.nordicsemi.android.tasks.ReleaseStagingRepositoriesTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension
@@ -103,7 +103,7 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
                 }
 
                 try {
-                    rootProject.tasks.register("releaseStagingRepositories", ReleaseStatingRepositoriesTask::class.java)
+                    rootProject.tasks.register("releaseStagingRepositories", ReleaseStagingRepositoriesTask::class.java)
                 } catch (_: Throwable) { }
             }
         }
