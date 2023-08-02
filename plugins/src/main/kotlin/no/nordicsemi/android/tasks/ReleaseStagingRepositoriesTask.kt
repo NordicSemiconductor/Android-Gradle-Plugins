@@ -12,6 +12,8 @@ open class ReleaseStagingRepositoriesTask : DefaultTask() {
 
     @TaskAction
     fun releaseStagingRepositories() {
+        group = "publishing"
+
         val username = System.getenv("OSSR_USERNAME")
         val password = System.getenv("OSSR_PASSWORD")
 
