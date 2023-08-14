@@ -54,7 +54,6 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
 
                 defaultConfig {
                     minSdk = AppConst.MIN_SDK
-                    targetSdk = AppConst.TARGET_SDK
                 }
 
                 buildFeatures {
