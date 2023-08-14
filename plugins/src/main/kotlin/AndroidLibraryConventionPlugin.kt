@@ -31,6 +31,7 @@
 
 import com.android.build.api.variant.LibraryAndroidComponentsExtension
 import com.android.build.gradle.LibraryExtension
+import no.nordicsemi.android.AppConst
 import no.nordicsemi.android.buildlogic.configurePrintApksTask
 import no.nordicsemi.android.buildlogic.getVersionCodeFromTags
 import no.nordicsemi.android.buildlogic.getVersionNameFromTags
@@ -49,11 +50,11 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
             }
 
             extensions.configure<LibraryExtension> {
-                compileSdk = 33
+                compileSdk = AppConst.COMPILE_SDK
 
                 defaultConfig {
-                    minSdk = 21
-                    targetSdk = 33
+                    minSdk = AppConst.MIN_SDK
+                    targetSdk = AppConst.TARGET_SDK
                 }
 
                 buildFeatures {

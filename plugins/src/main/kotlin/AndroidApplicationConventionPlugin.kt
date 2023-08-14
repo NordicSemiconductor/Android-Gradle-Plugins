@@ -31,6 +31,7 @@
 
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
+import no.nordicsemi.android.AppConst
 import no.nordicsemi.android.buildlogic.configurePrintApksTask
 import no.nordicsemi.android.buildlogic.getVersionCodeFromTags
 import no.nordicsemi.android.buildlogic.getVersionNameFromTags
@@ -47,11 +48,11 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
             }
 
             extensions.configure<ApplicationExtension> {
-                compileSdk = 33
+                compileSdk = AppConst.COMPILE_SDK
 
                 defaultConfig {
-                    minSdk = 21
-                    targetSdk = 33
+                    minSdk = AppConst.MIN_SDK
+                    targetSdk = AppConst.TARGET_SDK
                     versionName = target.getVersionNameFromTags()
                     versionCode = target.getVersionCodeFromTags()
                 }
