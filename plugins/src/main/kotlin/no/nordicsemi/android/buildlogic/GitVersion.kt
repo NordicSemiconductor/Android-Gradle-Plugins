@@ -55,7 +55,7 @@ fun Project.getVersionCodeFromTags(): Int {
     }
     val now = ZonedDateTime.now(ZoneId.of("UTC"))
     val year = now.year % 100
-    val month = now.monthValue
+    val month = String.format("%02d", now.monthValue)
     val revisions = code.toString().trim()
     return "$year$month$revisions".toInt()
 }
