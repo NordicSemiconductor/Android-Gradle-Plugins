@@ -36,7 +36,7 @@ import java.io.ByteArrayOutputStream
 import java.time.ZoneId
 import java.time.ZonedDateTime
 
-private const val DEFAULT_CODE = 0
+private const val DEFAULT_CODE = 1
 private const val DEFAULT_NAME = "0.0.0"
 
 /**
