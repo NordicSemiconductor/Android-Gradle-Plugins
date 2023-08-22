@@ -36,7 +36,7 @@ plugins {
     `kotlin-dsl`
     `maven-publish`
     signing
-    id("com.gradle.plugin-publish") version "1.2.0"
+    id("com.gradle.plugin-publish") version "1.2.1"
 }
 apply(from = "../gradle/git-tag-version.gradle")
 
