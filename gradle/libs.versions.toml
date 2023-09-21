@@ -61,6 +61,9 @@ robolectric = "4.10.3"
 skydovesBallon = "1.5.4"
 moshiKotlin = "1.15.0"
 moshiAdapters = "1.15.0"
+moshiConverter = "2.9.0"
+moshi = "1.15.0"
+moshiKotlinCodegen = "1.14.0"
 
 nordic-blek = "1.0.5"
 nordic-ble = "2.6.1"
@@ -174,6 +177,9 @@ test-robolectric = { group = "org.robolectric", name = "robolectric", version.re
 skydoves-ballon = {group = "com.github.skydoves", name = "balloon-compose", version.ref = "skydovesBallon"}
 moshi-kotlin = {group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshiKotlin"}
 moshi-adapters = {group = "com.squareup.moshi", name = "moshi-adapters", version.ref = "moshiAdapters"}
+moshi-converter = {group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "moshiConverter"}
+moshi = {group = "com.squareup.moshi", name = "moshi", version.ref = "moshi"}
+moshi-kotlin-codegen = {group = "com.squareup.moshi", name = "moshi-kotlin-codegen", version.ref = "moshiKotlinCodegen"}
 
 # Nordic
 nordic-ble-ktx = { group = "no.nordicsemi.android", name = "ble-ktx", version.ref = "nordic-ble" }
