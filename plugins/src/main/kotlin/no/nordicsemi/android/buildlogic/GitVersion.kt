@@ -47,7 +47,7 @@ fun Project.getVersionCodeFromTags(): Int {
     val code = ByteArrayOutputStream()
     try {
         exec {
-            commandLine("git", "rev-list", "--all", "--count")
+            commandLine("git", "rev-list", "--count", "HEAD")
             standardOutput = code
         }
     } catch (e: Exception) {
@@ -56,8 +56,10 @@ fun Project.getVersionCodeFromTags(): Int {
     val now = ZonedDateTime.now(ZoneId.of("UTC"))
     val year = now.year % 100
     val month = String.format("%02d", now.monthValue)
-    val revisions = code.toString().trim()
-    return "$year$month$revisions".toInt()
+    val day = String.format("%02d", now.dayOfMonth)
+    val revisions = String.format("%02d", code.toString().trim().toInt()%100)
+    val version = "$year$month$day$revisions".toInt()
+    return version
 }
 
 /**
