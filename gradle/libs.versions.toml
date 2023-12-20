@@ -47,6 +47,7 @@ protobufPlugin = "0.9.4"
 publishPlugin = "1.2.1"
 retrofit = "2.9.0"
 room = "2.6.1"
+paging = "3.2.1"
 secrets = "2.0.1"
 turbine = "1.0.0"
 markdown = "0.3.6"
@@ -177,6 +178,10 @@ retrofit-converter-kotlin-serialization = { group = "com.squareup.retrofit2", na
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+room-paging = { group = "androidx.room", name = "room-paging", version.ref = "room" }
+paging-runtime = { group = "androidx.paging", name = "paging-runtime", version.ref = "paging" }
+paging-common = { group = "androidx.paging", name = "paging-common", version.ref = "paging" }
+paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "paging" }
 markdown = { group = "com.github.jeziellago", name = "compose-markdown", version.ref = "markdown" }
 memfault-cloud = { group = "com.memfault.cloud", name = "cloud-android", version.ref = "memfault-cloud" }
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
