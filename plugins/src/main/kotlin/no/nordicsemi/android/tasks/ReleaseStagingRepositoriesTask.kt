@@ -68,5 +68,13 @@ open class ReleaseStagingRepositoriesTask : DefaultTask() {
         if (!releaseResponse.isSuccessful) {
             throw HttpException(releaseResponse)
         }
+
+        Thread.sleep(120000) //Wait for the repository to close. Been too lazy to write retry mechanism.
+
+        val dropResponse = service.dropStagingRepositories(requestBody).execute()
+
+        if (!dropResponse.isSuccessful) {
+            throw HttpException(dropResponse)
+        }
     }
 }

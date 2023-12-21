@@ -15,4 +15,7 @@ interface SonatypeService {
 
     @POST("service/local/staging/bulk/promote")
     fun releaseStagingRepositories(@Body body: StagingRepositoriesRequestBody): Call<Unit>
+
+    @POST("service/local/staging/bulk/drop")
+    fun dropStagingRepositories(@Body body: StagingRepositoriesRequestBody): Call<Unit>
 }
