@@ -67,6 +67,11 @@ moshi = "1.15.0"
 moshiKotlinCodegen = "1.15.0"
 material3 = "1.2.0-beta01"
 material = "1.6.0-beta03"
+koinCore = "3.4.3"
+koinCompose = "1.0.4"
+kmmUuid = "0.8.0"
+kmmVoyager = "1.0.0-rc10"
+kmmLogs = "2.6.1"
 
 nordic-blek = "1.0.14"
 nordic-ble = "2.7.2"
@@ -197,6 +202,11 @@ moshi-adapters = {group = "com.squareup.moshi", name = "moshi-adapters", version
 moshi-converter = {group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "moshiConverter"}
 moshi = {group = "com.squareup.moshi", name = "moshi", version.ref = "moshi"}
 moshi-kotlin-codegen = {group = "com.squareup.moshi", name = "moshi-kotlin-codegen", version.ref = "moshiKotlinCodegen"}
+koin-core = {group = "io.insert-koin", name = "koin-core", version.ref = "koinCore"}
+koin-compose = {group = "io.insert-koin", name = "koin-compose", version.ref = "koinCompose"}
+kmm-uuid = {group = "com.benasher44", name = "uuid", version.ref = "kmmUuid"}
+kmm-voyager = {group = "cafe.adriel.voyager", name = "voyager-navigator", version.ref = "kmmVoyager"}
+kmm-logs = {group = "io.github.aakira", name = "napier", version.ref = "kmmLogs"}
 
 # Nordic
 nordic-ble-ktx = { group = "no.nordicsemi.android", name = "ble-ktx", version.ref = "nordic-ble" }
