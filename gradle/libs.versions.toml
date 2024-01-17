@@ -85,6 +85,7 @@ nordicPlugins = "1.11.1"
 dokkaPlugin = "1.9.10"
 googleServicesPlugins = "4.4.0"
 firebaseCrashlyticsPlugins = "2.9.9"
+kmmIosPublishPlugin = "2.0.3"
 
 [libraries]
 accompanist-flowlayout = { group = "com.google.accompanist", name = "accompanist-flowlayout", version.ref = "accompanist" }
@@ -269,3 +270,4 @@ publish = { id = "com.gradle.plugin-publish", version.ref = "publishPlugin" }
 wire = { id = "com.squareup.wire", version.ref = "wirePlugin" }
 google-services = { id = "com.google.gms.google-services", version.ref = "googleServicesPlugins" }
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlyticsPlugins" }
+kmm-ios-publish = { id = "com.chromaticnoise.multiplatform-swiftpackage", version.ref = "kmmIosPublishPlugin" }
