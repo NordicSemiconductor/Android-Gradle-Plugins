@@ -227,7 +227,6 @@ nordic-core = { group = "no.nordicsemi.android.common", name = "core", version.r
 nordic-theme = { group = "no.nordicsemi.android.common", name = "theme", version.ref = "nordic-common" }
 nordic-analytics = { group = "no.nordicsemi.android.common", name = "analytics", version.ref = "nordic-common" }
 nordic-navigation = { group = "no.nordicsemi.android.common", name = "navigation", version.ref = "nordic-common" }
-nordic-uilogger = { group = "no.nordicsemi.android.common", name = "uilogger", version.ref = "nordic-common" }
 nordic-logger = { group = "no.nordicsemi.android.common", name = "logger", version.ref = "nordic-common" }
 nordic-permissions-nfc = { group = "no.nordicsemi.android.common", name = "permissions-nfc", version.ref = "nordic-common" }
 nordic-permissions-ble = { group = "no.nordicsemi.android.common", name = "permissions-ble", version.ref = "nordic-common" }
