@@ -29,13 +29,13 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import com.android.build.gradle.LibraryExtension
 import no.nordicsemi.android.NexusRepositoryPluginExt
 import no.nordicsemi.android.buildlogic.getVersionNameFromTags
 import no.nordicsemi.android.from
 import no.nordicsemi.android.tasks.ReleaseStagingRepositoriesTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.kotlin.dsl.extra
@@ -43,21 +43,21 @@ import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.plugins.signing.SigningExtension
 
-class AndroidNexusRepositoryPlugin : Plugin<Project> {
+class KotlinNexusRepositoryPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         with(target) {
             pluginManager.apply {
-                apply("com.android.library")
+                apply("org.jetbrains.kotlin.jvm")
                 apply("maven-publish")
                 apply("signing")
             }
 
             // Default Nordic group.
-            group = "no.nordicsemi.android"
+            group = "no.nordicsemi.kotlin"
 
             val nexusPluginExt = extensions.create("nordicNexusPublishing", NexusRepositoryPluginExt::class.java)
-            val library = extensions.getByType<LibraryExtension>()
+            val library = extensions.getByType<JavaPluginExtension>()
             val signing = extensions.getByType<SigningExtension>()
 
             // The signing configuration will be user by signing plugin.
@@ -66,11 +66,7 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
             extra.set("signing.secretKeyRingFile", "${project.rootDir.path}/sec.gpg")
 
             // Create a software component with the release variant.
-            library.publishing {
-                singleVariant("release") {
-                    withSourcesJar()
-                }
-            }
+            library.withSourcesJar()
 
             afterEvaluate {
                 publishing {
@@ -92,11 +88,11 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
                                 groupId = POM_GROUP ?: group.toString()
                             }
                             // Set the component to be published.
-                            from(components["release"])
+                            from(components["kotlin"])
                             // Apply POM configuration.
                             pom {
                                 from(nexusPluginExt)
-                                packaging = "aar"
+                                packaging = "jar"
                             }
                         }
                         // This task will add *.asc files to the publication for all artifacts.
