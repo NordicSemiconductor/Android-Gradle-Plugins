@@ -25,6 +25,12 @@
         "com.google.devtools.ksp"
       ],
       "groupName": "kotlin"
+    },
+    {
+      "matchPackageNames": [
+        "org.slf4j:slf4j-simple"
+      ],
+      "enabled": false
     }
   ]
 }
