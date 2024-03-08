@@ -89,7 +89,7 @@ class KotlinNexusRepositoryPlugin : Plugin<Project> {
                                 groupId = POM_GROUP ?: group.toString()
                             }
                             // Set the component to be published.
-                            from(components["kotlin"])
+                            from(components["java"])
                             // Apply POM configuration.
                             pom {
                                 from(nexusPluginExt)
