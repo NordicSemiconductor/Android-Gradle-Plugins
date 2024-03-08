@@ -67,6 +67,7 @@ class KotlinNexusRepositoryPlugin : Plugin<Project> {
 
             // Create a software component with the release variant.
             library.withSourcesJar()
+            library.withJavadocJar()
 
             afterEvaluate {
                 publishing {
@@ -88,7 +89,7 @@ class KotlinNexusRepositoryPlugin : Plugin<Project> {
                                 groupId = POM_GROUP ?: group.toString()
                             }
                             // Set the component to be published.
-                            from(components["kotlin"])
+                            from(components["java"])
                             // Apply POM configuration.
                             pom {
                                 from(nexusPluginExt)

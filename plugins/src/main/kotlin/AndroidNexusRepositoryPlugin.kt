@@ -69,6 +69,7 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
             library.publishing {
                 singleVariant("release") {
                     withSourcesJar()
+                    withJavadocJar()
                 }
             }
 
