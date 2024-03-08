@@ -238,8 +238,10 @@ nordic-permissions-internet = { group = "no.nordicsemi.android.common", name = "
 nordic-memfault = { group = "no.nordicsemi.android", name = "memfault", version.ref = "nordic-memfault" }
 
 # BleK
-nordic-blek-client = { group = "no.nordicsemi.android.kotlin.ble", name = "client", version.ref = "nordic-blek" }
-nordic-blek-server = { group = "no.nordicsemi.android.kotlin.ble", name = "server", version.ref = "nordic-blek" }
+nordic-blek-client-android = { group = "no.nordicsemi.android.kotlin.ble", name = "client-android", version.ref = "nordic-blek" }
+nordic-blek-client-mock = { group = "no.nordicsemi.android.kotlin.ble", name = "client-mock", version.ref = "nordic-blek" }
+nordic-blek-server-android = { group = "no.nordicsemi.android.kotlin.ble", name = "server-android", version.ref = "nordic-blek" }
+nordic-blek-server-mock = { group = "no.nordicsemi.android.kotlin.ble", name = "server-mock", version.ref = "nordic-blek" }
 nordic-blek-profile = { group = "no.nordicsemi.android.kotlin.ble", name = "profile", version.ref = "nordic-blek" }
 nordic-blek-core = { group = "no.nordicsemi.android.kotlin.ble", name = "core", version.ref = "nordic-blek" }
 nordic-blek-scanner = { group = "no.nordicsemi.android.kotlin.ble", name = "scanner", version.ref = "nordic-blek" }
