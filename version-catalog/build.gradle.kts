@@ -87,9 +87,9 @@ publishing {
                 // https://maven.apache.org/pom.html#developers
                 developers {
                     developer {
-                        id.set("syzi")
-                        name.set("Sylwester Zieliński")
-                        email.set("sylwester.zielinski@nordicsemi.no")
+                        id.set("mag")
+                        name.set("Mobile Applications Group")
+                        email.set("mag@nordicsemi.no")
                         organization.set("Nordic Semiconductor ASA")
                         organizationUrl.set("https://www.nordicsemi.com")
                     }

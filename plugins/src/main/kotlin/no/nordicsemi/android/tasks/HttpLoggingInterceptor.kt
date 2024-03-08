@@ -87,7 +87,7 @@ class HttpLoggingInterceptor @JvmOverloads constructor(private val logger: Logge
             if (logBody) {
                 val source = responseBody?.source()
                 source?.request(Long.MAX_VALUE) // Buffer the entire body.
-                val buffer = source?.buffer()
+                val buffer = source?.buffer
                 var charset: Charset? = UTF8
                 val contentType = responseBody?.contentType()
                 if (contentType != null) {
