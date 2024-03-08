@@ -79,6 +79,7 @@ nordic-blek = "2.0.0"
 nordic-ble = "2.7.3"
 nordic-dfu = "2.4.2"
 nordic-log = "2.3.0"
+nordic-data = "1.0.0"
 nordic-mcumgr = "1.9.2"
 nordic-scanner = "1.6.0"
 nordic-common = "2.0.0"
@@ -224,6 +225,7 @@ nordic-mcumgr-ble = { group = "no.nordicsemi.android", name = "mcumgr-ble", vers
 nordic-log = { group = "no.nordicsemi.android", name = "log", version.ref = "nordic-log" }
 nordic-log-timber = { group = "no.nordicsemi.android", name = "log-timber", version.ref = "nordic-log" }
 nordic-compat-scanner = { group = "no.nordicsemi.android.support.v18", name = "scanner", version.ref = "nordic-scanner" }
+nordic-kotlin-data = { group = "no.nordicsemi.kotlin", name = "data", version.ref = "nordic-data" }
 nordic-core = { group = "no.nordicsemi.android.common", name = "core", version.ref = "nordic-common" }
 nordic-theme = { group = "no.nordicsemi.android.common", name = "theme", version.ref = "nordic-common" }
 nordic-analytics = { group = "no.nordicsemi.android.common", name = "analytics", version.ref = "nordic-common" }
