@@ -67,6 +67,7 @@ class KotlinNexusRepositoryPlugin : Plugin<Project> {
 
             // Create a software component with the release variant.
             library.withSourcesJar()
+            library.withJavadocJar()
 
             afterEvaluate {
                 publishing {
