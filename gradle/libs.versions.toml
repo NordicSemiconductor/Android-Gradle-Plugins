@@ -6,7 +6,6 @@ androidxActivity = "1.9.0"
 androidxAnnotation = "1.8.0"
 androidxAppCompat = "1.7.0"
 androidxComposeBom = "2024.06.00" # https://developer.android.com/jetpack/compose/bom/bom-mapping
-androidxComposeCompiler = "1.5.14" # https://developer.android.com/jetpack/androidx/releases/compose-kotlin
 androidxComposeRuntimeTracing = "1.0.0-beta01"
 androidxCore = "1.13.1"
 androidxCoreSplashscreen = "1.0.1"
@@ -34,10 +33,10 @@ hilt = "2.51.1"
 hiltExt = "1.2.0"
 jacoco = "0.8.7"
 junit4 = "4.13.2"
-kotlin = "1.9.24"
-kotlinxCoroutines = "1.8.0"
-kotlinxDatetime = "0.5.0"
-kotlinxSerializationJson = "1.6.3"
+kotlin = "2.0.0"
+kotlinxCoroutines = "1.9.0-RC"
+kotlinxDatetime = "0.6.0"
+kotlinxSerializationJson = "1.7.0"
 kotlinCompose = "1.6.11"
 ksp = "1.9.24-1.0.20"
 lint = "31.5.0"
@@ -102,7 +101,6 @@ androidx-activity-compose = { group = "androidx.activity", name = "activity-comp
 androidx-annotation = { group = "androidx.annotation", name = "annotation", version.ref = "androidxAnnotation" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidxAppCompat" }
 androidx-benchmark-macro = { group = "androidx.benchmark", name = "benchmark-macro-junit4", version.ref = "androidxMacroBenchmark" }
-androidx-compose-compiler = { group = "androidx.compose.compiler", name = "compiler", version.ref = "androidxComposeCompiler" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidxComposeBom" }
 androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
 androidx-compose-foundation-layout = { group = "androidx.compose.foundation", name = "foundation-layout" }
@@ -273,6 +271,7 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.compose", version.ref = "kotlinCompose" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 protobuf = { id = "com.google.protobuf", version.ref = "protobufPlugin" }
 secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secrets" }
 publish = { id = "com.gradle.plugin-publish", version.ref = "publishPlugin" }
