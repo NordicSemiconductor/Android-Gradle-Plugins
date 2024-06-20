@@ -64,8 +64,6 @@ internal fun Project.configureKotlinAndroid(
  */
 internal fun Project.configureKotlinJvm() {
     extensions.configure<JavaPluginExtension> {
-        // Up to Java 11 APIs are available through desugaring
-        // https://developer.android.com/studio/write/java11-minimal-support-table
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
@@ -94,6 +92,5 @@ private inline fun <reified T : KotlinTopLevelExtension> Project.configureKotlin
         optIn.add("kotlin.RequiresOptIn")
         optIn.add("kotlinx.coroutines.ExperimentalCoroutinesApi")
         optIn.add("kotlinx.coroutines.FlowPreview")
-        optIn.add("kotlin.Experimental")
     }
 }

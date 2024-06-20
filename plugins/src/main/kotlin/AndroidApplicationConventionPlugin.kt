@@ -30,9 +30,7 @@
  */
 
 import com.android.build.api.dsl.ApplicationExtension
-import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import no.nordicsemi.android.AppConst
-import no.nordicsemi.android.buildlogic.configurePrintApksTask
 import no.nordicsemi.android.buildlogic.getVersionCodeFromTags
 import no.nordicsemi.android.buildlogic.getVersionNameFromTags
 import org.gradle.api.Plugin
@@ -91,9 +89,6 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                         buildConfigField("String", "VERSION_CODE", "\"${getVersionCodeFromTags()}\"")
                     }
                 }
-            }
-            extensions.configure<ApplicationAndroidComponentsExtension> {
-                configurePrintApksTask(this)
             }
         }
     }

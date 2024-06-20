@@ -31,9 +31,9 @@
 
 import com.android.build.gradle.LibraryExtension
 import no.nordicsemi.android.buildlogic.configureAndroidCompose
+import no.nordicsemi.android.buildlogic.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
 
@@ -49,7 +49,6 @@ class AndroidLibraryComposeConventionPlugin : Plugin<Project> {
             val extension = extensions.getByType<LibraryExtension>()
             configureAndroidCompose(extension)
 
-            val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
             dependencies {
                 // Add Material 3 Compose
                 add("implementation", libs.findLibrary("androidx.compose.material3").get())

@@ -29,6 +29,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+import no.nordicsemi.android.buildlogic.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalogsExtension
@@ -44,7 +45,6 @@ class AndroidHiltConventionPlugin : Plugin<Project> {
                 apply("dagger.hilt.android.plugin")
             }
 
-            val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
             dependencies {
                 add("implementation", libs.findLibrary("hilt.android").get())
                 add("kapt", libs.findLibrary("hilt.compiler").get())

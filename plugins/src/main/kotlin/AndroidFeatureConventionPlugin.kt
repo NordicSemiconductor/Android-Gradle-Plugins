@@ -29,6 +29,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+import no.nordicsemi.android.buildlogic.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalogsExtension
@@ -43,7 +44,6 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 apply("no.nordicsemi.android.plugin.hilt")
             }
 
-            val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
             dependencies {
                 add("implementation", libs.findLibrary("androidx.hilt.navigation.compose").get())
                 // The above library depends on the following libraries, but to keep them in the
