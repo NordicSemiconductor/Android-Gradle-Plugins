@@ -30,6 +30,9 @@ out/
 .gradle/
 build/
 
+# Kotlin
+.kotlin
+
 # Signing files
 .signing/
 

@@ -29,17 +29,13 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import com.android.build.api.variant.LibraryAndroidComponentsExtension
 import com.android.build.gradle.LibraryExtension
 import no.nordicsemi.android.AppConst
-import no.nordicsemi.android.buildlogic.configurePrintApksTask
 import no.nordicsemi.android.buildlogic.getVersionCodeFromTags
 import no.nordicsemi.android.buildlogic.getVersionNameFromTags
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.getByType
 
 class AndroidLibraryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -80,18 +76,6 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                         buildConfigField("String", "VERSION_NAME", "\"debug\"")
                         buildConfigField("String", "VERSION_CODE", "\"${getVersionCodeFromTags()}\"")
                     }
-                }
-            }
-
-            extensions.configure<LibraryAndroidComponentsExtension> {
-                configurePrintApksTask(this)
-            }
-            val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
-            configurations.configureEach {
-                resolutionStrategy {
-                    force(libs.findLibrary("junit4").get())
-                    // Temporary workaround for https://issuetracker.google.com/174733673
-                    force("org.objenesis:objenesis:2.6")
                 }
             }
         }

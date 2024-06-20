@@ -77,6 +77,7 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
                 publishing {
                     repositories {
                         maven {
+                            name = "sonatype"
                             setUrl("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
                             credentials {
                                 username = System.getenv("OSSR_USERNAME")
@@ -85,7 +86,7 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
                         }
                     }
                     publications {
-                        val publication = create("mavenPublication", MavenPublication::class.java) {
+                        val publication = create("library", MavenPublication::class.java) {
                             // Set publication properties.
                             with (nexusPluginExt) {
                                 artifactId = POM_ARTIFACT_ID

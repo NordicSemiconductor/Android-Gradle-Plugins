@@ -29,30 +29,18 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import com.android.build.gradle.LibraryExtension
-import no.nordicsemi.android.buildlogic.configureAndroidCompose
-import no.nordicsemi.android.buildlogic.libs
+import no.nordicsemi.android.buildlogic.configureKotlinJvm
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.dependencies
-import org.gradle.kotlin.dsl.getByType
 
-class AndroidLibraryComposeConventionPlugin : Plugin<Project> {
+class JvmKotlinConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
-                apply("no.nordicsemi.android.plugin.library")
-                apply("no.nordicsemi.android.plugin.kotlin")
-                apply("org.jetbrains.kotlin.plugin.compose")
+                apply("org.jetbrains.kotlin.jvm")
             }
 
-            val extension = extensions.getByType<LibraryExtension>()
-            configureAndroidCompose(extension)
-
-            dependencies {
-                // Add Material 3 Compose
-                add("implementation", libs.findLibrary("androidx.compose.material3").get())
-            }
+            configureKotlinJvm()
         }
     }
 }

@@ -29,21 +29,19 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+import no.nordicsemi.android.buildlogic.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.dependencies
-import org.gradle.kotlin.dsl.getByType
 
 class AndroidFeatureConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             pluginManager.apply {
-                apply("no.nordicsemi.android.gradle.library.compose")
-                apply("no.nordicsemi.android.gradle.hilt")
+                apply("no.nordicsemi.android.plugin.library.compose")
+                apply("no.nordicsemi.android.plugin.hilt")
             }
 
-            val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
             dependencies {
                 add("implementation", libs.findLibrary("androidx.hilt.navigation.compose").get())
                 // The above library depends on the following libraries, but to keep them in the
