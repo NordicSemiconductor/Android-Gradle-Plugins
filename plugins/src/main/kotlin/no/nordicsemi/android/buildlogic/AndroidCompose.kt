@@ -36,6 +36,8 @@ package no.nordicsemi.android.buildlogic
 import com.android.build.api.dsl.CommonExtension
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
+import org.gradle.kotlin.dsl.configure
+import org.jetbrains.kotlin.compose.compiler.gradle.ComposeCompilerGradlePluginExtension
 
 /**
  * Configure Compose-specific options
@@ -56,5 +58,11 @@ internal fun Project.configureAndroidCompose(
             add("implementation", libs.findLibrary("androidx.compose.ui.tooling.preview").get())
             add("debugImplementation", libs.findLibrary("androidx.compose.ui.tooling").get())
         }
+    }
+
+    extensions.configure<ComposeCompilerGradlePluginExtension> {
+        // Enable strong skipping mode for Compose
+        // https://github.com/JetBrains/kotlin/blob/master/plugins/compose/design/strong-skipping.md
+        enableStrongSkippingMode.set(true)
     }
 }

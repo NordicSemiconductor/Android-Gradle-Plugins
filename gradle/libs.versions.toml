@@ -243,6 +243,7 @@ nordic-blek-uiscanner = { group = "no.nordicsemi.android.kotlin.ble", name = "ui
 # Dependencies of the included build-logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+compose-gradlePlugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
 
 [plugins]
 nordic-application = { id = "no.nordicsemi.android.gradle.application", version.ref = "nordicPlugins" }
