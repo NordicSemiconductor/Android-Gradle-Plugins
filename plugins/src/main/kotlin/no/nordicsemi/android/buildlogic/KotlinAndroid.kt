@@ -34,10 +34,13 @@ package no.nordicsemi.android.buildlogic
 import com.android.build.api.dsl.CommonExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
+import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.provideDelegate
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
+import org.jetbrains.kotlin.gradle.dsl.KotlinTopLevelExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
-import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 /**
  * Configure base Kotlin with Android options
@@ -51,21 +54,47 @@ internal fun Project.configureKotlinAndroid(
             targetCompatibility = JavaVersion.VERSION_17
         }
 
-        tasks.named("compileKotlin", KotlinJvmCompile::class.java) {
-            compilerOptions {
-                // Treat all Kotlin warnings as errors (disabled by default)
-                // Override by setting warningsAsErrors=true in your ~/.gradle/gradle.properties
-                val warningsAsErrors: String? by project
-                allWarningsAsErrors.set(warningsAsErrors.toBoolean())
+        configureKotlin<KotlinAndroidProjectExtension>()
+    }
+}
 
-                languageVersion.set(KotlinVersion.KOTLIN_2_0)
-                apiVersion.set(KotlinVersion.KOTLIN_2_0)
-                jvmTarget.set(JvmTarget.JVM_17)
-                optIn.add("kotlin.RequiresOptIn")
-                optIn.add("kotlinx.coroutines.ExperimentalCoroutinesApi")
-                optIn.add("kotlinx.coroutines.FlowPreview")
-                optIn.add("kotlin.Experimental")
-            }
+/**
+ * Configure base Kotlin with Android options
+ */
+internal fun Project.configureKotlinJvm(
+    commonExtension: CommonExtension<*, *, *, *, *, *>,
+) {
+    commonExtension.apply {
+        compileOptions {
+            sourceCompatibility = JavaVersion.VERSION_17
+            targetCompatibility = JavaVersion.VERSION_17
         }
+
+        configureKotlin<KotlinJvmProjectExtension>()
+    }
+}
+
+/**
+ * Configure base Kotlin options.
+ */
+private inline fun <reified T : KotlinTopLevelExtension> Project.configureKotlin() = configure<T> {
+    // Treat all Kotlin warnings as errors (disabled by default)
+    // Override by setting warningsAsErrors=true in your ~/.gradle/gradle.properties
+    val warningsAsErrors: String? by project
+
+    when (this) {
+        is KotlinAndroidProjectExtension -> compilerOptions
+        is KotlinJvmProjectExtension -> compilerOptions
+        else -> TODO("Unsupported project extension $this ${T::class}")
+    }.apply {
+        allWarningsAsErrors.set(warningsAsErrors.toBoolean())
+
+        languageVersion.set(KotlinVersion.KOTLIN_2_0)
+        apiVersion.set(KotlinVersion.KOTLIN_2_0)
+        jvmTarget.set(JvmTarget.JVM_17)
+        optIn.add("kotlin.RequiresOptIn")
+        optIn.add("kotlinx.coroutines.ExperimentalCoroutinesApi")
+        optIn.add("kotlinx.coroutines.FlowPreview")
+        optIn.add("kotlin.Experimental")
     }
 }
