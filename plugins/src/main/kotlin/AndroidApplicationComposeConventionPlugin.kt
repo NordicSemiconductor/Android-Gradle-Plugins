@@ -53,9 +53,6 @@ class AndroidApplicationComposeConventionPlugin : Plugin<Project> {
             dependencies {
                 // Add Material 3 Compose
                 add("implementation", libs.findLibrary("androidx.compose.material3").get())
-                // Add UI Tooling and Previews
-                add("debugImplementation", libs.findLibrary("androidx.compose.ui.tooling").get())
-                add("implementation", libs.findLibrary("androidx.compose.ui.tooling.preview").get())
             }
         }
     }
