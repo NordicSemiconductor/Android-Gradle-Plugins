@@ -116,6 +116,13 @@ gradlePlugin {
             implementationClass = "AndroidKotlinConventionPlugin"
             tags.set(listOf("nordicsemi", "Android", "kotlin"))
         }
+        register("jvm.kotlin") {
+            id = "no.nordicsemi.jvm.plugin.kotlin"
+            displayName = "Kotlin plugin for JVM projects"
+            description = "Plugin enabling Kotlin for JVM modules."
+            implementationClass = "JvmKotlinConventionPlugin"
+            tags.set(listOf("nordicsemi", "jvm", "kotlin"))
+        }
         register("android.nexus") {
             id = "no.nordicsemi.android.plugin.nexus"
             displayName = "Nexus plugin for Android projects"
