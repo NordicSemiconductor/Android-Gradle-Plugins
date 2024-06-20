@@ -86,7 +86,7 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
                         }
                     }
                     publications {
-                        val publication = create("androidLibrary", MavenPublication::class.java) {
+                        val publication = create("library", MavenPublication::class.java) {
                             // Set publication properties.
                             with (nexusPluginExt) {
                                 artifactId = POM_ARTIFACT_ID

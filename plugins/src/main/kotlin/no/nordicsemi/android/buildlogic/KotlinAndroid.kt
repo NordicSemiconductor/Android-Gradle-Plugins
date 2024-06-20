@@ -43,7 +43,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinTopLevelExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 /**
- * Configure base Kotlin with Android options
+ * Configure base Kotlin with Android options.
  */
 internal fun Project.configureKotlinAndroid(
     commonExtension: CommonExtension<*, *, *, *, *, *>,

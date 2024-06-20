@@ -43,7 +43,7 @@ import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.plugins.signing.SigningExtension
 
-class KotlinNexusRepositoryPlugin : Plugin<Project> {
+class JvmNexusRepositoryPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         with(target) {
@@ -82,7 +82,7 @@ class KotlinNexusRepositoryPlugin : Plugin<Project> {
                         }
                     }
                     publications {
-                        val publication = create("kotlinLibrary", MavenPublication::class.java) {
+                        val publication = create("library", MavenPublication::class.java) {
                             // Set publication properties.
                             with (nexusPluginExt) {
                                 artifactId = POM_ARTIFACT_ID

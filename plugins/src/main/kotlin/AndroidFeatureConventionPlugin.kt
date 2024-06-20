@@ -39,8 +39,8 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             pluginManager.apply {
-                apply("no.nordicsemi.android.gradle.library.compose")
-                apply("no.nordicsemi.android.gradle.hilt")
+                apply("no.nordicsemi.android.plugin.library.compose")
+                apply("no.nordicsemi.android.plugin.hilt")
             }
 
             val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
