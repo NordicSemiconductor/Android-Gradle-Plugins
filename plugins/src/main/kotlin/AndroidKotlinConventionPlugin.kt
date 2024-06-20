@@ -31,14 +31,10 @@
 
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.gradle.LibraryExtension
-import no.nordicsemi.android.buildlogic.configureAndroidCompose
 import no.nordicsemi.android.buildlogic.configureKotlinAndroid
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.artifacts.VersionCatalogsExtension
-import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.findByType
-import org.gradle.kotlin.dsl.getByType
 
 class AndroidKotlinConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
