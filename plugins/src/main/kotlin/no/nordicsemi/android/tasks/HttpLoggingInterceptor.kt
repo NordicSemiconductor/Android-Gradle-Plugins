@@ -97,7 +97,7 @@ class HttpLoggingInterceptor @JvmOverloads constructor(private val logger: Logge
                     logger.log("")
                     logger.log(buffer?.clone()?.readString((charset)!!))
                 }
-                endMessage += " (" + buffer?.size() + "-byte body)"
+                endMessage += " (" + buffer?.size + "-byte body)"
             }
             logger.log(endMessage)
         }
