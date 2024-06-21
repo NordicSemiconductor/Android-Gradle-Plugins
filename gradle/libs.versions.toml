@@ -220,6 +220,7 @@ nordic-log-timber = { group = "no.nordicsemi.android", name = "log-timber", vers
 nordic-compat-scanner = { group = "no.nordicsemi.android.support.v18", name = "scanner", version.ref = "nordic-scanner" }
 nordic-kotlin-data = { group = "no.nordicsemi.kotlin", name = "data", version.ref = "nordic-data" }
 nordic-core = { group = "no.nordicsemi.android.common", name = "core", version.ref = "nordic-common" }
+nordic-ui = { group = "no.nordicsemi.android.common", name = "ui", version.ref = "nordic-common" }
 nordic-theme = { group = "no.nordicsemi.android.common", name = "theme", version.ref = "nordic-common" }
 nordic-analytics = { group = "no.nordicsemi.android.common", name = "analytics", version.ref = "nordic-common" }
 nordic-navigation = { group = "no.nordicsemi.android.common", name = "navigation", version.ref = "nordic-common" }
