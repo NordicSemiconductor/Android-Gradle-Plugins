@@ -35,6 +35,7 @@ import no.nordicsemi.android.buildlogic.configureKotlinAndroid
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.findByType
+import org.jetbrains.kotlin.gradle.plugin.KaptExtension
 
 class AndroidKotlinConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -48,6 +49,9 @@ class AndroidKotlinConventionPlugin : Plugin<Project> {
             }
             extensions.findByType<ApplicationExtension>()?.apply {
                 configureKotlinAndroid(this)
+            }
+            extensions.findByType<KaptExtension>()?.apply {
+                generateStubs = false
             }
         }
     }
