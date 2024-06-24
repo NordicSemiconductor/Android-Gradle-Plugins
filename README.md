@@ -49,7 +49,7 @@ List of plugins currently available in the repository.
 
 7. [no.nordicsemi.android.plugin.hilt](plugins/src/main/kotlin/AndroidHiltConventionPlugin.kt)
 
-   This plugin applies `no.nordicsemi.android.plugin.kotlin` and `org.jetbrains.kotlin.kapt` and
+   This plugin applies `no.nordicsemi.android.plugin.kotlin` and `com.google.devtools.ksp` and
    configures [Hilt](https://dagger.dev/hilt/) for the module.
 
 9. [no.nordicsemi.android.plugin.feature](plugins/src/main/kotlin/AndroidFeatureConventionPlugin.kt)
