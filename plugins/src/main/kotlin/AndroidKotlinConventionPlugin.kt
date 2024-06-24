@@ -50,9 +50,6 @@ class AndroidKotlinConventionPlugin : Plugin<Project> {
             extensions.findByType<ApplicationExtension>()?.apply {
                 configureKotlinAndroid(this)
             }
-            extensions.findByType<KaptExtension>()?.apply {
-                generateStubs = false
-            }
         }
     }
 }
