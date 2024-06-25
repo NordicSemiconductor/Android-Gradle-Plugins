@@ -38,10 +38,15 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
+import org.gradle.api.tasks.bundling.Jar
 import org.gradle.kotlin.dsl.extra
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.getByType
+import org.gradle.kotlin.dsl.register
+import org.gradle.kotlin.dsl.withType
 import org.gradle.plugins.signing.SigningExtension
+import org.jetbrains.dokka.gradle.DokkaTask
+import org.jetbrains.kotlin.gradle.tasks.Kapt
 
 class AndroidNexusRepositoryPlugin : Plugin<Project> {
 
@@ -51,6 +56,7 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
                 apply("com.android.library")
                 apply("maven-publish")
                 apply("signing")
+                apply("org.jetbrains.dokka")
             }
 
             // Default Nordic group.
@@ -69,8 +75,25 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
             library.publishing {
                 singleVariant("release") {
                     withSourcesJar()
-                    withJavadocJar()
+                    // Javadoc fails with Java 17:
+                    // https://github.com/Kotlin/dokka/issues/2956
+                    // withJavadocJar()
                 }
+            }
+
+            // Instead, configure Dokka to generate HTML docs.
+            tasks.withType<DokkaTask>().configureEach {
+                dependsOn(tasks.withType<Kapt>())
+                dokkaSourceSets.configureEach {
+                    noAndroidSdkLink.set(false)
+                }
+            }
+
+            tasks.register<Jar>("dokkaHtmlJar").configure {
+                val dokkaHtml = tasks.named("dokkaHtml", DokkaTask::class.java)
+                dependsOn(dokkaHtml)
+                from(dokkaHtml.flatMap { it.outputDirectory })
+                archiveClassifier.set("html-docs")
             }
 
             afterEvaluate {
@@ -100,6 +123,8 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
                                 from(nexusPluginExt)
                                 packaging = "aar"
                             }
+                            // Add Dokka HTML docs.
+                            artifact(tasks.named("dokkaHtmlJar"))
                         }
                         // This task will add *.asc files to the publication for all artifacts.
                         signing.sign(publication)
