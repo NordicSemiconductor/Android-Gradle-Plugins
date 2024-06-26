@@ -1,6 +1,6 @@
 package no.nordicsemi.android.tasks
 
-import com.squareup.okhttp.Credentials
+import okhttp3.Credentials
 import okhttp3.OkHttpClient
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
@@ -69,7 +69,7 @@ open class ReleaseStagingRepositoriesTask : DefaultTask() {
             throw HttpException(releaseResponse)
         }
 
-        Thread.sleep(120000) //Wait for the repository to close. Been too lazy to write retry mechanism.
+        Thread.sleep(120000) //Wait for the repository to be released. Been too lazy to write retry mechanism.
 
         val dropResponse = service.dropStagingRepositories(requestBody).execute()
 
