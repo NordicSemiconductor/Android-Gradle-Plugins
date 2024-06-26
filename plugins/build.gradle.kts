@@ -34,7 +34,8 @@ plugins {
     `kotlin-dsl`
     `maven-publish`
     signing
-    id("com.gradle.plugin-publish") version "1.2.1"
+    alias(libs.plugins.publish)
+    alias(libs.plugins.ksp)
 }
 apply(from = "../gradle/git-tag-version.gradle")
 
@@ -148,7 +149,8 @@ signing {
 }
 
 dependencies {
-    implementation("com.squareup.okhttp:okhttp:2.7.5")
-    implementation("com.squareup.retrofit2:retrofit:2.11.0")
-    implementation("com.squareup.retrofit2:converter-moshi:2.11.0")
+    implementation(libs.okhttp)
+    implementation(libs.retrofit.core)
+    implementation(libs.retrofit.converter.moshi)
+    ksp(libs.moshi.kotlin.codegen)
 }

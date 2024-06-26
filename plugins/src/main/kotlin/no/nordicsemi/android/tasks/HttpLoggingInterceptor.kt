@@ -1,8 +1,8 @@
 package no.nordicsemi.android.tasks
 
-import com.squareup.okhttp.HttpUrl
-import com.squareup.okhttp.Protocol
+import okhttp3.HttpUrl
 import okhttp3.Interceptor
+import okhttp3.Protocol
 import okhttp3.Response
 import okio.Buffer
 import java.io.IOException
@@ -50,17 +50,17 @@ class HttpLoggingInterceptor @JvmOverloads constructor(private val logger: Logge
         }
         val logBody = level == Level.BODY
         val logHeaders = logBody || level == Level.HEADERS
-        val requestBody = request.body()
+        val requestBody = request.body
         val hasRequestBody = requestBody != null
         if (logHeaders) {
-            val headers = request.headers()
+            val headers = request.headers
             var i = 0
-            val count = headers.size()
+            val count = headers.size
             while (i < count) {
                 logger.log(headers.name(i) + ": " + headers.value(i))
                 i++
             }
-            var endMessage: String = "--> END " + request.method()
+            var endMessage: String = "--> END " + request.method
             if (logBody && hasRequestBody) {
                 val buffer = Buffer()
                 requestBody!!.writeTo(buffer)
@@ -74,30 +74,30 @@ class HttpLoggingInterceptor @JvmOverloads constructor(private val logger: Logge
             logger.log(endMessage)
         }
         val response = chain.proceed(request)
-        val responseBody = response.body()
+        val responseBody = response.body
         if (logHeaders) {
-            val headers = response.headers()
+            val headers = response.headers
             var i = 0
-            val count = headers.size()
+            val count = headers.size
             while (i < count) {
                 logger.log(headers.name(i) + ": " + headers.value(i))
                 i++
             }
             var endMessage: String = "<-- END HTTP"
             if (logBody) {
-                val source = responseBody?.source()
-                source?.request(Long.MAX_VALUE) // Buffer the entire body.
-                val buffer = source?.buffer
+                val source = responseBody.source()
+                source.request(Long.MAX_VALUE) // Buffer the entire body.
+                val buffer = source.buffer
                 var charset: Charset? = UTF8
-                val contentType = responseBody?.contentType()
+                val contentType = responseBody.contentType()
                 if (contentType != null) {
                     charset = contentType.charset(UTF8)
                 }
-                if (responseBody?.contentLength() != 0L) {
+                if (responseBody.contentLength() != 0L) {
                     logger.log("")
-                    logger.log(buffer?.clone()?.readString((charset)!!))
+                    logger.log(buffer.clone().readString((charset)!!))
                 }
-                endMessage += " (" + buffer?.size + "-byte body)"
+                endMessage += " (" + buffer.size + "-byte body)"
             }
             logger.log(endMessage)
         }
@@ -111,8 +111,8 @@ class HttpLoggingInterceptor @JvmOverloads constructor(private val logger: Logge
         }
 
         private fun requestPath(url: HttpUrl): String {
-            val path = url.encodedPath()
-            val query = url.encodedQuery()
+            val path = url.encodedPath
+            val query = url.encodedQuery
             return if (query != null) ("$path?$query") else path
         }
     }
