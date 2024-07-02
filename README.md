@@ -6,6 +6,8 @@ for writing Nordic's dedicated plugins.
 
 ## Plugins
 
+![Gradle Plugin Portal Version](https://img.shields.io/gradle-plugin-portal/v/no.nordicsemi.android.plugin.application)
+
 List of plugins currently available in the repository.
 
 ### Android plugins
@@ -83,6 +85,48 @@ and are available by their ids and version number.
 
 ## Version catalog
 
-The repository also contains Gradle Version Catalog which consumes [toml](gradle/libs.versions.toml) file.
-The file is automatically used by gradle to create libs reference in gradle.kts files because it
-is located in gradle directory. No additional set up is required.
+![Maven Central Version](https://img.shields.io/maven-central/v/no.nordicsemi.android.gradle/version-catalog)
+
+The repository also contains Gradle Version Catalog with [toml](gradle/libs.versions.toml) file.
+The file is automatically used by gradle to create libs reference in _build.gradle.kts_ files.
+
+### Set up
+
+Include the following code in your _settings.gradle.kts_ file:
+```kotlin
+pluginManagement {
+    repositories {
+        mavenLocal()
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        mavenLocal()
+        google()
+        mavenCentral()
+    }
+    versionCatalogs {
+        create("libs") {
+            from("no.nordicsemi.android.gradle:version-catalog:<version>")
+        }
+    }
+}
+```
+
+Dependencies can be later set using `libs` reference in _build.gradle.kts_ files:
+```kotlin
+plugins {
+    alias(libs.plugins.android.application) apply false
+}
+
+dependencies {
+    // Example dependency:
+    implementation(libs.nordic.dfu)
+    implementation(libs.androidx.compose.material.iconsExtended)
+}
+```
