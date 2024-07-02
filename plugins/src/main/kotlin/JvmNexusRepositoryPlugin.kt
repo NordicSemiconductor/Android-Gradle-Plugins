@@ -89,7 +89,9 @@ class JvmNexusRepositoryPlugin : Plugin<Project> {
                 val dokkaHtml = tasks.named("dokkaHtml", DokkaTask::class.java)
                 dependsOn(dokkaHtml)
                 from(dokkaHtml.flatMap { it.outputDirectory })
-                archiveClassifier.set("html-docs")
+                // Maven Central requires JVM libraries to have [module]-[version]-javadoc.jar file.
+                // Let's put Dokka HTML docs into the javadoc file.
+                archiveClassifier.set("javadoc")
             }
 
             afterEvaluate {
