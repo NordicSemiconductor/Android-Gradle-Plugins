@@ -14,14 +14,6 @@
         "org.jetbrains.kotlin.*"
       ],
       "groupName": "kotlin"
-    },
-    {
-      "matchPackageNames": [
-        "org.slf4j:slf4j-api",
-        "org.slf4j:slf4j-nop",
-        "org.slf4j:slf4j-simple"
-      ],
-      "enabled": false
     }
   ]
 }
