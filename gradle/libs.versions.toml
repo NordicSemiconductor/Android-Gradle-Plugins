@@ -75,6 +75,7 @@ nordic-ble = "2.7.5"
 nordic-dfu = "2.5.0"
 nordic-log = "2.3.0"
 nordic-data = "0.1.0"
+nordic-wifi = "1.1.0"
 nordic-mcumgr = "1.9.2"
 nordic-scanner = "1.6.0"
 nordic-common = "2.0.0"
@@ -229,6 +230,9 @@ nordic-permissions-nfc = { group = "no.nordicsemi.android.common", name = "permi
 nordic-permissions-ble = { group = "no.nordicsemi.android.common", name = "permissions-ble", version.ref = "nordic-common" }
 nordic-permissions-internet = { group = "no.nordicsemi.android.common", name = "permissions-internet", version.ref = "nordic-common" }
 nordic-permissions-wifi = { group = "no.nordicsemi.android.common", name = "permissions-wifi", version.ref = "nordic-common" }
+nordic-wifi-ble = { group = "no.nordicsemi.android.wifi", name = "provisioning-ble", version.ref = "nordic-wifi" }
+nordic-wifi-softap = { group = "no.nordicsemi.android.wifi", name = "provisioning-softap", version.ref = "nordic-wifi" }
+nordic-wifi-nfc = { group = "no.nordicsemi.android.wifi", name = "provisioning-nfc", version.ref = "nordic-wifi" }
 nordic-memfault = { group = "no.nordicsemi.android", name = "memfault", version.ref = "nordic-memfault" }
 
 # BleK
