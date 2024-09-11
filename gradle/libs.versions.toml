@@ -72,7 +72,7 @@ gson = "2.11.0"
 
 nordic-blek = "1.1.0"
 nordic-ble = "2.8.0"
-nordic-dfu = "2.5.0"
+nordic-dfu = "2.6.0"
 nordic-log = "2.5.0"
 nordic-data = "0.2.0"
 nordic-wifi = "1.1.1"
