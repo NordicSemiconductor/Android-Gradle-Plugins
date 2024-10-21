@@ -79,7 +79,7 @@ nordic-scanner = "1.6.0"
 nordic-common = "2.1.0"
 nordic-memfault = "1.0.2"
 
-nordicPlugins = "2.4"
+nordicPlugins = "2.5"
 dokkaPlugin = "1.9.20"
 googleServicesPlugins = "4.4.2"
 firebaseCrashlyticsPlugins = "3.0.2"
