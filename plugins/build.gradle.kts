@@ -50,7 +50,9 @@ java {
 }
 
 kotlin {
-    jvmToolchain(17)
+    // Commented out to make compile on Android Studio Ladybug Patch 2
+    // https://github.com/skiptools/skip/issues/161#issuecomment-2203078945
+    // jvmToolchain(17)
 }
 
 dependencies {
