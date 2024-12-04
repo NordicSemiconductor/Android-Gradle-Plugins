@@ -77,7 +77,7 @@ nordic-wifi = "1.1.1"
 nordic-mcumgr = "2.2.2"
 nordic-scanner = "1.6.0"
 nordic-common = "2.1.1"
-nordic-memfault = "1.0.2"
+nordic-memfault = "1.1.0"
 
 nordicPlugins = "2.5"
 dokkaPlugin = "1.9.20"
