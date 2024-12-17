@@ -45,14 +45,14 @@ group = "no.nordicsemi.android.gradle"
 version = getVersionNameFromTags()
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
 kotlin {
     // Commented out to make compile on Android Studio Ladybug Patch 2
     // https://github.com/skiptools/skip/issues/161#issuecomment-2203078945
-    // jvmToolchain(17)
+    jvmToolchain(21)
 }
 
 dependencies {

@@ -37,7 +37,7 @@ import org.gradle.kotlin.dsl.dependencies
 class AndroidFeatureConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
-            pluginManager.apply {
+            with(pluginManager) {
                 apply("no.nordicsemi.android.plugin.library.compose")
                 apply("no.nordicsemi.android.plugin.hilt")
             }

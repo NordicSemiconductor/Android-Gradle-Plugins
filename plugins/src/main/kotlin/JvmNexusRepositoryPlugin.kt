@@ -43,16 +43,14 @@ import org.gradle.kotlin.dsl.extra
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.register
-import org.gradle.kotlin.dsl.withType
 import org.gradle.plugins.signing.SigningExtension
-import org.jetbrains.dokka.gradle.DokkaTask
-import org.jetbrains.kotlin.gradle.tasks.Kapt
+import org.jetbrains.dokka.gradle.DokkaExtension
 
 class JvmNexusRepositoryPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         with(target) {
-            pluginManager.apply {
+            with(pluginManager) {
                 apply("org.jetbrains.kotlin.jvm")
                 apply("maven-publish")
                 apply("signing")
@@ -65,6 +63,7 @@ class JvmNexusRepositoryPlugin : Plugin<Project> {
             val nexusPluginExt = extensions.create("nordicNexusPublishing", NexusRepositoryPluginExt::class.java)
             val library = extensions.getByType<JavaPluginExtension>()
             val signing = extensions.getByType<SigningExtension>()
+            val dokka = extensions.getByType<DokkaExtension>()
 
             // The signing configuration will be user by signing plugin.
             extra.set("signing.keyId", System.getenv("GPG_SIGNING_KEY"))
@@ -78,20 +77,17 @@ class JvmNexusRepositoryPlugin : Plugin<Project> {
             // library.withJavadocJar()
 
             // Instead, configure Dokka to generate HTML docs.
-            tasks.withType<DokkaTask>().configureEach {
-                dependsOn(tasks.withType<Kapt>())
+            dokka.apply {
                 dokkaSourceSets.configureEach {
-                    noAndroidSdkLink.set(false)
+                    enableAndroidDocumentationLink.set(true)
                 }
-            }
-
-            tasks.register<Jar>("dokkaHtmlJar").configure {
-                val dokkaHtml = tasks.named("dokkaHtml", DokkaTask::class.java)
-                dependsOn(dokkaHtml)
-                from(dokkaHtml.flatMap { it.outputDirectory })
-                // Maven Central requires JVM libraries to have [module]-[version]-javadoc.jar file.
-                // Let's put Dokka HTML docs into the javadoc file.
-                archiveClassifier.set("javadoc")
+                dokkaPublications.named("html") {
+                    tasks.register<Jar>("dokkaHtmlJar").configure {
+                        dependsOn(tasks.named("dokkaGenerate"))
+                        from(outputDirectory)
+                        archiveClassifier.set("javadoc")
+                    }
+                }
             }
 
             afterEvaluate {

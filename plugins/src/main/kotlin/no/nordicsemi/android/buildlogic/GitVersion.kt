@@ -32,7 +32,6 @@
 package no.nordicsemi.android.buildlogic
 
 import org.gradle.api.Project
-import java.io.ByteArrayOutputStream
 import java.time.ZoneId
 import java.time.ZonedDateTime
 
@@ -44,20 +43,22 @@ private const val DEFAULT_NAME = "0.0.0"
  * The format is YYMMxxxxx where x is a number of git revisions.
  */
 fun Project.getVersionCodeFromTags(): Int {
-    val code = ByteArrayOutputStream()
+    val numberOfCommits: Int
     try {
-        exec {
-            commandLine("git", "rev-list", "--count", "HEAD")
-            standardOutput = code
-        }
+        numberOfCommits = providers
+            .exec { commandLine("git", "rev-list", "--count", "HEAD") }
+            .standardOutput
+            .asText.get().trim()
+            .toInt()
     } catch (e: Exception) {
+        e.printStackTrace()
         return DEFAULT_CODE
     }
     val now = ZonedDateTime.now(ZoneId.of("UTC"))
     val year = now.year % 100
     val month = String.format("%02d", now.monthValue)
     val day = String.format("%02d", now.dayOfMonth)
-    val revisions = String.format("%02d", code.toString().trim().toInt()%100)
+    val revisions = String.format("%02d", numberOfCommits % 100)
     val version = "$year$month$day$revisions".toInt()
     return version
 }
@@ -66,14 +67,16 @@ fun Project.getVersionCodeFromTags(): Int {
  * This method returns the version name from the latest git tag.
  */
 fun Project.getVersionNameFromTags(): String {
-    val code = ByteArrayOutputStream()
+    val latestTag: String
     try {
-        exec {
-            commandLine("git", "describe", "--tags", "--abbrev=0")
-            standardOutput = code
-        }
+        latestTag = providers
+            .exec { commandLine("git", "describe", "--tags", "--abbrev=0") }
+            .standardOutput
+            .asText.get().trim()
     } catch (e: Exception) {
+        e.printStackTrace()
         return DEFAULT_NAME
     }
-    return code.toString().trim().split("%")[0]
+    // Version may have % to add additional information
+    return latestTag.split("%")[0]
 }
