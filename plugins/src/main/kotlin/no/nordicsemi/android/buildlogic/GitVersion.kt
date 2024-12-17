@@ -32,7 +32,6 @@
 package no.nordicsemi.android.buildlogic
 
 import org.gradle.api.Project
-import java.io.ByteArrayOutputStream
 import java.time.ZoneId
 import java.time.ZonedDateTime
 
