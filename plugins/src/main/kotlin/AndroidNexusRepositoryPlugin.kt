@@ -43,16 +43,14 @@ import org.gradle.kotlin.dsl.extra
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.register
-import org.gradle.kotlin.dsl.withType
 import org.gradle.plugins.signing.SigningExtension
-import org.jetbrains.dokka.gradle.DokkaTask
-import org.jetbrains.kotlin.gradle.tasks.Kapt
+import org.jetbrains.dokka.gradle.DokkaExtension
 
 class AndroidNexusRepositoryPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         with(target) {
-            pluginManager.apply {
+            with(pluginManager) {
                 apply("com.android.library")
                 apply("maven-publish")
                 apply("signing")
@@ -65,6 +63,7 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
             val nexusPluginExt = extensions.create("nordicNexusPublishing", NexusRepositoryPluginExt::class.java)
             val library = extensions.getByType<LibraryExtension>()
             val signing = extensions.getByType<SigningExtension>()
+            val dokka = extensions.getByType<DokkaExtension>()
 
             // The signing configuration will be user by signing plugin.
             extra.set("signing.keyId", System.getenv("GPG_SIGNING_KEY"))
@@ -82,18 +81,17 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
             }
 
             // Instead, configure Dokka to generate HTML docs.
-            tasks.withType<DokkaTask>().configureEach {
-                dependsOn(tasks.withType<Kapt>())
+            dokka.apply {
                 dokkaSourceSets.configureEach {
-                    noAndroidSdkLink.set(false)
+                    enableAndroidDocumentationLink.set(true)
                 }
-            }
-
-            tasks.register<Jar>("dokkaHtmlJar").configure {
-                val dokkaHtml = tasks.named("dokkaHtml", DokkaTask::class.java)
-                dependsOn(dokkaHtml)
-                from(dokkaHtml.flatMap { it.outputDirectory })
-                archiveClassifier.set("html-docs")
+                dokkaPublications.named("html") {
+                    tasks.register<Jar>("dokkaHtmlJar").configure {
+                        dependsOn(tasks.named("dokkaGenerate"))
+                        from(outputDirectory)
+                        archiveClassifier.set("html-docs")
+                    }
+                }
             }
 
             afterEvaluate {
