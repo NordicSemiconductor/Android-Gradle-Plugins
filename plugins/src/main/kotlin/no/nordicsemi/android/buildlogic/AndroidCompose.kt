@@ -38,6 +38,7 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.configure
 import org.jetbrains.kotlin.compose.compiler.gradle.ComposeCompilerGradlePluginExtension
+import org.jetbrains.kotlin.compose.compiler.gradle.ComposeFeatureFlag
 
 /**
  * Configure Compose-specific options
@@ -61,8 +62,7 @@ internal fun Project.configureAndroidCompose(
     }
 
     extensions.configure<ComposeCompilerGradlePluginExtension> {
-        // Enable strong skipping mode for Compose
-        // https://github.com/JetBrains/kotlin/blob/master/plugins/compose/design/strong-skipping.md
-        enableStrongSkippingMode.set(true)
+        // String skipping is enabled by default
+        // featureFlags.add(ComposeFeatureFlag.StrongSkipping)
     }
 }
