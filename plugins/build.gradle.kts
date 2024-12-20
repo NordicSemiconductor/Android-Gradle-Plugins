@@ -74,70 +74,70 @@ gradlePlugin {
             displayName = "Application with Compose"
             description = "Application plugin extension with Compose and Material3 dependencies. This plugin includes 'application' plugin."
             implementationClass = "AndroidApplicationComposeConventionPlugin"
-            tags.set(listOf("nordicsemi", "Android", "application", "compose"))
+            tags.addAll("nordicsemi", "Android", "application", "compose")
         }
         register("android.application") {
             id = "no.nordicsemi.android.plugin.application"
             displayName = "Standalone Application configuration"
             description = "Application plugin extension."
             implementationClass = "AndroidApplicationConventionPlugin"
-            tags.set(listOf("nordicsemi", "Android", "application"))
+            tags.addAll("nordicsemi", "Android", "application")
         }
         register("android.library.compose") {
             id = "no.nordicsemi.android.plugin.library.compose"
             displayName = "Library with Compose"
             description = "Library plugin extension with Compose and Material3 dependencies. This plugin extends 'library' plugin."
             implementationClass = "AndroidLibraryComposeConventionPlugin"
-            tags.set(listOf("nordicsemi", "Android", "library", "compose"))
+            tags.addAll("nordicsemi", "Android", "library", "compose")
         }
         register("android.library") {
             id = "no.nordicsemi.android.plugin.library"
             displayName = "Standalone library configuration"
             description = "Library plugin extension."
             implementationClass = "AndroidLibraryConventionPlugin"
-            tags.set(listOf("nordicsemi", "Android", "library"))
+            tags.addAll("nordicsemi", "Android", "library")
         }
         register("android.feature") {
             id = "no.nordicsemi.android.plugin.feature"
             displayName = "Feature plugin"
             description = "UI feature plugin with Hilt & Compose. This plugin extends 'library.compose' and 'hilt' plugins and adds Compose navigation."
             implementationClass = "AndroidFeatureConventionPlugin"
-            tags.set(listOf("nordicsemi", "Android", "feature"))
+            tags.addAll("nordicsemi", "Android", "feature")
         }
         register("android.hilt") {
             id = "no.nordicsemi.android.plugin.hilt"
             displayName = "Hilt plugin"
             description = "Plugin enabling Hilt"
             implementationClass = "AndroidHiltConventionPlugin"
-            tags.set(listOf("nordicsemi", "Android", "hilt"))
+            tags.addAll("nordicsemi", "Android", "hilt")
         }
         register("android.kotlin") {
             id = "no.nordicsemi.android.plugin.kotlin"
             displayName = "Kotlin plugin for Android modules"
             description = "Plugin enabling Kotlin for Android modules."
             implementationClass = "AndroidKotlinConventionPlugin"
-            tags.set(listOf("nordicsemi", "Android", "kotlin"))
+            tags.addAll("nordicsemi", "Android", "kotlin")
         }
         register("jvm.kotlin") {
             id = "no.nordicsemi.jvm.plugin.kotlin"
             displayName = "Kotlin plugin for JVM projects"
             description = "Plugin enabling Kotlin for JVM modules."
             implementationClass = "JvmKotlinConventionPlugin"
-            tags.set(listOf("nordicsemi", "jvm", "kotlin"))
+            tags.addAll("nordicsemi", "jvm", "kotlin")
         }
         register("android.nexus") {
             id = "no.nordicsemi.android.plugin.nexus"
             displayName = "Nexus plugin for Android projects"
             description = "Plugin creating a task for publishing Android libraries to Nexus repository."
             implementationClass = "AndroidNexusRepositoryPlugin"
-            tags.set(listOf("nordicsemi", "Android", "nexus", "publish"))
+            tags.addAll("nordicsemi", "Android", "nexus", "publish")
         }
         register("jvm.nexus") {
             id = "no.nordicsemi.jvm.plugin.nexus"
             displayName = "Nexus plugin for JVM projects"
             description = "Plugin creating a task for publishing JVM libraries to Nexus repository."
             implementationClass = "JvmNexusRepositoryPlugin"
-            tags.set(listOf("nordicsemi", "jvm", "kotlin", "nexus", "publish"))
+            tags.addAll("nordicsemi", "jvm", "kotlin", "nexus", "publish")
         }
     }
 }
