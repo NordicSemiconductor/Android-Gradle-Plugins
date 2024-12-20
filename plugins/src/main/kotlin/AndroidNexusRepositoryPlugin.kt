@@ -39,12 +39,15 @@ import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.bundling.Jar
+import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.extra
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.register
 import org.gradle.plugins.signing.SigningExtension
 import org.jetbrains.dokka.gradle.DokkaExtension
+import org.jetbrains.dokka.gradle.engine.plugins.DokkaHtmlPluginParameters
+import java.util.Calendar
 
 class AndroidNexusRepositoryPlugin : Plugin<Project> {
 
@@ -80,11 +83,19 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
                 }
             }
 
-            // Instead, configure Dokka to generate HTML docs.
+            // Instead, configure Dokka to generate HTML docs for the module.
             dokka.apply {
                 dokkaSourceSets.configureEach {
                     enableAndroidDocumentationLink.set(true)
                 }
+                // Set the version.
+                moduleVersion.set(getVersionNameFromTags())
+                // Set the footer message.
+                pluginsConfiguration.named("html", DokkaHtmlPluginParameters::class.java) {
+                    val year = Calendar.getInstance().get(Calendar.YEAR)
+                    footerMessage.set("Copyright © 2022 - $year Nordic Semiconductor ASA. All Rights Reserved.")
+                }
+                // Create a task to generate HTML docs, it will be added to the Maven publication.
                 dokkaPublications.named("html") {
                     tasks.register<Jar>("dokkaHtmlJar").configure {
                         dependsOn(tasks.named("dokkaGenerate"))
@@ -92,6 +103,9 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
                         archiveClassifier.set("html-docs")
                     }
                 }
+            }
+            parent?.dependencies {
+                add("dokka", this@with)
             }
 
             afterEvaluate {

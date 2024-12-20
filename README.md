@@ -10,6 +10,12 @@ for writing Nordic's dedicated plugins.
 
 List of plugins currently available in the repository.
 
+### Dokka plugin
+
+1. [no.nordicsemi.dokka.plugin](plugins/src/main/kotlin/NordicDokkaPlugin.kt)
+
+   This plugin applies `org.jetbrains.dokka` and applies Nordic styles to Dokka documentation.
+
 ### Android plugins
 
 1. [no.nordicsemi.android.plugin.application](plugins/src/main/kotlin/AndroidApplicationConventionPlugin.kt)

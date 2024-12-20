@@ -139,6 +139,13 @@ gradlePlugin {
             implementationClass = "JvmNexusRepositoryPlugin"
             tags.addAll("nordicsemi", "jvm", "kotlin", "nexus", "publish")
         }
+        register("nordic.dokka") {
+            id = "no.nordicsemi.plugin.dokka"
+            displayName = "Nordic Dokka plugin"
+            description = "Plugin configuring Dokka for Nordic projects."
+            implementationClass = "NordicDokkaPlugin"
+            tags.addAll("nordicsemi", "dokka")
+        }
     }
 }
 
