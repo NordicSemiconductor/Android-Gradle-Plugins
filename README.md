@@ -10,6 +10,12 @@ for writing Nordic's dedicated plugins.
 
 List of plugins currently available in the repository.
 
+### Dokka plugin
+
+1. [no.nordicsemi.dokka.plugin](plugins/src/main/kotlin/NordicDokkaPlugin.kt)
+
+   This plugin applies `org.jetbrains.dokka` and applies Nordic styles to Dokka documentation.
+
 ### Android plugins
 
 1. [no.nordicsemi.android.plugin.application](plugins/src/main/kotlin/AndroidApplicationConventionPlugin.kt)
@@ -26,9 +32,6 @@ List of plugins currently available in the repository.
 
    This plugin applies `no.nordicsemi.android.plugin.application` and adds Compose and Material3 dependency.
 
-   Since version 2.1 [`enableStrongSkippingMode`](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-compiler.html#enablestrongskippingmode) is
-   [enabled](https://github.com/NordicSemiconductor/Android-Gradle-Plugins/blob/6ee70d9f2fb2c2c8474067845eac05308740afa8/plugins/src/main/kotlin/no/nordicsemi/android/buildlogic/AndroidCompose.kt#L66).
-
 3. [no.nordicsemi.android.plugin.library](plugins/src/main/kotlin/AndroidLibraryConventionPlugin.kt)
 
    This plugin does the following:
@@ -41,9 +44,6 @@ List of plugins currently available in the repository.
 4. [no.nordicsemi.android.plugin.library.compose](plugins/src/main/kotlin/AndroidLibraryComposeConventionPlugin.kt)
 
    This plugin applies `no.nordicsemi.android.plugin.library` and adds Compose and Material3 dependency.
-
-   Since version 2.1 [`enableStrongSkippingMode`](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-compiler.html#enablestrongskippingmode) is
-   [enabled](https://github.com/NordicSemiconductor/Android-Gradle-Plugins/blob/6ee70d9f2fb2c2c8474067845eac05308740afa8/plugins/src/main/kotlin/no/nordicsemi/android/buildlogic/AndroidCompose.kt#L66).
 
 5. [no.nordicsemi.android.plugin.kotlin](plugins/src/main/kotlin/AndroidNexusRepositoryPlugin.kt)
 
@@ -67,6 +67,14 @@ List of plugins currently available in the repository.
 
 Creates `publish` and `releaseStagingRepositories` tasks using `maven-publish`.
 
+Since 2.6 Dokka V2 is enabled.
+
+Add 
+```
+org.jetbrains.dokka.experimental.gradle.pluginMode=V2Enabled
+```
+to _gradle.properties_ file.
+
 ### JVM plugins
 
 1. [no.nordicsemi.jvm.plugin.kotlin](plugins/src/main/kotlin/JvmKotlinConventionPlugin.kt) (since 2.1)
@@ -82,6 +90,14 @@ and are available by their ids and version number.
 
 > [!Note]
 > Version 2.1 altered ids of the plugins by replacing `gradle` with `plugin`.
+
+Since 2.6 Dokka V2 is enabled.
+
+Add
+```
+org.jetbrains.dokka.experimental.gradle.pluginMode=V2Enabled
+```
+to _gradle.properties_ file.
 
 ## Version catalog
 

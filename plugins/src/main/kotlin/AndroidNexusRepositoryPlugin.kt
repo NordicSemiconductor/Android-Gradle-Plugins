@@ -39,20 +39,21 @@ import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.bundling.Jar
+import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.extra
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.register
-import org.gradle.kotlin.dsl.withType
 import org.gradle.plugins.signing.SigningExtension
-import org.jetbrains.dokka.gradle.DokkaTask
-import org.jetbrains.kotlin.gradle.tasks.Kapt
+import org.jetbrains.dokka.gradle.DokkaExtension
+import org.jetbrains.dokka.gradle.engine.plugins.DokkaHtmlPluginParameters
+import java.util.Calendar
 
 class AndroidNexusRepositoryPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         with(target) {
-            pluginManager.apply {
+            with(pluginManager) {
                 apply("com.android.library")
                 apply("maven-publish")
                 apply("signing")
@@ -65,6 +66,7 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
             val nexusPluginExt = extensions.create("nordicNexusPublishing", NexusRepositoryPluginExt::class.java)
             val library = extensions.getByType<LibraryExtension>()
             val signing = extensions.getByType<SigningExtension>()
+            val dokka = extensions.getByType<DokkaExtension>()
 
             // The signing configuration will be user by signing plugin.
             extra.set("signing.keyId", System.getenv("GPG_SIGNING_KEY"))
@@ -81,19 +83,29 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
                 }
             }
 
-            // Instead, configure Dokka to generate HTML docs.
-            tasks.withType<DokkaTask>().configureEach {
-                dependsOn(tasks.withType<Kapt>())
+            // Instead, configure Dokka to generate HTML docs for the module.
+            dokka.apply {
                 dokkaSourceSets.configureEach {
-                    noAndroidSdkLink.set(false)
+                    enableAndroidDocumentationLink.set(true)
+                }
+                // Set the version.
+                moduleVersion.set(getVersionNameFromTags())
+                // Set the footer message.
+                pluginsConfiguration.named("html", DokkaHtmlPluginParameters::class.java) {
+                    val year = Calendar.getInstance().get(Calendar.YEAR)
+                    footerMessage.set("Copyright © 2022 - $year Nordic Semiconductor ASA. All Rights Reserved.")
+                }
+                // Create a task to generate HTML docs, it will be added to the Maven publication.
+                dokkaPublications.named("html") {
+                    tasks.register<Jar>("dokkaHtmlJar").configure {
+                        dependsOn(tasks.named("dokkaGenerate"))
+                        from(outputDirectory)
+                        archiveClassifier.set("html-docs")
+                    }
                 }
             }
-
-            tasks.register<Jar>("dokkaHtmlJar").configure {
-                val dokkaHtml = tasks.named("dokkaHtml", DokkaTask::class.java)
-                dependsOn(dokkaHtml)
-                from(dokkaHtml.flatMap { it.outputDirectory })
-                archiveClassifier.set("html-docs")
+            parent?.dependencies {
+                add("dokka", this@with)
             }
 
             afterEvaluate {

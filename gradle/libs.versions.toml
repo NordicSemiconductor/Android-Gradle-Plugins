@@ -79,7 +79,7 @@ nordic-scanner = "1.6.0"
 nordic-common = "2.3.0"
 nordic-memfault = "1.1.0"
 
-nordicPlugins = "2.5"
+nordicPlugins = "2.6"
 dokkaPlugin = "2.0.0"
 googleServicesPlugins = "4.4.2"
 firebaseCrashlyticsPlugins = "3.0.2"
@@ -264,6 +264,7 @@ nordic-kotlin-android = { id = "no.nordicsemi.android.plugin.kotlin", version.re
 nordic-kotlin-jvm = { id = "no.nordicsemi.jvm.plugin.kotlin", version.ref = "nordicPlugins" }
 nordic-nexus-android = { id = "no.nordicsemi.android.plugin.nexus", version.ref = "nordicPlugins" }
 nordic-nexus-kotlin = { id = "no.nordicsemi.jvm.plugin.nexus", version.ref = "nordicPlugins" }
+nordic-dokka = { id = "no.nordicsemi.plugin.dokka", version.ref = "nordicPlugins" }
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 android-test = { id = "com.android.test", version.ref = "androidGradlePlugin" }

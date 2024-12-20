@@ -39,20 +39,21 @@ import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.bundling.Jar
+import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.extra
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.register
-import org.gradle.kotlin.dsl.withType
 import org.gradle.plugins.signing.SigningExtension
-import org.jetbrains.dokka.gradle.DokkaTask
-import org.jetbrains.kotlin.gradle.tasks.Kapt
+import org.jetbrains.dokka.gradle.DokkaExtension
+import org.jetbrains.dokka.gradle.engine.plugins.DokkaHtmlPluginParameters
+import java.util.Calendar
 
 class JvmNexusRepositoryPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         with(target) {
-            pluginManager.apply {
+            with(pluginManager) {
                 apply("org.jetbrains.kotlin.jvm")
                 apply("maven-publish")
                 apply("signing")
@@ -65,6 +66,7 @@ class JvmNexusRepositoryPlugin : Plugin<Project> {
             val nexusPluginExt = extensions.create("nordicNexusPublishing", NexusRepositoryPluginExt::class.java)
             val library = extensions.getByType<JavaPluginExtension>()
             val signing = extensions.getByType<SigningExtension>()
+            val dokka = extensions.getByType<DokkaExtension>()
 
             // The signing configuration will be user by signing plugin.
             extra.set("signing.keyId", System.getenv("GPG_SIGNING_KEY"))
@@ -77,21 +79,29 @@ class JvmNexusRepositoryPlugin : Plugin<Project> {
             // https://github.com/Kotlin/dokka/issues/2956
             // library.withJavadocJar()
 
-            // Instead, configure Dokka to generate HTML docs.
-            tasks.withType<DokkaTask>().configureEach {
-                dependsOn(tasks.withType<Kapt>())
+            // Instead, configure Dokka to generate HTML docs for the module.
+            dokka.apply {
                 dokkaSourceSets.configureEach {
-                    noAndroidSdkLink.set(false)
+                    enableAndroidDocumentationLink.set(true)
+                }
+                // Set the version.
+                moduleVersion.set(getVersionNameFromTags())
+                // Set the footer message.
+                pluginsConfiguration.named("html", DokkaHtmlPluginParameters::class.java) {
+                    val year = Calendar.getInstance().get(Calendar.YEAR)
+                    footerMessage.set("Copyright © 2022 - $year Nordic Semiconductor ASA. All Rights Reserved.")
+                }
+                // Create a task to generate HTML docs, it will be added to the Maven publication.
+                dokkaPublications.named("html") {
+                    tasks.register<Jar>("dokkaHtmlJar").configure {
+                        dependsOn(tasks.named("dokkaGenerate"))
+                        from(outputDirectory)
+                        archiveClassifier.set("javadoc")
+                    }
                 }
             }
-
-            tasks.register<Jar>("dokkaHtmlJar").configure {
-                val dokkaHtml = tasks.named("dokkaHtml", DokkaTask::class.java)
-                dependsOn(dokkaHtml)
-                from(dokkaHtml.flatMap { it.outputDirectory })
-                // Maven Central requires JVM libraries to have [module]-[version]-javadoc.jar file.
-                // Let's put Dokka HTML docs into the javadoc file.
-                archiveClassifier.set("javadoc")
+            parent?.dependencies {
+                add("dokka", this@with)
             }
 
             afterEvaluate {
