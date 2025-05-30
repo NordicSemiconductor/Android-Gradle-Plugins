@@ -68,7 +68,7 @@ kmmVoyager = "1.0.1"
 kmmLogs = "2.7.1"
 gson = "2.13.1"
 
-nordic-blek = "1.3.1"
+nordic-blek = "2.0.0-alpha01"
 nordic-ble = "2.10.0"
 nordic-dfu = "2.9.0"
 nordic-log = "2.5.0"
@@ -238,13 +238,10 @@ nordic-wifi-nfc = { group = "no.nordicsemi.android.wifi", name = "provisioning-n
 nordic-memfault = { group = "no.nordicsemi.android", name = "memfault", version.ref = "nordic-memfault" }
 
 # BleK
-nordic-blek-client = { group = "no.nordicsemi.android.kotlin.ble", name = "client", version.ref = "nordic-blek" }
-nordic-blek-server = { group = "no.nordicsemi.android.kotlin.ble", name = "server", version.ref = "nordic-blek" }
-nordic-blek-profile = { group = "no.nordicsemi.android.kotlin.ble", name = "profile", version.ref = "nordic-blek" }
-nordic-blek-core = { group = "no.nordicsemi.android.kotlin.ble", name = "core", version.ref = "nordic-blek" }
-nordic-blek-scanner = { group = "no.nordicsemi.android.kotlin.ble", name = "scanner", version.ref = "nordic-blek" }
-nordic-blek-advertiser = { group = "no.nordicsemi.android.kotlin.ble", name = "advertiser", version.ref = "nordic-blek" }
-nordic-blek-uiscanner = { group = "no.nordicsemi.android.kotlin.ble", name = "uiscanner", version.ref = "nordic-blek" }
+nordic-blek-client = { group = "no.nordicsemi.kotlin.ble", name = "client-android", version.ref = "nordic-blek" }
+nordic-blek-client-mock = { group = "no.nordicsemi.kotlin.ble", name = "client-android-mock", version.ref = "nordic-blek" }
+nordic-blek-advertiser = { group = "no.nordicsemi.kotlin.ble", name = "advertiser-android", version.ref = "nordic-blek" }
+nordic-blek-advertiser-mock = { group = "no.nordicsemi.kotlin.ble", name = "advertiser-android-mock", version.ref = "nordic-blek" }
 
 # Dependencies of the included build-logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
