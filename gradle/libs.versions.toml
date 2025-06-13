@@ -69,7 +69,7 @@ kmmLogs = "2.7.1"
 gson = "2.13.1"
 
 nordic-blek = "2.0.0-alpha02"
-nordic-ble = "2.10.0"
+nordic-ble = "2.10.1"
 nordic-dfu = "2.9.0"
 nordic-log = "2.5.0"
 nordic-data = "0.4.0"
