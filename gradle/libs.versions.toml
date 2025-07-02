@@ -239,9 +239,11 @@ nordic-memfault = { group = "no.nordicsemi.android", name = "memfault", version.
 
 # BleK
 nordic-blek-client-core = { group = "no.nordicsemi.kotlin.ble", name = "client-core", version.ref = "nordic-blek" }
+nordic-blek-client-core-android = { group = "no.nordicsemi.kotlin.ble", name = "client-core-android", version.ref = "nordic-blek" }
 nordic-blek-client-android = { group = "no.nordicsemi.kotlin.ble", name = "client-android", version.ref = "nordic-blek" }
 nordic-blek-client-android-mock = { group = "no.nordicsemi.kotlin.ble", name = "client-android-mock", version.ref = "nordic-blek" }
 nordic-blek-advertiser-core = { group = "no.nordicsemi.kotlin.ble", name = "advertiser-android-core", version.ref = "nordic-blek" }
+nordic-blek-advertiser-core-android = { group = "no.nordicsemi.kotlin.ble", name = "advertiser-core-android", version.ref = "nordic-blek" }
 nordic-blek-advertiser-android = { group = "no.nordicsemi.kotlin.ble", name = "advertiser-android", version.ref = "nordic-blek" }
 nordic-blek-advertiser-android-mock = { group = "no.nordicsemi.kotlin.ble", name = "advertiser-android-mock", version.ref = "nordic-blek" }
 
