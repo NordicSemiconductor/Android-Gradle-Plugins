@@ -224,6 +224,7 @@ nordic-kotlin-data = { group = "no.nordicsemi.kotlin", name = "data", version.re
 nordic-core = { group = "no.nordicsemi.android.common", name = "core", version.ref = "nordic-common" }
 nordic-ui = { group = "no.nordicsemi.android.common", name = "ui", version.ref = "nordic-common" }
 nordic-theme = { group = "no.nordicsemi.android.common", name = "theme", version.ref = "nordic-common" }
+nordic-scanner-ble = { group = "no.nordicsemi.android.common", name = "scanner-ble", version.ref = "nordic-common" }
 nordic-analytics = { group = "no.nordicsemi.android.common", name = "analytics", version.ref = "nordic-common" }
 nordic-navigation = { group = "no.nordicsemi.android.common", name = "navigation", version.ref = "nordic-common" }
 nordic-logger = { group = "no.nordicsemi.android.common", name = "logger", version.ref = "nordic-common" }
