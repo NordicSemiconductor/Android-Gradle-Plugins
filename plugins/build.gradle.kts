@@ -159,6 +159,7 @@ signing {
 
 dependencies {
     implementation(libs.okhttp)
+    implementation(libs.okhttp.logging)
     implementation(libs.retrofit.core)
     implementation(libs.retrofit.converter.moshi)
     ksp(libs.moshi.kotlin.codegen)
