@@ -22,6 +22,7 @@ import kotlin.time.Duration.Companion.seconds
  */
 open class ReleaseStagingRepositoriesTask : DefaultTask() {
 
+    @Suppress("unused")
     enum class PublishingType(val value: String) {
         /**
          * This type (default) will upload the deployment to the Publisher Portal, where it can be
