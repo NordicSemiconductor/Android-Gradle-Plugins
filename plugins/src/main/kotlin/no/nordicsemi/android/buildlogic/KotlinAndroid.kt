@@ -86,8 +86,8 @@ private inline fun <reified T : KotlinBaseExtension> Project.configureKotlin() =
     }.apply {
         allWarningsAsErrors.set(warningsAsErrors.toBoolean())
 
-        languageVersion.set(KotlinVersion.KOTLIN_2_0)
-        apiVersion.set(KotlinVersion.KOTLIN_2_0)
+        languageVersion.set(KotlinVersion.KOTLIN_2_2)
+        apiVersion.set(KotlinVersion.KOTLIN_2_2)
         jvmTarget.set(JvmTarget.JVM_17)
         optIn.add("kotlin.RequiresOptIn")
         optIn.add("kotlinx.coroutines.ExperimentalCoroutinesApi")
