@@ -31,7 +31,7 @@ androidDesugarJdkLibs = "2.1.5"
 accompanist = "0.37.3"
 accompanistPlaceholder = "0.36.0"
 coil = "2.7.0"
-firebaseBom = "34.1.0"
+firebaseBom = "33.16.0" # https://firebase.google.com/support/release-notes/android#2025-07-21 minSdkVersion increased from 21 to 23
 hilt = "2.57"
 hiltExt = "1.2.0"
 junit4 = "4.13.2"
@@ -149,9 +149,9 @@ coil-kt = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
 coil-kt-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 coil-kt-svg = { group = "io.coil-kt", name = "coil-svg", version.ref = "coil" }
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
-firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
-firebase-database = { group = "com.google.firebase", name = "firebase-database" }
-firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
+firebase-database = { group = "com.google.firebase", name = "firebase-database-ktx" }
+firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics-ktx" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-ext-work = { group = "androidx.hilt", name = "hilt-work", version.ref = "hiltExt" }
 hilt-ext-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "hiltExt" }
