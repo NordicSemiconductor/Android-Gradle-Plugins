@@ -216,6 +216,7 @@ kmm-logs = { group = "io.github.aakira", name = "napier", version.ref = "kmmLogs
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 
 # Nordic
+nordic-ble = { group = "no.nordicsemi.android", name = "ble", version.ref = "nordic-ble" }
 nordic-ble-ktx = { group = "no.nordicsemi.android", name = "ble-ktx", version.ref = "nordic-ble" }
 nordic-ble-common = { group = "no.nordicsemi.android", name = "ble-common", version.ref = "nordic-ble" }
 nordic-dfu = { group = "no.nordicsemi.android", name = "dfu", version.ref = "nordic-dfu" }
