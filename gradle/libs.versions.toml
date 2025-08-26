@@ -39,6 +39,7 @@ kotlinxCoroutines = "1.10.2"
 kotlinxDatetime = "0.7.1-0.6.x-compat"
 kotlinxSerializationJson = "1.9.0"
 kotlinCompose = "1.8.2"
+javaAnnotations = "26.0.2" # https://github.com/JetBrains/java-annotations
 lint = "31.12.2"
 memfault-cloud = "2.0.5"
 okhttp = "5.1.0"
@@ -157,6 +158,7 @@ hilt-ext-work = { group = "androidx.hilt", name = "hilt-work", version.ref = "hi
 hilt-ext-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "hiltExt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
+java-annotations = { group = "org.jetbrains", name = "annotations", version.ref = "javaAnnotations" }
 junit4 = { group = "junit", name = "junit", version.ref = "junit4" }
 truth = { group = "com.google.truth", name = "truth", version.ref = "truth" }
 kotlin-junit = { group = "org.jetbrains.kotlin", name = "kotlin-test-junit", version.ref = "kotlin" }
