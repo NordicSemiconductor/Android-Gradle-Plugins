@@ -161,6 +161,7 @@ hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testi
 java-annotations = { group = "org.jetbrains", name = "annotations", version.ref = "javaAnnotations" }
 junit4 = { group = "junit", name = "junit", version.ref = "junit4" }
 truth = { group = "com.google.truth", name = "truth", version.ref = "truth" }
+kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin" }
 kotlin-junit = { group = "org.jetbrains.kotlin", name = "kotlin-test-junit", version.ref = "kotlin" }
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version.ref = "kotlin" }
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
