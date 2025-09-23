@@ -78,7 +78,7 @@ nordic-data = "0.4.0"
 nordic-wifi = "1.3.0"
 nordic-mcumgr = "2.7.2"
 nordic-scanner = "1.6.0"
-nordic-common = "2.5.2"
+nordic-common = "2.5.3"
 nordic-memfault = "2.0.2"
 
 nordicPlugins = "2.9"
