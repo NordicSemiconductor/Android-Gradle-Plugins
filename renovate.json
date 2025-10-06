@@ -18,8 +18,8 @@
     {
       "matchPackageNames": [
         "com.google.firebase:firebase-bom",
-        "androidx.room",
-        "androidx.hilt"
+        "/androidx.room/",
+        "/androidx.hilt/"
       ],
       "enabled": false
     }
