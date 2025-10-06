@@ -45,7 +45,11 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
             }
 
             extensions.configure<LibraryExtension> {
-                compileSdk = AppConst.COMPILE_SDK
+                compileSdk {
+                    version = release(AppConst.COMPILE_SDK) {
+                        minorApiLevel = 1
+                    }
+                }
 
                 defaultConfig {
                     minSdk = AppConst.MIN_SDK
