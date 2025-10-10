@@ -13,15 +13,15 @@ jobs:
           # The following env variables are used by pluginPublish task
           GRADLE_PUBLISH_KEY: ${{ secrets.GRADLE_PUBLISH_KEY }}
           GRADLE_PUBLISH_SECRET: ${{ secrets.GRADLE_PUBLISH_SECRET }}
-          # The following env variables are used by gradle/publish-module.gradle
+          # The following env variables are used by plugins/build.gradle.kts
           GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
           GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
           # The following env variables are used by gradle/publish-root.gradle.kts
           OSSR_USERNAME: ${{ secrets.OSSR_USERNAME }}
           OSSR_PASSWORD: ${{ secrets.OSSR_PASSWORD }}
           SONATYPE_STAGING_PROFILE_ID: ${{ secrets.SONATYPE_STAGING_PROFILE_ID }}
-        # The script generates sec.gpg file that is required by gradle/publish-module.gradle
-        # and starts :deployNexus lane using fastlane.
+        # The script generates sec.gpg file that is required by plugins/build.gradle.kts
+        # and starts :deployPlugins lane using fastlane.
         run: |
           echo "${{ secrets.GPG_FILE }}" > sec.gpg.asc
           gpg -d --passphrase "${{ secrets.GPG_FILE_PSWD }}" --batch sec.gpg.asc > sec.gpg
