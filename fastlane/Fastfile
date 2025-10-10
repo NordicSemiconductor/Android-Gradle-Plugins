@@ -22,13 +22,9 @@ platform :android do
     gradle(task: ":plugins:publishPlugins")
   end
 
-  desc "Deploy version catalog to Nexus."
+  desc "Deploy version catalog to Maven Central."
   lane :deployVersionCatalog do
     gradle(task: ":version-catalog:publishToSonatype closeAndReleaseSonatypeStagingRepository")
   end
 
-  desc "Deploy libraries to Maven locally on the PC."
-  lane :deployLocal do
-    gradle(task: "publishToMavenLocal")
-  end
 end
