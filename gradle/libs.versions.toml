@@ -37,6 +37,7 @@ androidDesugarJdkLibs = "2.1.5"
 accompanist = "0.37.3"
 accompanistPlaceholder = "0.36.0"
 coil = "2.7.0"
+dagger = "2.57.2"
 firebaseBom = "33.16.0" # https://firebase.google.com/support/release-notes/android#2025-07-21 minSdkVersion increased from 21 to 23
 hilt = "2.57.2"
 hiltExt = "1.2.0"
@@ -155,6 +156,11 @@ annotations = { group = "org.jetbrains", name = "annotations", version.ref = "ja
 coil-kt = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
 coil-kt-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 coil-kt-svg = { group = "io.coil-kt", name = "coil-svg", version.ref = "coil" }
+dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
+dagger-android = { module = "com.google.dagger:dagger-android", version.ref = "dagger" }
+dagger-android-processor = { module = "com.google.dagger:dagger-android-processor", version.ref = "dagger" }
+dagger-android-support = { module = "com.google.dagger:dagger-android-support", version.ref = "dagger" }
+dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
 fasterxml-cbor = { group = "com.fasterxml.jackson.dataformat", name = "jackson-dataformat-cbor", version.ref = "fasterxml" }
 fasterxml-core = { group = "com.fasterxml.jackson.core", name = "jackson-core", version.ref = "fasterxml" }
 fasterxml-databind = { group = "com.fasterxml.jackson.core", name = "jackson-databind", version.ref = "fasterxml" }
