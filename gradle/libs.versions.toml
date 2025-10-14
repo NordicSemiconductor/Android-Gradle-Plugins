@@ -69,6 +69,7 @@ kmmUuid = "0.8.4"
 kmmVoyager = "1.0.1"
 kmmLogs = "2.7.1"
 gson = "2.13.2"
+fasterxml = "2.13.5" # don't update
 
 # Plugin versions
 nordicPlugins = "2.10"
@@ -141,6 +142,9 @@ annotations = { group = "org.jetbrains", name = "annotations", version.ref = "ja
 coil-kt = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
 coil-kt-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 coil-kt-svg = { group = "io.coil-kt", name = "coil-svg", version.ref = "coil" }
+fasterxml-cbor = { group = "com.fasterxml.jackson.dataformat", name = "jackson-dataformat-cbor", version.ref = "fasterxml" }
+fasterxml-core = { group = "com.fasterxml.jackson.core", name = "jackson-core", version.ref = "fasterxml" }
+fasterxml-databind = { group = "com.fasterxml.jackson.core", name = "jackson-databind", version.ref = "fasterxml" }
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
 firebase-database = { group = "com.google.firebase", name = "firebase-database-ktx" }
