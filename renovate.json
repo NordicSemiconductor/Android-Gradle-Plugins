@@ -17,10 +17,7 @@
     },
     {
       "matchPackageNames": [
-        "com.google.firebase:firebase-bom",
-        "/com.fasterxml.jackson.*/",
-        "/androidx.room/",
-        "/androidx.hilt/"
+        "/com.fasterxml.jackson.*/"
       ],
       "enabled": false
     }
