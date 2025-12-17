@@ -1,7 +1,7 @@
 [versions]
 androidGradlePlugin = "8.13.2"
-kotlin = "2.2.21" # When changes, update also kotlinAndroid.kt
-ksp = "2.3.3"
+kotlin = "2.3.0" # When changes, update also kotlinAndroid.kt
+ksp = "2.3.4"
 androidxActivity = "1.12.1"
 androidxAnnotation = "1.9.1"
 androidxAppCompat = "1.7.1"
