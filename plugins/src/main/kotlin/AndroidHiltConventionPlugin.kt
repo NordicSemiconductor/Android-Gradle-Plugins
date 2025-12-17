@@ -39,15 +39,21 @@ class AndroidHiltConventionPlugin : Plugin<Project> {
         with(target) {
             with(pluginManager) {
                 apply("no.nordicsemi.android.plugin.kotlin")
-                apply("org.jetbrains.kotlin.kapt")
+                apply("com.google.devtools.ksp")
                 apply("dagger.hilt.android.plugin")
             }
 
             dependencies {
                 add("implementation", libs.findLibrary("hilt.android").get())
-                add("kapt", libs.findLibrary("hilt.compiler").get())
-                add("kaptTest", libs.findLibrary("hilt.compiler").get())
-                add("kaptAndroidTest", libs.findLibrary("hilt.compiler").get())
+                add("ksp", libs.findLibrary("hilt.android.compiler").get())
+                add("kspTest", libs.findLibrary("hilt.android.compiler").get())
+                add("kspAndroidTest", libs.findLibrary("hilt.android.compiler").get())
+            }
+
+            // TODO: Remove when Dagger bumps Kotlin metadata dependency to 2.3.0
+            //  (see also https://github.com/google/dagger/issues/5059)
+            configurations.configureEach {
+                resolutionStrategy.force(libs.findLibrary("kotlin.metadata.jvm").get())
             }
         }
     }
