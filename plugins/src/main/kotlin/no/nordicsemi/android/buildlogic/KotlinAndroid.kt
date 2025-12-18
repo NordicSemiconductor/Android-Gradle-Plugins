@@ -86,11 +86,15 @@ private inline fun <reified T : KotlinBaseExtension> Project.configureKotlin() =
     }.apply {
         allWarningsAsErrors.set(warningsAsErrors.toBoolean())
 
-        languageVersion.set(KotlinVersion.KOTLIN_2_2)
-        apiVersion.set(KotlinVersion.KOTLIN_2_2)
+        languageVersion.set(KotlinVersion.KOTLIN_2_3)
+        apiVersion.set(KotlinVersion.KOTLIN_2_3)
         jvmTarget.set(JvmTarget.JVM_17)
         optIn.add("kotlin.RequiresOptIn")
         optIn.add("kotlinx.coroutines.ExperimentalCoroutinesApi")
         optIn.add("kotlinx.coroutines.FlowPreview")
+        // https://kotlinlang.org/docs/whatsnew23.html#explicit-backing-fields
+        freeCompilerArgs.add("-Xexplicit-backing-fields")
+        // https://kotlinlang.org/docs/whatsnew23.html#unused-return-value-checker
+        freeCompilerArgs.add("-Xreturn-value-checker=full")
     }
 }
