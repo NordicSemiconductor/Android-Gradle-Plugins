@@ -81,7 +81,7 @@ fasterxml = "2.13.5" # don't update
 
 # Plugin versions
 nordicPlugins = "2.13"
-dokkaPlugin = "2.1.0"
+dokkaPlugin = "2.2.0-Beta"
 googleServicesPlugins = "4.4.2"
 firebaseCrashlyticsPlugins = "3.0.2"
 kmmIosPublishPlugin = "2.0.3"
