@@ -46,12 +46,9 @@ import org.gradle.kotlin.dsl.extra
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.register
-import org.gradle.kotlin.dsl.withType
 import org.gradle.plugins.signing.SigningExtension
 import org.jetbrains.dokka.gradle.DokkaExtension
-import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.dokka.gradle.engine.plugins.DokkaHtmlPluginParameters
-import org.jetbrains.kotlin.gradle.tasks.Kapt
 import java.util.Calendar
 
 class AndroidNexusRepositoryPlugin : Plugin<Project> {
@@ -73,7 +70,7 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
             val signing = extensions.getByType<SigningExtension>()
             val dokka = try {
                 extensions.getByType<DokkaExtension>()
-            } catch (e: UnknownDomainObjectException) {
+            } catch (_: UnknownDomainObjectException) {
                 logger.log(
                     LogLevel.WARN,
                     "WARNING: Dokka V2 could not be applied, add \"org.jetbrains.dokka.experimental.gradle.pluginMode=V2Enabled\" to gradle.properties."
@@ -120,7 +117,7 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
                 rootProject.dependencies {
                     try {
                         add("dokka", this@with)
-                    } catch (e: Exception) {
+                    } catch (_: Exception) {
                         logger.log(
                             LogLevel.WARN,
                             "WARNING: Dokka could not be configured for module ':$name', apply dokka plugin (libs.plugins.nordic.dokka) in main build.gradle.kts."
@@ -128,21 +125,7 @@ class AndroidNexusRepositoryPlugin : Plugin<Project> {
                     }
                 }
             } ?: run {
-                // Use Dokka V1 if V2 is not enabled.
-                logger.log(LogLevel.INFO, "Applying Dokka V1.")
-                tasks.withType<DokkaTask>().configureEach {
-                    dependsOn(tasks.withType<Kapt>())
-                    dokkaSourceSets.configureEach {
-                        noAndroidSdkLink.set(false)
-                    }
-                }
-
-                tasks.register<Jar>("dokkaHtmlJar").configure {
-                    val dokkaHtml = tasks.named("dokkaHtml", DokkaTask::class.java)
-                    dependsOn(dokkaHtml)
-                    from(dokkaHtml.flatMap { it.outputDirectory })
-                    archiveClassifier.set("html-docs")
-                }
+                logger.error("ERROR: Dokka V2 could not be applied, add \"org.jetbrains.dokka.experimental.gradle.pluginMode=V2Enabled\" to gradle.properties.")
             }
 
             afterEvaluate {
