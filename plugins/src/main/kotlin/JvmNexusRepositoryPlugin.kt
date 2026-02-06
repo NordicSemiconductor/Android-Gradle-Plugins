@@ -92,7 +92,13 @@ class JvmNexusRepositoryPlugin : Plugin<Project> {
             // Instead, configure Dokka to generate HTML docs for the module.
             dokka?.apply {
                 dokkaSourceSets.configureEach {
+                    // Enable Android documentation links.
                     enableAndroidDocumentationLink.set(true)
+                    // Don't add documentation for internal API, even if it's public.
+                    perPackageOption {
+                        matchingRegex.set(".*internal.*")
+                        suppress.set(true)
+                    }
                 }
                 // Set the version.
                 moduleVersion.set(getVersionNameFromTags())
