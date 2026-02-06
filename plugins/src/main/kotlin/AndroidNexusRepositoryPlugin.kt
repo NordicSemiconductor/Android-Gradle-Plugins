@@ -29,7 +29,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import com.android.build.gradle.LibraryExtension
+import com.android.build.api.dsl.LibraryExtension
 import no.nordicsemi.android.NexusRepositoryPluginExt
 import no.nordicsemi.android.buildlogic.getVersionNameFromTags
 import no.nordicsemi.android.from

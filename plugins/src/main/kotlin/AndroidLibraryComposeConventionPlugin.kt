@@ -29,7 +29,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import com.android.build.gradle.LibraryExtension
+import com.android.build.api.dsl.LibraryExtension
 import no.nordicsemi.android.buildlogic.configureAndroidCompose
 import no.nordicsemi.android.buildlogic.libs
 import org.gradle.api.Plugin
