@@ -47,8 +47,6 @@ List of plugins currently available in the repository.
 
 5. [no.nordicsemi.android.plugin.kotlin](plugins/src/main/kotlin/AndroidNexusRepositoryPlugin.kt)
 
-   This plugin applies `org.jetbrains.kotlin.android` and configures Kotlin compiler.
-
 7. [no.nordicsemi.android.plugin.hilt](plugins/src/main/kotlin/AndroidHiltConventionPlugin.kt)
 
    This plugin applies `no.nordicsemi.android.plugin.kotlin` and `com.google.devtools.ksp` and
