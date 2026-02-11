@@ -46,6 +46,8 @@ List of plugins currently available in the repository.
    This plugin applies `no.nordicsemi.android.plugin.library` and adds Compose and Material3 dependency.
 
 5. [no.nordicsemi.android.plugin.kotlin](plugins/src/main/kotlin/AndroidNexusRepositoryPlugin.kt)
+   
+   Configures Kotlin compiler in the module. This is automatically added with `*.compose` or `feature` plugins.
 
 7. [no.nordicsemi.android.plugin.hilt](plugins/src/main/kotlin/AndroidHiltConventionPlugin.kt)
 
