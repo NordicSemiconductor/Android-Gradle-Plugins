@@ -92,7 +92,7 @@ private inline fun <reified T : KotlinBaseExtension> Project.configureKotlin() =
         optIn.add("kotlinx.coroutines.ExperimentalCoroutinesApi")
         optIn.add("kotlinx.coroutines.FlowPreview")
         // https://kotlinlang.org/docs/whatsnew23.html#explicit-backing-fields
-        freeCompilerArgs.add("-Xexplicit-backing-fields")
+        // freeCompilerArgs.add("-Xexplicit-backing-fields") // -> https://github.com/NordicSemiconductor/Nordic-Gradle-Plugins/issues/372
         // https://kotlinlang.org/docs/whatsnew23.html#unused-return-value-checker
         freeCompilerArgs.add("-Xreturn-value-checker=full")
     }
