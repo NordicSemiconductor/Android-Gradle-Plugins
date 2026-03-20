@@ -40,6 +40,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinBaseExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
+import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 /**
@@ -48,13 +49,15 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 internal fun Project.configureKotlinAndroid(
     commonExtension: CommonExtension,
 ) {
-    commonExtension.apply {
-        compileOptions.apply {
-            sourceCompatibility = JavaVersion.VERSION_17
-            targetCompatibility = JavaVersion.VERSION_17
-        }
+    commonExtension.compileOptions.apply {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
 
-        configureKotlin<KotlinAndroidProjectExtension>()
+    configureKotlin<KotlinAndroidProjectExtension>()
+
+    extensions.configure<KotlinAndroidProjectExtension> {
+        compilerOptions.jvmTarget.set(JvmTarget.JVM_17)
     }
 }
 
@@ -68,6 +71,42 @@ internal fun Project.configureKotlinJvm() {
     }
 
     configureKotlin<KotlinJvmProjectExtension>()
+
+    extensions.configure<KotlinJvmProjectExtension> {
+        compilerOptions.jvmTarget.set(JvmTarget.JVM_17)
+    }
+}
+
+/**
+ * Configure base Kotlin options for KMP (Kotlin Multiplatform)
+ */
+internal fun Project.configureKotlinKmp() {
+    extensions.configure<KotlinMultiplatformExtension> {
+//        androidTarget {
+//            compilerOptions.jvmTarget.set(JvmTarget.JVM_17)
+//        }
+
+        jvm {
+            compilerOptions.jvmTarget.set(JvmTarget.JVM_17)
+        }
+
+        iosX64()
+        iosArm64()
+        iosSimulatorArm64()
+    }
+
+//    extensions.configure<LibraryExtension> {
+//        compileSdk {
+//            version = release(AppConst.COMPILE_SDK) {
+//                minorApiLevel = 1
+//            }
+//        }
+//        defaultConfig {
+//            minSdk = AppConst.MIN_SDK
+//        }
+//    }
+
+    configureKotlin<KotlinMultiplatformExtension>()
 }
 
 /**
@@ -81,13 +120,13 @@ private inline fun <reified T : KotlinBaseExtension> Project.configureKotlin() =
     when (this) {
         is KotlinAndroidProjectExtension -> compilerOptions
         is KotlinJvmProjectExtension -> compilerOptions
+        is KotlinMultiplatformExtension -> compilerOptions
         else -> TODO("Unsupported project extension $this ${T::class}")
     }.apply {
         allWarningsAsErrors.set(warningsAsErrors.toBoolean())
 
         languageVersion.set(KotlinVersion.KOTLIN_2_3)
         apiVersion.set(KotlinVersion.KOTLIN_2_3)
-        jvmTarget.set(JvmTarget.JVM_17)
         optIn.add("kotlin.RequiresOptIn")
         optIn.add("kotlinx.coroutines.ExperimentalCoroutinesApi")
         optIn.add("kotlinx.coroutines.FlowPreview")

@@ -104,5 +104,6 @@ ext["signing.password"] = System.getenv("GPG_PASSWORD")
 ext["signing.secretKeyRingFile"] = "../sec.gpg"
 
 signing {
+    isRequired = System.getenv("GPG_SIGNING_KEY") != null
     sign(publishing.publications)
 }

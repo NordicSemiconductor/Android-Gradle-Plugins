@@ -237,6 +237,7 @@ gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 # Dependencies of the included build-logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
 compose-gradlePlugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
+kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 dokka-gradlePlugin = { group = "org.jetbrains.dokka", name = "dokka-gradle-plugin", version.ref = "dokkaPlugin" }
 dokka-android-gradlePlugin = { group = "org.jetbrains.dokka", name = "android-documentation-plugin", version.ref = "dokkaPlugin" }
 
@@ -252,6 +253,8 @@ nordic-kotlin-android = { id = "no.nordicsemi.android.plugin.kotlin", version.re
 nordic-kotlin-jvm = { id = "no.nordicsemi.jvm.plugin.kotlin", version.ref = "nordicPlugins" }
 nordic-nexus-android = { id = "no.nordicsemi.android.plugin.nexus", version.ref = "nordicPlugins" }
 nordic-nexus-jvm = { id = "no.nordicsemi.jvm.plugin.nexus", version.ref = "nordicPlugins" }
+nordic-kotlin-kmp = { id = "no.nordicsemi.kmp.plugin.kotlin", version.ref = "nordicPlugins" }
+nordic-nexus-kmp = { id = "no.nordicsemi.kmp.plugin.nexus", version.ref = "nordicPlugins" }
 nordic-dokka = { id = "no.nordicsemi.plugin.dokka", version.ref = "nordicPlugins" }
 
 # External Plugins
