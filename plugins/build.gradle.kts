@@ -57,6 +57,7 @@ kotlin {
 
 dependencies {
     compileOnly(libs.android.gradlePlugin)
+    compileOnly(libs.kotlin.gradlePlugin)
     compileOnly(libs.compose.gradlePlugin)
     compileOnly(libs.dokka.gradlePlugin)
 }
@@ -138,6 +139,20 @@ gradlePlugin {
             implementationClass = "JvmNexusRepositoryPlugin"
             tags.addAll("nordicsemi", "jvm", "kotlin", "nexus", "publish")
         }
+        register("kmp.kotlin") {
+            id = "no.nordicsemi.kmp.plugin.kotlin"
+            displayName = "Kotlin plugin for KMP projects"
+            description = "Plugin enabling Kotlin for Kotlin Multiplatform modules."
+            implementationClass = "KmpKotlinConventionPlugin"
+            tags.addAll("nordicsemi", "kmp", "kotlin", "multiplatform")
+        }
+        register("kmp.nexus") {
+            id = "no.nordicsemi.kmp.plugin.nexus"
+            displayName = "Nexus plugin for KMP projects"
+            description = "Plugin creating a task for publishing KMP libraries to Nexus repository."
+            implementationClass = "KmpNexusRepositoryPlugin"
+            tags.addAll("nordicsemi", "kmp", "kotlin", "multiplatform", "nexus", "publish")
+        }
         register("nordic.dokka") {
             id = "no.nordicsemi.plugin.dokka"
             displayName = "Nordic Dokka plugin"
@@ -153,6 +168,7 @@ ext["signing.password"] = System.getenv("GPG_PASSWORD")
 ext["signing.secretKeyRingFile"] = "../sec.gpg"
 
 signing {
+    isRequired = System.getenv("GPG_SIGNING_KEY") != null
     sign(publishing.publications)
 }
 
