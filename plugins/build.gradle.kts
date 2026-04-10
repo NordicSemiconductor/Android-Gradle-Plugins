@@ -37,12 +37,12 @@ plugins {
     alias(libs.plugins.publish)
     alias(libs.plugins.ksp)
 }
-apply(from = "../gradle/git-tag-version.gradle")
+apply(from = "../gradle/git-tag-version.gradle.kts")
 
-val getVersionNameFromTags: groovy.lang.Closure<String> by ext
+val versionNameFromTags: String by extra
 
 group = "no.nordicsemi.android.gradle"
-version = getVersionNameFromTags()
+version = versionNameFromTags
 
 java {
     sourceCompatibility = JavaVersion.VERSION_21
@@ -139,19 +139,19 @@ gradlePlugin {
             implementationClass = "JvmNexusRepositoryPlugin"
             tags.addAll("nordicsemi", "jvm", "kotlin", "nexus", "publish")
         }
-        register("kmp.kotlin") {
-            id = "no.nordicsemi.kmp.plugin.kotlin"
-            displayName = "Kotlin plugin for KMP projects"
-            description = "Plugin enabling Kotlin for Kotlin Multiplatform modules."
-            implementationClass = "KmpKotlinConventionPlugin"
-            tags.addAll("nordicsemi", "kmp", "kotlin", "multiplatform")
-        }
         register("kmp.nexus") {
             id = "no.nordicsemi.kmp.plugin.nexus"
             displayName = "Nexus plugin for KMP projects"
             description = "Plugin creating a task for publishing KMP libraries to Nexus repository."
             implementationClass = "KmpNexusRepositoryPlugin"
             tags.addAll("nordicsemi", "kmp", "kotlin", "multiplatform", "nexus", "publish")
+        }
+        register("kmp.kotlin") {
+            id = "no.nordicsemi.kmp.plugin.kotlin"
+            displayName = "Kotlin plugin for KMP projects"
+            description = "Plugin enabling Kotlin for Kotlin Multiplatform modules."
+            implementationClass = "KmpKotlinConventionPlugin"
+            tags.addAll("nordicsemi", "kmp", "kotlin", "multiplatform")
         }
         register("nordic.dokka") {
             id = "no.nordicsemi.plugin.dokka"
