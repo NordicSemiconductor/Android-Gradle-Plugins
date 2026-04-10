@@ -146,13 +146,6 @@ gradlePlugin {
             implementationClass = "KmpNexusRepositoryPlugin"
             tags.addAll("nordicsemi", "kmp", "kotlin", "multiplatform", "nexus", "publish")
         }
-        register("kmp.kotlin") {
-            id = "no.nordicsemi.kmp.plugin.kotlin"
-            displayName = "Kotlin plugin for KMP projects"
-            description = "Plugin enabling Kotlin for Kotlin Multiplatform modules."
-            implementationClass = "KmpKotlinConventionPlugin"
-            tags.addAll("nordicsemi", "kmp", "kotlin", "multiplatform")
-        }
         register("nordic.dokka") {
             id = "no.nordicsemi.plugin.dokka"
             displayName = "Nordic Dokka plugin"
