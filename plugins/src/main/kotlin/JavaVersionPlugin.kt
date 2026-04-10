@@ -39,9 +39,6 @@ import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-/**
- * Set javaSource, javaTarget and kotlinJvmTarget versions
- */
 class JavaVersionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         target.configure<JavaPluginExtension> {
