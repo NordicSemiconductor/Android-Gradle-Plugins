@@ -51,6 +51,8 @@ import org.jetbrains.dokka.gradle.engine.plugins.DokkaHtmlPluginParameters
 import java.util.Calendar
 
 class KmpNexusRepositoryPlugin : Plugin<Project> {
+    private val isSigningEnabled: Boolean
+        get() = System.getenv("GPG_SIGNING_KEY") != null
 
     override fun apply(target: Project) {
         with(target) {
@@ -76,7 +78,7 @@ class KmpNexusRepositoryPlugin : Plugin<Project> {
                 null
             }
 
-            // The signing configuration will be user by signing plugin.
+            // The signing configuration will be used by signing plugin.
             extra.set("signing.keyId", System.getenv("GPG_SIGNING_KEY"))
             extra.set("signing.password", System.getenv("GPG_PASSWORD"))
             extra.set("signing.secretKeyRingFile", "${project.rootDir.path}/sec.gpg")
@@ -134,30 +136,29 @@ class KmpNexusRepositoryPlugin : Plugin<Project> {
                             }
                         }
                     }
-                    publications {
-                        // KMP creates publications automatically for each target.
-                        // Configure all of them with common settings.
-                        withType<MavenPublication>().configureEach {
+                    // KMP creates publications automatically for each target.
+                    // Configure all of them with common settings.
+                    publications.withType<MavenPublication>().configureEach {
+                        with(nexusPluginExt) {
                             version = getVersionNameFromTags()
-                            groupId = nexusPluginExt.POM_GROUP ?: group.toString()
-                            // Apply POM configuration.
-                            pom {
-                                from(nexusPluginExt)
-                                packaging = "jar"
-                            }
-                            // Add Dokka HTML docs only to the root publication.
-                            if (name == "kotlinMultiplatform") {
-                                artifact(tasks.named("dokkaHtmlJar"))
-                            }
+                            groupId = POM_GROUP ?: group.toString()
                         }
-                        // This task will add *.asc files to the publication for all artifacts.
-                        signing.sign(publications)
+                        // Apply POM configuration.
+                        pom {
+                            from(nexusPluginExt)
+                        }
+                        // Add Dokka HTML docs.
+                        artifact(tasks.named("dokkaHtmlJar"))
                     }
+                    // This task will add *.asc files to the publication for all artifacts.
+                    signing.isRequired = isSigningEnabled
+                    signing.sign(publications)
                 }
 
                 try {
                     rootProject.tasks.register("releaseStagingRepositories", ReleaseStagingRepositoriesTask::class.java)
-                } catch (_: Throwable) { }
+                } catch (_: Throwable) {
+                }
             }
         }
     }

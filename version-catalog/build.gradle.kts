@@ -34,12 +34,12 @@ plugins {
     `maven-publish`
     signing
 }
-apply(from = "../gradle/git-tag-version.gradle")
+apply(from = "../gradle/git-tag-version.gradle.kts")
 
-val getVersionNameFromTags: groovy.lang.Closure<String> by ext
+val versionNameFromTags: String by extra
 
 group = "no.nordicsemi.android.gradle"
-version = getVersionNameFromTags()
+version = versionNameFromTags
 
 catalog {
     versionCatalog {

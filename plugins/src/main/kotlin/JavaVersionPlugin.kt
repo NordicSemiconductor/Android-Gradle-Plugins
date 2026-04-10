@@ -29,11 +29,33 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-plugins {
-    id 'io.github.gradle-nexus.publish-plugin' version '2.0.0'
-}
+import no.nordicsemi.android.AppConst
+import no.nordicsemi.asJvmTarget
+import org.gradle.api.Plugin
+import org.gradle.api.Project
+import org.gradle.api.plugins.JavaPluginExtension
+import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.withType
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-// Maven Central publishing
-apply plugin: 'io.github.gradle-nexus.publish-plugin'
-apply from: rootProject.file('gradle/publish-root.gradle')
+/**
+ * Set javaSource, javaTarget and kotlinJvmTarget versions
+ */
+class JavaVersionPlugin : Plugin<Project> {
+    override fun apply(target: Project) {
+        target.configure<JavaPluginExtension> {
+            sourceCompatibility = AppConst.JAVA_SOURCE_VERSION
+            targetCompatibility = AppConst.JAVA_TARGET_VERSION
+        }
+        target.tasks
+            .withType<KotlinCompile>()
+            .configureEach {
+                compilerOptions.jvmTarget.set(AppConst.JAVA_TARGET_VERSION.asJvmTarget())
+            }
+
+        target.extensions.configure<KotlinJvmProjectExtension> {
+            compilerOptions.jvmTarget.set(AppConst.JAVA_TARGET_VERSION.asJvmTarget())
+        }
+    }
+}
