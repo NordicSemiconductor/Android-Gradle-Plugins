@@ -121,9 +121,16 @@ gradlePlugin {
         register("jvm.kotlin") {
             id = "no.nordicsemi.jvm.plugin.kotlin"
             displayName = "Kotlin plugin for JVM projects"
-            description = "Plugin enabling Kotlin for JVM modules."
+            description = "Plugin setting up Kotlin for JVM modules."
             implementationClass = "JvmKotlinConventionPlugin"
             tags.addAll("nordicsemi", "jvm", "kotlin")
+        }
+        register("kmp.kotlin") {
+            id = "no.nordicsemi.kmp.plugin.kotlin"
+            displayName = "Kotlin plugin for KMP projects"
+            description = "Plugin setting up Kotlin for KMP modules."
+            implementationClass = "KmpKotlinConventionPlugin"
+            tags.addAll("nordicsemi", "kmp", "kotlin", "multiplatform")
         }
         register("android.nexus") {
             id = "no.nordicsemi.android.plugin.nexus"

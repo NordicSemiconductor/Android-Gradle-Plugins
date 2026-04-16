@@ -38,8 +38,8 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
-                apply("no.nordicsemi.android.plugin.library.compose")
-                apply("no.nordicsemi.android.plugin.hilt")
+                apply(AndroidLibraryComposeConventionPlugin::class.java)
+                apply(AndroidHiltConventionPlugin::class.java)
             }
 
             dependencies {
