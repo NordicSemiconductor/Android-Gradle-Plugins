@@ -29,6 +29,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+import no.nordicsemi.android.buildlogic.configureKotlinJvm
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -38,8 +39,8 @@ class JvmKotlinConventionPlugin : Plugin<Project> {
             with(pluginManager) {
                 apply("org.jetbrains.kotlin.jvm")
             }
-            target.pluginManager.apply(JavaVersionPlugin::class.java)
-            target.pluginManager.apply(KotlinOptionsPlugin::class.java)
+
+            configureKotlinJvm()
         }
     }
 }
