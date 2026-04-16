@@ -29,11 +29,12 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-plugins {
-    id 'io.github.gradle-nexus.publish-plugin' version '2.0.0'
-}
+package no.nordicsemi
 
-// Maven Central publishing
-apply plugin: 'io.github.gradle-nexus.publish-plugin'
-apply from: rootProject.file('gradle/publish-root.gradle')
+import org.gradle.api.JavaVersion
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
+
+internal fun JavaVersion.asJvmTarget(): JvmTarget {
+    return JvmTarget.fromTarget(majorVersion)
+}
