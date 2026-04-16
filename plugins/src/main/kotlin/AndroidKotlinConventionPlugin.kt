@@ -29,30 +29,22 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import no.nordicsemi.android.AppConst
-import no.nordicsemi.asJvmTarget
+import com.android.build.api.dsl.ApplicationExtension
+import com.android.build.api.dsl.LibraryExtension
+import no.nordicsemi.android.buildlogic.configureKotlinAndroid
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.plugins.JavaPluginExtension
-import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.withType
-import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.gradle.kotlin.dsl.findByType
 
-class JavaVersionPlugin : Plugin<Project> {
+class AndroidKotlinConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
-        target.configure<JavaPluginExtension> {
-            sourceCompatibility = AppConst.JAVA_SOURCE_VERSION
-            targetCompatibility = AppConst.JAVA_TARGET_VERSION
-        }
-        target.tasks
-            .withType<KotlinCompile>()
-            .configureEach {
-                compilerOptions.jvmTarget.set(AppConst.JAVA_TARGET_VERSION.asJvmTarget())
+        with(target) {
+            extensions.findByType<LibraryExtension>()?.apply {
+                configureKotlinAndroid(this)
             }
-
-        target.extensions.configure<KotlinJvmProjectExtension> {
-            compilerOptions.jvmTarget.set(AppConst.JAVA_TARGET_VERSION.asJvmTarget())
+            extensions.findByType<ApplicationExtension>()?.apply {
+                configureKotlinAndroid(this)
+            }
         }
     }
 }
