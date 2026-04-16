@@ -34,12 +34,12 @@ plugins {
     `maven-publish`
     signing
 }
-apply(from = "../gradle/git-tag-version.gradle")
+apply(from = "../gradle/git-tag-version.gradle.kts")
 
-val getVersionNameFromTags: groovy.lang.Closure<String> by ext
+val versionNameFromTags: String by extra
 
 group = "no.nordicsemi.android.gradle"
-version = getVersionNameFromTags()
+version = versionNameFromTags
 
 catalog {
     versionCatalog {
@@ -104,5 +104,6 @@ ext["signing.password"] = System.getenv("GPG_PASSWORD")
 ext["signing.secretKeyRingFile"] = "../sec.gpg"
 
 signing {
+    isRequired = System.getenv("GPG_SIGNING_KEY") != null
     sign(publishing.publications)
 }

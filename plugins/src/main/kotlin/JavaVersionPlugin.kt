@@ -29,17 +29,30 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+import no.nordicsemi.android.AppConst
+import no.nordicsemi.asJvmTarget
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.plugins.JavaPluginExtension
+import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.withType
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-class JvmKotlinConventionPlugin : Plugin<Project> {
+class JavaVersionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
-        with(target) {
-            with(pluginManager) {
-                apply("org.jetbrains.kotlin.jvm")
+        target.configure<JavaPluginExtension> {
+            sourceCompatibility = AppConst.JAVA_SOURCE_VERSION
+            targetCompatibility = AppConst.JAVA_TARGET_VERSION
+        }
+        target.tasks
+            .withType<KotlinCompile>()
+            .configureEach {
+                compilerOptions.jvmTarget.set(AppConst.JAVA_TARGET_VERSION.asJvmTarget())
             }
-            target.pluginManager.apply(JavaVersionPlugin::class.java)
-            target.pluginManager.apply(KotlinOptionsPlugin::class.java)
+
+        target.extensions.configure<KotlinJvmProjectExtension> {
+            compilerOptions.jvmTarget.set(AppConst.JAVA_TARGET_VERSION.asJvmTarget())
         }
     }
 }
