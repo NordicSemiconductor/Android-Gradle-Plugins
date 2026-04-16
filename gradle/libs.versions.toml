@@ -251,9 +251,9 @@ nordic-feature = { id = "no.nordicsemi.android.plugin.feature", version.ref = "n
 nordic-hilt = { id = "no.nordicsemi.android.plugin.hilt", version.ref = "nordicPlugins" }
 nordic-kotlin-android = { id = "no.nordicsemi.android.plugin.kotlin", version.ref = "nordicPlugins" }
 nordic-kotlin-jvm = { id = "no.nordicsemi.jvm.plugin.kotlin", version.ref = "nordicPlugins" }
+nordic-kotlin-kmp = { id = "no.nordicsemi.kmp.plugin.kotlin", version.ref = "nordicPlugins" }
 nordic-nexus-android = { id = "no.nordicsemi.android.plugin.nexus", version.ref = "nordicPlugins" }
 nordic-nexus-jvm = { id = "no.nordicsemi.jvm.plugin.nexus", version.ref = "nordicPlugins" }
-nordic-kotlin-kmp = { id = "no.nordicsemi.kmp.plugin.kotlin", version.ref = "nordicPlugins" }
 nordic-nexus-kmp = { id = "no.nordicsemi.kmp.plugin.nexus", version.ref = "nordicPlugins" }
 nordic-dokka = { id = "no.nordicsemi.plugin.dokka", version.ref = "nordicPlugins" }
 
