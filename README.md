@@ -30,7 +30,7 @@ See [VERSION_CATALOG.md](./VERSION_CATALOG.md) for details.
 
 All Nordic libraries are released with a dedicated **Version Catalog** and **BOM (Bill of Materials)** hosted in a separate repository:
 
-🔗 [Nordic Android Version Catalog & BOM](https://github.com/NordicSemiconductor/Android-Version-Catalog)
+🔗 [Nordic Version Catalog & BOM](https://github.com/nordicsemi/Nordic-Version-Catalog)
 
 Use this catalog in your projects to automatically align versions of Nordic libraries.
 

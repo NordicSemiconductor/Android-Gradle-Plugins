@@ -29,26 +29,12 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import no.nordicsemi.android.buildlogic.libs
-import org.gradle.api.Plugin
-import org.gradle.api.Project
-import org.gradle.kotlin.dsl.dependencies
+package no.nordicsemi
 
-class AndroidHiltConventionPlugin : Plugin<Project> {
-    override fun apply(target: Project) {
-        with(target) {
-            with(pluginManager) {
-                apply(AndroidKotlinConventionPlugin::class.java)
-                apply("com.google.devtools.ksp")
-                apply("dagger.hilt.android.plugin")
-            }
+import org.gradle.api.JavaVersion
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
-            dependencies {
-                add("implementation", libs.findLibrary("hilt.android").get())
-                add("ksp", libs.findLibrary("hilt.android.compiler").get())
-                add("kspTest", libs.findLibrary("hilt.android.compiler").get())
-                add("kspAndroidTest", libs.findLibrary("hilt.android.compiler").get())
-            }
-        }
-    }
+
+internal fun JavaVersion.asJvmTarget(): JvmTarget {
+    return JvmTarget.fromTarget(majorVersion)
 }

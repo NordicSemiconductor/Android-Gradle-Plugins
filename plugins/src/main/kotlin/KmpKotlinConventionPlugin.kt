@@ -29,11 +29,18 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-plugins {
-    id 'io.github.gradle-nexus.publish-plugin' version '2.0.0'
-}
+import no.nordicsemi.android.buildlogic.configureKotlinKmp
+import org.gradle.api.Plugin
+import org.gradle.api.Project
 
-// Maven Central publishing
-apply plugin: 'io.github.gradle-nexus.publish-plugin'
-apply from: rootProject.file('gradle/publish-root.gradle')
+class KmpKotlinConventionPlugin : Plugin<Project> {
+    override fun apply(target: Project) {
+        with(target) {
+            with(pluginManager) {
+                apply("org.jetbrains.kotlin.multiplatform")
+            }
+
+            configureKotlinKmp()
+        }
+    }
+}

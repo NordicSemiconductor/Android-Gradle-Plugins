@@ -41,8 +41,8 @@ class AndroidApplicationComposeConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
-                apply("no.nordicsemi.android.plugin.application")
-                apply("no.nordicsemi.android.plugin.kotlin")
+                apply(AndroidApplicationConventionPlugin::class.java)
+                apply(AndroidKotlinConventionPlugin::class.java)
                 apply("org.jetbrains.kotlin.plugin.compose")
             }
 
