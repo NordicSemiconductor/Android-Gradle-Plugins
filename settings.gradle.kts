@@ -38,7 +38,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Android Gradle Plugins"
+rootProject.name = "Nordic Gradle Plugins"
 
 include(":plugins")
 include(":version-catalog")
