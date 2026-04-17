@@ -45,7 +45,9 @@ List of plugins currently available in the repository.
 
    This plugin applies `no.nordicsemi.android.plugin.library` and adds Compose and Material3 dependency.
 
-5. [no.nordicsemi.android.plugin.kotlin](plugins/src/main/kotlin/AndroidNexusRepositoryPlugin.kt)
+5. [no.nordicsemi.android.plugin.kotlin](plugins/src/main/kotlin/AndroidKotlinConventionPlugin.kt)
+   
+   Configures Kotlin compiler in the module. This is automatically added with `*.compose` or `feature` plugins.
 
 7. [no.nordicsemi.android.plugin.hilt](plugins/src/main/kotlin/AndroidHiltConventionPlugin.kt)
 
@@ -61,7 +63,7 @@ List of plugins currently available in the repository.
 
    and adds dependency to `androidx.hilt.navigation.compose`.
 
-10. [no.nordicsemi.android.plugin.nexus](plugins/src/main/kotlin/AndroidKotlinConventionPlugin.kt)
+10. [no.nordicsemi.android.plugin.nexus](plugins/src/main/kotlin/AndroidNexusRepositoryPlugin.kt)
 
 Creates `publish` and `releaseStagingRepositories` tasks using `maven-publish`.
 
@@ -96,3 +98,13 @@ Add
 org.jetbrains.dokka.experimental.gradle.pluginMode=V2Enabled
 ```
 to _gradle.properties_ file.
+
+### Kotlin Multiplatform (KMP) plugins
+
+1. [no.nordicsemi.kmp.plugin.kotlin](plugins/src/main/kotlin/KmpKotlinConventionPlugin.kt) (since 2.15)
+
+   This plugin applies `org.jetbrains.kotlin.jvm` and configures Kotlin compiler.
+
+2. [no.nordicsemi.kmp.plugin.nexus](plugins/src/main/kotlin/KmpNexusRepositoryPlugin.kt) (since 2.15)
+
+   Creates `publish` and `releaseStagingRepositories` tasks using `maven-publish`.
